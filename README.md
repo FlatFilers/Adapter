@@ -30,7 +30,7 @@ npm install flatfile-csv-importer --save
 The latest version of the package is available via CDN so you can just drop it into your website and start using it.
 
 ```sh
-https://unpkg.com/flatfile-csv-importer@^0.0.2/build/browser/index.js
+https://unpkg.com/flatfile-csv-importer@^0.0.2/build/dist/index.min.js
 ```
 
 ## Quickstart
@@ -38,7 +38,7 @@ Add the following code before the ending `</body>` tag in your html.
 
 ```js
 
-<script src="https://unpkg.com/flatfile-csv-importer/index.min.js"></script>
+<script src="https://unpkg.com/flatfile-csv-importer@^0.0.2/build/dist/index.min.js"></script>
 
 <script>
   var LICENSE_KEY = 'PASTE YOUR KEY HERE'
