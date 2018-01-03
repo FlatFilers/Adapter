@@ -84,25 +84,20 @@
     "uglify-js": "^3.3.4"
   },
   "keywords": [
+    "csv",
+    "importer",
+    "import",
+    "convert",
+    "json",
+    "parse",
+    "parser",
+    "csv-parse",
+    "parse",
     "async",
-    "ava",
     "await",
-    "boilerplate",
-    "conventional-changelog",
     "ES6",
     "ES7",
-    "library",
-    "javascript-modules",
-    "node",
-    "nyc",
-    "rollup",
-    "starter",
-    "template",
-    "tree-shaking",
-    "tslint",
-    "typedoc",
-    "typescript",
-    "typings"
+    "typescript"
   ],
   "nyc": {
     "exclude": [
