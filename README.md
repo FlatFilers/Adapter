@@ -8,7 +8,9 @@
 [![devDependencies Status](https://david-dm.org/flatfilers/adapter/dev-status.svg)](https://david-dm.org/flatfilers/adapter?type=dev)
 
 
-A simple event and promise driven adapter for importing CSV files.
+A simple adapter for elegantly importing CSV files via [flatfile.io](https://www.flatfile.io) (Typescript, ES6, Browser)
+
+Read the developer docs &rarr; https://developers.flatfile.io/docs
 
 ![Preview](https://flatfile.io/img/preview.png)
 
