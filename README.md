@@ -1,7 +1,7 @@
 # Flatfile.io CSV Importer Adapter
 
-[![Build Status](https://travis-ci.org/flatfilers/adapter.svg?branch=master)](https://travis-ci.org/flatfilers/adapter)
-[![Codecov](https://img.shields.io/codecov/c/github/flatfilers/adapter.svg)](https://codecov.io/gh/flatfilers/adapter)
+[![Build Status](https://travis-ci.org/Flatfilers/Adapter.svg?branch=master)](https://travis-ci.org/Flatfilers/Adapter)
+[![Codecov](https://img.shields.io/codecov/c/github/Flatfilers/Adapter.svg)](https://codecov.io/gh/Flatfilers/Adapter)
 [![NPM version](https://img.shields.io/npm/v/typescript-starter.svg)](https://www.npmjs.com/package/typescript-starter)
 [![Standard Version](https://img.shields.io/badge/release-standard%20version-brightgreen.svg)](https://github.com/conventional-changelog/standard-version)
 [![dependencies Status](https://david-dm.org/flatfilers/adapter/status.svg)](https://david-dm.org/flatfilers/adapter)
