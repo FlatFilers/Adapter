@@ -16,16 +16,21 @@ A simple event and promise driven adapter for importing CSV files.
 >
 > In order to setup, you need to [create or sign in to your flatfile.io account](https://flatfile.io) and obtain a license key.
 
-## Using NPM or Bower
+## Using NPM
 
 If you don't like external dependencies, or you have a nice build system like Webpack in place. You can install and use Flatfile as an npm package.
 
 ```sh
 npm install flatfile-csv-importer --save
 ```
-or
+
+
+## Using CDN
+
+The latest version of the package is available via CDN so you can just drop it into your website and start using it.
+
 ```sh
-bower install flatfile-csv-importer --save
+https://unpkg.com/flatfile-csv-importer@^0.0.2/build/browser/index.js
 ```
 
 ## Quickstart
