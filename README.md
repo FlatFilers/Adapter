@@ -13,8 +13,8 @@ A simple event and promise driven adapter for importing CSV files.
 ![Preview](https://flatfile.io/img/preview.png)
 
 > **License Key**
-> 
-> In order to setup, you need to [create or sign in to your account](https://flatfile.io) and obtain a license key.
+>
+> In order to setup, you need to [create or sign in to your flatfile.io account](https://flatfile.io) and obtain a license key.
 
 ## Using NPM or Bower
 

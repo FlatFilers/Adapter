@@ -175,6 +175,8 @@ export default class FlatfileImporter extends EventEmitter {
         ready: () => {
           this.handshake.promise.then((child) => {
             this.$resolver(child)
+          }).catch((err) => {
+            console.error(err)
           })
           return this.options
         }
