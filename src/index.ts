@@ -4,6 +4,7 @@ import whenDomReady from 'when-dom-ready'
 import insertCss from 'insert-css'
 import elementClass from 'element-class'
 import Penpal from 'penpal'
+// import File from './file'
 
 Penpal.debug = true
 
@@ -19,19 +20,22 @@ export default class FlatfileImporter extends EventEmitter {
 
   private apiKey: string
   private options: object
+  private customer: object
   private uuid: string
+  // private file: object
 
   private handshake: Penpal.IChildConnectionObject
 
   private $resolver: (data: any) => any
   private $rejecter: (err: any) => any
 
-  constructor (apiKey: string, options: object) {
+  constructor (apiKey: string, options: object, customer: object = {}) {
     super()
     this.apiKey = apiKey
     this.options = options
+    this.customer = customer
     this.uuid = this.$generateUuid()
-
+    // this.file = new File(this.apiKey, this.options, this.customer)
     this.$ready = new FlatfileImporter.Promise((resolve, reject) => {
       this.$resolver = resolve
       this.$rejecter = reject
