@@ -27,6 +27,7 @@
     "test": "yarn lint && yarn unit && yarn check-coverage",
     "watch": "yarn build && yarn build:tests -- --no-browser && concurrently -r --kill-others 'npm run --silent build:main -- -w' 'npm run --silent build:tests -- -w --no-browser' 'sleepms 2000 && ava --watch'",
     "cov": "yarn unit && yarn html-coverage && opn coverage/index.html",
+    "serve:dev": "yarn build; node build/main/serve.js",
     "html-coverage": "nyc report --reporter=html",
     "send-coverage": "nyc report --reporter=lcov > coverage.lcov && codecov",
     "docs": "yarn docs:html && opn build/docs/index.html",
@@ -115,6 +116,7 @@
   "dependencies": {
     "element-class": "^0.2.2",
     "eventemitter3": "^3.0.0",
+    "express": "^4.16.2",
     "insert-css": "^2.0.0",
     "penpal": "^3.0.1",
     "ts-promise": "^1.0.0",
