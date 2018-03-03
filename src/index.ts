@@ -22,7 +22,6 @@ export default class FlatfileImporter extends EventEmitter {
   private options: object
   private customer: object
   private uuid: string
-  // private file: object
 
   private handshake: Penpal.IChildConnectionObject
 
@@ -35,7 +34,6 @@ export default class FlatfileImporter extends EventEmitter {
     this.options = options
     this.customer = customer
     this.uuid = this.$generateUuid()
-    // this.file = new File(this.apiKey, this.options, this.customer)
     this.$ready = new FlatfileImporter.Promise((resolve, reject) => {
       this.$resolver = resolve
       this.$rejecter = reject
@@ -183,7 +181,7 @@ export default class FlatfileImporter extends EventEmitter {
           }).catch((err) => {
             console.error(err)
           })
-          return this.options // testing
+          return this.options
         }
       }
     })
