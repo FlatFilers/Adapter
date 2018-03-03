@@ -178,7 +178,7 @@ export default class FlatfileImporter extends EventEmitter {
           }).catch((err) => {
             console.error(err)
           })
-          return this.options
+          return this.options // testing
         }
       }
     })
