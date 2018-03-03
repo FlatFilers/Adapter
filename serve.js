@@ -4,7 +4,7 @@ const app = express()
 
 app.set('port', 8080)
 
-app.use(express.static(path.join(__dirname, '../dist/')))
+app.use(express.static(path.join(__dirname, '/build/dist/')))
 
 const server = app.listen(app.get('port'), function () {
   const port = server.address().port
