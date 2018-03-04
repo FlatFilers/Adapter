@@ -1,10 +1,10 @@
 import { EventEmitter } from 'eventemitter3'
-import Promise from 'ts-promise'
+import Promise from 'ts-promise' // Duplicate identifier 'Promise'. Compiler reserves name 'Promise' in top level scope of a module containing async functions.
 import whenDomReady from 'when-dom-ready'
 import insertCss from 'insert-css'
 import elementClass from 'element-class'
 import Penpal from 'penpal'
-// import File from './file'
+import FlatfileResults, { ImportMetaObject } from './results'
 
 Penpal.debug = true
 
@@ -53,6 +53,10 @@ export default class FlatfileImporter extends EventEmitter {
     this.MOUNT_URL = url
   }
 
+  public static get Results () {
+    return FlatfileResults
+  }
+
   /**
    * Calling open() to activate the importer overlay dialog.
    */
@@ -74,9 +78,6 @@ export default class FlatfileImporter extends EventEmitter {
   load (): Promise<Array<Object>> {
     return new FlatfileImporter.Promise((resolve, reject) => {
       this.open()
-      this.on('complete', (rows) => {
-        resolve(rows)
-      })
 
       const cleanup = () => {
         this.removeListener('close', loadRejectHandler)
@@ -85,6 +86,35 @@ export default class FlatfileImporter extends EventEmitter {
 
       function loadResolveHandler (rows: Array<Object>) {
         resolve(rows)
+        cleanup()
+      }
+
+      function loadRejectHandler (err) {
+        reject(err)
+        cleanup()
+      }
+
+      this.on('close', loadRejectHandler)
+      this.on('complete', loadResolveHandler)
+    })
+  }
+
+  /**
+   * Use loadMeta() when you want a promise returned. This is necessary if you want to use
+   * async/await for an es6 implementation
+   */
+  loadMeta (): Promise<FlatfileResults> {
+    return new FlatfileImporter.Promise((resolve, reject) => {
+      this.open()
+
+      const cleanup = () => {
+        this.removeListener('close', loadRejectHandler)
+        this.removeListener('complete', loadResolveHandler)
+      }
+
+      const loadResolveHandler = async (rows: Array<Object>, meta: object) => {
+        const results = new FlatfileResults(rows, meta as ImportMetaObject)
+        resolve(results)
         cleanup()
       }
 
@@ -126,6 +156,16 @@ export default class FlatfileImporter extends EventEmitter {
   displaySuccess (msg: string): void {
     this.$ready.then((child) => {
       child.displaySuccess(msg)
+    })
+  }
+
+  getMeta (): object {
+    return new Promise((resolve, reject) => {
+      this.$ready.then((child) => {
+        child.getMeta()
+          .then(resolve)
+          .catch(reject)
+      }).catch(reject)
     })
   }
 
