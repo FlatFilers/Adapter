@@ -1,12 +1,9 @@
 import { EventEmitter } from 'eventemitter3'
-import Promise from 'ts-promise' // Duplicate identifier 'Promise'. Compiler reserves name 'Promise' in top level scope of a module containing async functions.
 import whenDomReady from 'when-dom-ready'
 import insertCss from 'insert-css'
 import elementClass from 'element-class'
 import Penpal from 'penpal'
 import FlatfileResults, { ImportMetaObject } from './results'
-
-Penpal.debug = true
 
 export default class FlatfileImporter extends EventEmitter {
 
@@ -163,7 +160,7 @@ export default class FlatfileImporter extends EventEmitter {
     return new Promise((resolve, reject) => {
       this.$ready.then((child) => {
         child.getMeta()
-          .then(resolve)
+          .then(resolve) // how do I get _result out of this instead of the whole Promise?
           .catch(reject)
       }).catch(reject)
     })
