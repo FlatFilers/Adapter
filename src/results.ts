@@ -23,7 +23,7 @@ export interface ImportMetaObject {
   failed_at: string
   created_at: string
   handled_at: string
-  validated_in: string
+  validated_in: number | null
   matched_in: string
 }
 
@@ -218,8 +218,9 @@ export default class FlatfileResults {
   /**
    * The time it took to initially validate the data
    */
-  get validatedIn (): string | null {
-    return this.meta.validated_in || null
+  get validatedIn (): number | null {
+    const validatedIn = this.meta.validated_in
+    return typeof validatedIn === 'number' ? validatedIn : null
   }
 
   /**
