@@ -100,7 +100,7 @@ export default class FlatfileImporter extends EventEmitter {
    * Use loadMeta() when you want a promise returned. This is necessary if you want to use
    * async/await for an es6 implementation
    */
-  loadMeta (): Promise<FlatfileResults> {
+  loadData (): Promise<FlatfileResults> {
     return new FlatfileImporter.Promise((resolve, reject) => {
       this.open()
 
@@ -160,7 +160,7 @@ export default class FlatfileImporter extends EventEmitter {
     return new Promise((resolve, reject) => {
       this.$ready.then((child) => {
         child.getMeta()
-          .then(resolve) // how do I get _result out of this instead of the whole Promise?
+          .then(resolve)
           .catch(reject)
       }).catch(reject)
     })
