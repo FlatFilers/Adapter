@@ -2,31 +2,29 @@ export interface ImportMetaObject {
   rawData: string
   batchID: string
   status: string
-  originalFile: string | null
   csvFile: string | null
   filename: string
   isManaged: boolean
-  isManual: boolean
+  manual: boolean
   config: object
-  parsingConfig: object
-  countRows: number
-  countSkippedRows: number
-  countAcceptedRows: number
-  countRowsInvalid: number
-  countColumns: number
-  countColumnsMatched: number
-  columnsMatched: Array<object>
-  skippedRows: number
-  headersRaw: Array<object> | null
-  headersMatched: Array<object> | null
-  customColumns: Array<object>
-  failureReason: string
-  submittedAt: string
-  failedAt: string
-  createdAt: string
-  handledAt: string
-  validatedIn: string
-  matchedIn: string
+  parsing_config: object
+  count_rows: number
+  count_skipped_rows: number
+  count_accepted_rows: number
+  count_rows_invalid: number
+  count_columns: number
+  count_columns_matched: number
+  skipped_rows: number
+  headers_raw: Array<object> | null
+  headers_matched: Array<object> | null
+  custom_columns: Array<object>
+  failure_reason: string
+  submitted_at: string
+  failed_at: string
+  created_at: string
+  handled_at: string
+  validated_in: string
+  matched_in: string
 }
 
 export default class FlatfileResults {
@@ -95,7 +93,7 @@ export default class FlatfileResults {
    * If the data was entered manually instead of via file upload or not
    */
   get isManual (): boolean {
-    return this.meta.isManual
+    return this.meta.manual
   }
 
   /**
@@ -109,133 +107,126 @@ export default class FlatfileResults {
    * The configuration used by the csv parser PapaParse: https://www.papaparse.com/docs#config
    */
   get parsingConfig (): object {
-    return this.meta.parsingConfig
+    return this.meta.parsing_config
   }
 
   /**
    * The number of rows in the parsed data
    */
   get countRows (): number {
-    return this.meta.countRows
+    return this.meta.count_rows
   }
 
   /**
    * The number of invalid rows that were skipped instead of fixed
    */
   get countSkippedRows (): number | null {
-    return this.meta.countSkippedRows || null
+    return this.meta.count_skipped_rows || null
   }
 
   /**
    * The number of rows that were submitted
    */
   get countAcceptedRows (): number | null {
-    return this.meta.countAcceptedRows || null
+    return this.meta.count_accepted_rows || null
   }
 
   /**
    * The number of rows that had invalid cells before correction in the review stage
    */
   get countRowsInvalid (): number | null {
-    return this.meta.countRowsInvalid || null
+    return this.meta.count_rows_invalid || null
   }
 
   /**
    * The number of columns in the parsed data
    */
   get countColumns (): number | null {
-    return this.meta.countColumns || null
+    return this.meta.count_columns || null
   }
 
   /**
    * The number of columns submitted
    */
   get countColumnsMatched (): number | null {
-    return this.meta.countColumnsMatched || null
-  }
-
-  /**
-   * The column objects that were submitted
-   */
-  get columnsMatched (): Array<object> | null {
-    return this.meta.columnsMatched || null
+    return this.meta.count_columns_matched || null
   }
 
   /**
    * The invalid rows that were skipped on submission
    */
   get skippedRows (): number | null {
-    return this.meta.skippedRows || null
+    return this.meta.skipped_rows || null
   }
 
   /**
    * The headers before they were matched as given in the original file
    */
   get headersRaw (): Array<object> | null {
-    return this.meta.headersRaw || null
+    return this.meta.headers_raw || null
   }
 
   /**
    * The headers after they are matched
    */
   get headersMatched (): Array<object> | null {
-    return this.meta.headersMatched || null
+    return this.meta.headers_matched || null
   }
 
   /**
    * An array of any columns that were created during import
    */
   get customColumns (): Array<object> {
-    return this.meta.customColumns
+    return this.meta.custom_columns
   }
 
   /**
    * The reason for the failure if there was a failure
    */
   get failureReason (): string | null {
-    return this.meta.failureReason || null
+    return this.meta.failure_reason || null
   }
 
   /**
    * The time that the data was submitted
    */
   get submittedAt (): string | null {
-    return this.meta.submittedAt || null
+    return this.meta.submitted_at || null
   }
 
   /**
    * The time that the import failed if it failed
    */
   get failedAt (): string | null {
-    return this.meta.failedAt || null
+    return this.meta.failed_at || null
   }
 
   /**
    * The time the data began the import, whether via file upload or manual data entry
    */
   get createdAt (): string {
-    return this.meta.createdAt
+    return this.meta.created_at
   }
 
   /**
    * The time the upload either failed or succeeded
    */
   get handledAt (): string | null {
-    return this.meta.handledAt || null
+    return this.meta.handled_at || null
   }
 
   /**
    * The time it took to initially validate the data
    */
   get validatedIn (): string | null {
-    return this.meta.validatedIn || null
+    return this.meta.validated_in || null
   }
 
   /**
    * The time it took to automatically match the columns
    */
   get matchedIn (): string | null {
-    return this.meta.matchedIn || null
+    return this.meta.matched_in || null
   }
 
   updateCustomer (customer: object): void {
