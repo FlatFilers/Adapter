@@ -101,7 +101,7 @@ const importer = new FlatfileImporter(FLATFILE_LICENSE_KEY, options)
 // setup your handler
 const buttonClickHandler = async () => {
   try {
-    const response.data = await importer.loadMeta()
+    const response.data = await importer.loadData()
     await uploadYourData(data)
   } catch(e) {
     // handle a failed upload
