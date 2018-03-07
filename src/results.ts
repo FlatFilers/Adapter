@@ -42,6 +42,10 @@ export default class FlatfileResults {
     this.licenseKey = licenseKey
   }
 
+  public setCustomer (customer: object): void {
+    this.customer = customer // support partial data updates
+  }
+
   // public static loadFrom (fileKey: string): File {
     // load from server here
   //   return new File({})
@@ -228,9 +232,5 @@ export default class FlatfileResults {
    */
   get matchedIn (): string | null {
     return this.meta.matched_in || null
-  }
-
-  updateCustomer (customer: object): void {
-    this.customer = customer // support partial data updates
   }
 }
