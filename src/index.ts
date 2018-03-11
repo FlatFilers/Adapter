@@ -156,6 +156,9 @@ export default class FlatfileImporter extends EventEmitter {
     })
   }
 
+  /**
+   * This will fetch the data from the importer
+   */
   getMeta (): object {
     return new Promise((resolve, reject) => {
       this.$ready.then((child) => {
