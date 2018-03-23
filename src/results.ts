@@ -1,11 +1,12 @@
 export interface ImportMetaObject {
-  rawData: string
   batchID: string
   endUser: object
   status: string
+  originalFile: string | null
   csvFile: string | null
   filename: string
   isManaged: boolean
+  filetype: string
   manual: boolean
   config: object
   parsing_config: object
@@ -69,17 +70,21 @@ export default class FlatfileResults {
   }
 
   /**
-   * A reconstituted File object of the originally uploaded file
+   * A File object of the originally uploaded file stored as an AWS url
    */
   get originalFile (): File | null {
-    return new File(this.meta.rawData.split(/\r\n|\r|\n/), this.meta.filename, { type: 'text/plain' }) // needs polyfill
+    return this.meta.originalFile // fetch from AWS
   }
 
   /**
-   * Same as originalFile unless it was uploaded in xls format, in which case this is the converted csv file
+   * Same as originalFile unless it was uploaded in xls format, in which case this is the converted csv file stored as an AWS url
    */
   get csvFile (): File | null {
-    return this.originalFile
+    if (this.meta.filetype === 'xls') {
+      return this.meta.csvFile // fetched from AWS
+    } else {
+      return this.originalFile
+    }
   }
 
   /**
