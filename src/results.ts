@@ -29,7 +29,7 @@ export interface ImportMetaObject {
 
 export default class FlatfileResults {
   private static licenseKey: string
-  private customer: object
+  private endUser: object
   private meta: ImportMetaObject
   private data: Array<Object>
 
@@ -42,8 +42,8 @@ export default class FlatfileResults {
     this.licenseKey = licenseKey
   }
 
-  public setCustomer (customer: object): void {
-    this.customer = customer // support partial data updates
+  public setCustomer (endUser: object): void {
+    this.endUser = endUser // support partial data updates
   }
 
   // public static loadFrom (fileKey: string): File {
