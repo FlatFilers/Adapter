@@ -1,6 +1,7 @@
 export interface ImportMetaObject {
   rawData: string
   batchID: string
+  endUser: object
   status: string
   csvFile: string | null
   filename: string
@@ -29,7 +30,6 @@ export interface ImportMetaObject {
 
 export default class FlatfileResults {
   private static licenseKey: string
-  private endUser: object
   private meta: ImportMetaObject
   private data: Array<Object>
 
@@ -40,10 +40,6 @@ export default class FlatfileResults {
 
   public static setLicenseKey (licenseKey: string): void {
     this.licenseKey = licenseKey
-  }
-
-  public setCustomer (endUser: object): void {
-    this.endUser = endUser // support partial data updates
   }
 
   // public static loadFrom (fileKey: string): File {
@@ -63,6 +59,13 @@ export default class FlatfileResults {
    */
   get status (): string {
     return this.meta.status
+  }
+
+  /**
+   * The endUser object created by setUser
+   */
+  get user (): object {
+    return this.meta.endUser
   }
 
   /**
