@@ -169,6 +169,11 @@ export default class FlatfileImporter extends EventEmitter {
     })
   }
 
+  setUser (endUser: object): void {
+    this.$ready.then((child) => {
+      child.setUser(endUser)
+    })
+  }
   /**
    * Call close() from the parent window in order to hide the importer. You can do this after
    * handling the import callback so your users don't have to click the confirmation button
