@@ -170,7 +170,8 @@ export default class FlatfileImporter extends EventEmitter {
           this.emit('complete', data.rows, data.meta)
         },
         close: () => {
-          this.close() && this.emit('close')
+          this.emit('close')
+          this.close()
         },
         ready: () => {
           this.handshake.promise.then((child) => {
