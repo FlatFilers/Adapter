@@ -3,11 +3,14 @@ import whenDomReady from 'when-dom-ready'
 import insertCss from 'insert-css'
 import elementClass from 'element-class'
 import Penpal from 'penpal'
-import FlatfileResults, { ImportMetaObject } from './results'
+import PromisePolyfill from 'promise-polyfill'
+import FlatfileResults from './results'
+import Meta from './obj.meta'
+import RecordObject from './obj.record'
 
 export default class FlatfileImporter extends EventEmitter {
 
-  public static Promise = Promise
+  public static Promise = PromisePolyfill
   private static MOUNT_URL: string = 'https://www.flatfile.io/importer/:key'
 
   /**
@@ -50,14 +53,10 @@ export default class FlatfileImporter extends EventEmitter {
     this.MOUNT_URL = url
   }
 
-  public static get Results () {
-    return FlatfileResults
-  }
-
   /**
    * Calling open() to activate the importer overlay dialog.
    */
-  open (): void {
+  open (options = {}): void {
     this.$ready.then((child) => {
       elementClass(document.body).add('flatfile-active')
       let el = document.getElementById(`flatfile-${this.uuid}`)
@@ -71,6 +70,7 @@ export default class FlatfileImporter extends EventEmitter {
   /**
    * Use load() when you want a promise returned. This is necessary if you want to use
    * async/await for an es6 implementation
+   * @deprecated
    */
   load (): Promise<Array<Object>> {
     return new FlatfileImporter.Promise((resolve, reject) => {
@@ -97,20 +97,20 @@ export default class FlatfileImporter extends EventEmitter {
   }
 
   /**
-   * Use loadMeta() when you want a promise returned. This is necessary if you want to use
+   * Use requestDataFromUser() when you want a promise returned. This is necessary if you want to use
    * async/await for an es6 implementation
    */
-  loadData (): Promise<FlatfileResults> {
+  requestDataFromUser (options = {}): Promise<FlatfileResults> {
     return new FlatfileImporter.Promise((resolve, reject) => {
-      this.open()
+      this.open({ ...options, expectsExpandedResults: true})
 
       const cleanup = () => {
         this.removeListener('close', loadRejectHandler)
-        this.removeListener('complete', loadResolveHandler)
+        this.removeListener('results', loadResolveHandler)
       }
 
-      const loadResolveHandler = async (rows: Array<Object>, meta: object) => {
-        const results = new FlatfileResults(rows, meta as ImportMetaObject)
+      const loadResolveHandler = async (rows: Array<RecordObject>, meta: object) => {
+        const results = new FlatfileResults(rows, meta as Meta, this)
         resolve(results)
         cleanup()
       }
@@ -121,7 +121,7 @@ export default class FlatfileImporter extends EventEmitter {
       }
 
       this.on('close', loadRejectHandler)
-      this.on('complete', loadResolveHandler)
+      this.on('results', loadResolveHandler)
     })
   }
 
@@ -170,7 +170,7 @@ export default class FlatfileImporter extends EventEmitter {
   }
 
   /**
-   *   Triggers the importer to create or update the endUser of the given user_id
+   * Triggers the importer to create or update the endUser of the given user_id
    */
   setUser (endUser: object): void {
     this.$ready.then((child) => {
@@ -217,6 +217,9 @@ export default class FlatfileImporter extends EventEmitter {
       appendTo: document.getElementById(`flatfile-${this.uuid}`) || undefined,
       url: FlatfileImporter.MOUNT_URL.replace(':key', this.apiKey),
       methods: {
+        results: (data) => {
+          this.emit('results', data.results, data.meta)
+        },
         complete: (data) => {
           this.emit('complete', data.rows, data.meta)
         },
