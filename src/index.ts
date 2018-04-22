@@ -63,7 +63,7 @@ export default class FlatfileImporter extends EventEmitter {
       if (el) {
         el.style.display = 'block'
       }
-      child.open()
+      child.open(options)
     })
   }
 
