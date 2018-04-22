@@ -1,10 +1,11 @@
 import EndUserObject from './obj.end-user'
+import FileObject from './obj.file'
 export default interface Meta {
   batchID: string
   endUser?: EndUserObject
   status: string
-  originalFile: string | null
-  csvFile: string | null
+  originalFile: FileObject | null
+  csvFile: FileObject | null
   filename: string
   isManaged: boolean
   filetype: string
