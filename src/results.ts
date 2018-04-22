@@ -3,6 +3,7 @@ import Stats from './stats'
 import Meta from './obj.meta'
 import RecordObject from './obj.record'
 import User from './user'
+import UploadFile from './upload-file'
 
 export default class FlatfileResults {
   /**
@@ -78,19 +79,27 @@ export default class FlatfileResults {
   /**
    * A File object of the originally uploaded file stored as an AWS url
    */
-  get originalFileUrl (): string | null {
-    return this.$meta.originalFile // fetch from AWS
+  get originalFile (): UploadFile | null {
+    if (this.$meta.originalFile) {
+      return new UploadFile(this.$meta.originalFile)
+    }
+    return null
   }
 
   /**
    * Same as originalFile unless it was uploaded in xls format, in which case this is the converted csv file stored as an AWS url
    */
-  get csvFileUrl (): string | null {
+  get csvFile (): UploadFile | null {
     if (this.$meta.filetype === 'csv') {
-      return this.originalFileUrl
+      if (this.$meta.originalFile) {
+        return new UploadFile(this.$meta.originalFile)
+      }
     } else {
-      return this.$meta.csvFile // fetched from AWS
+      if (this.$meta.csvFile) {
+        return new UploadFile(this.$meta.csvFile)
+      }
     }
+    return null
   }
 
   /**
