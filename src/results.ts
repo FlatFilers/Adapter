@@ -31,6 +31,10 @@ export default class FlatfileResults {
     return this.$data
   }
 
+  get data (): Array<any> {
+    return this.validData
+  }
+
   get validData (): Array<any> {
     return this.$data.filter(v => v.valid)
                      .map(v => v.data)
