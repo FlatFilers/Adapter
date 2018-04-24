@@ -10,15 +10,15 @@ export default class EndUser {
   /**
    * The UUID referencing the user's record stored in Flatfile
    */
-  get uuid (): string {
-    return this.$user.uuid
+  get id (): string {
+    return this.$user.id
   }
 
   /**
-   * Your system ID of the user who uploaded the file
+   * Your internal ID reference for this user (required)
    */
-  get id (): string {
-    return this.$user.id
+  get userId (): string {
+    return this.$user.userId
   }
 
   /**
@@ -36,29 +36,16 @@ export default class EndUser {
   }
 
   /**
-   * The company the user belongs to if provided
+   * The company name the user is currently operating under
    */
-  get company (): Company | null {
-    if (this.$user.companyId) {
-      return new Company(this.$user.companyId, this.$user.companyName)
-    }
-    return null
+  get companyName (): string | undefined {
+    return this.$user.companyName
   }
-}
-
-export class Company {
-  /**
-   * Your system ID of the company
-   */
-  public id: string
 
   /**
-   * The name of the company the user belongs to
+   * The company name the user is currently operating under
    */
-  public name?: string
-
-  constructor (id, name) {
-    this.id = id
-    this.name = name
+  get companyId (): string | undefined {
+    return this.$user.companyId
   }
 }
