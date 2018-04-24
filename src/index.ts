@@ -7,6 +7,7 @@ import PromisePolyfill from 'promise-polyfill'
 import FlatfileResults from './results'
 import Meta from './obj.meta'
 import RecordObject from './obj.record'
+import CustomerObject from './obj.customer'
 
 export default class FlatfileImporter extends EventEmitter {
 
@@ -20,7 +21,7 @@ export default class FlatfileImporter extends EventEmitter {
 
   private apiKey: string
   private options: object
-  private customer: object
+  private customer?: CustomerObject
   private uuid: string
 
   private handshake: Penpal.IChildConnectionObject
@@ -28,7 +29,7 @@ export default class FlatfileImporter extends EventEmitter {
   private $resolver: (data: any) => any
   private $rejecter: (err: any) => any
 
-  constructor (apiKey: string, options: object, customer: object = {}) {
+  constructor (apiKey: string, options: object, customer?: CustomerObject) {
     super()
     this.apiKey = apiKey
     this.options = options
@@ -47,14 +48,14 @@ export default class FlatfileImporter extends EventEmitter {
   /**
    * This will by default always be `https://www.flatfile.io/importer/:key` unless you are
    * an enterprise customer that is self-hosting the application. In which case, this
-   * will be the URL of your browser importer index page
+   * will be the URL of your enterprise installd Flatfile importer index page
    */
   public static setMountUrl (url: string): void {
     this.MOUNT_URL = url
   }
 
   /**
-   * Calling open() to activate the importer overlay dialog.
+   * Call open() to activate the importer overlay dialog.
    */
   open (options = {}): void {
     this.$ready.then((child) => {
@@ -170,11 +171,12 @@ export default class FlatfileImporter extends EventEmitter {
   }
 
   /**
-   * Triggers the importer to create or update the endUser of the given user_id
+   * Set the customer information for this import
    */
-  setUser (endUser: object): void {
+  setCustomer (customer: CustomerObject): void {
     this.$ready.then((child) => {
-      child.setUser(endUser)
+      this.customer = customer
+      child.setUser(customer)
     })
   }
 
@@ -182,7 +184,7 @@ export default class FlatfileImporter extends EventEmitter {
    * Call close() from the parent window in order to hide the importer. You can do this after
    * handling the import callback so your users don't have to click the confirmation button
    */
-  close () {
+  handleClose () {
     elementClass(document.body).remove('flatfile-active')
     let el = document.getElementById(`flatfile-${this.uuid}`)
     if (el) {
@@ -225,7 +227,7 @@ export default class FlatfileImporter extends EventEmitter {
         },
         close: () => {
           this.emit('close')
-          this.close()
+          this.handleClose()
         },
         ready: () => {
           this.handshake.promise.then((child) => {
