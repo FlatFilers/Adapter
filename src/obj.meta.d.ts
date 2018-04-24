@@ -7,15 +7,13 @@ export default interface Meta {
   originalFile: FileObject | null
   csvFile: FileObject | null
   filename: string
-  isManaged: boolean
+  managed: boolean
   filetype: string
   manual: boolean
   config: object
   parsing_config: object
   count_rows: number
-  count_skipped_rows: number
-  count_accepted_rows: number
-  count_rows_invalid: number
+  count_rows_accepted: number
   count_columns: number
   count_columns_matched: number
   skipped_rows: number
@@ -27,6 +25,5 @@ export default interface Meta {
   failed_at: string
   created_at: string
   handled_at: string
-  validated_in: number | null
-  matched_in: string
+  matched_at: string
 }

@@ -77,13 +77,6 @@ export default class FlatfileResults {
   }
 
   /**
-   * The current status of the importer's progress
-   */
-  get status (): string {
-    return this.$meta.status
-  }
-
-  /**
    * Stats and counts about this file upload
    */
   get stats (): Stats {
@@ -114,13 +107,13 @@ export default class FlatfileResults {
    * Same as originalFile unless it was uploaded in xls format, in which case this is the converted csv file stored as an AWS url
    */
   get csvFile (): UploadFile | null {
-    if (this.$meta.filetype === 'csv') {
-      if (this.$meta.originalFile) {
+    if (this.$meta.originalFile) {
+      if (this.$meta.originalFile.filetype === 'csv') {
         return new UploadFile(this.$meta.originalFile)
-      }
-    } else {
-      if (this.$meta.csvFile) {
-        return new UploadFile(this.$meta.csvFile)
+      } else {
+        if (this.$meta.csvFile) {
+          return new UploadFile(this.$meta.csvFile)
+        }
       }
     }
     return null
@@ -136,14 +129,14 @@ export default class FlatfileResults {
   /**
    * If the final upload is managed by a private endpoint or not
    */
-  get isManaged (): boolean {
-    return this.$meta.isManaged || false
+  get managed (): boolean {
+    return this.$meta.managed || false
   }
 
   /**
    * If the data was entered manually instead of via file upload or not
    */
-  get isManual (): boolean {
+  get manual (): boolean {
     return this.$meta.manual
   }
 

@@ -18,7 +18,7 @@ export default class Stats {
    * The number of rows that were submitted
    */
   get acceptedRows (): number | null {
-    return this.$meta.count_accepted_rows || null
+    return this.$meta.count_rows_accepted || null
   }
 
   /**
