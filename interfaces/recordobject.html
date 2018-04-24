@@ -3,17 +3,17 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>flatfile-csv-importer</title>
+	<title>RecordObject | flatfile-csv-importer</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="../assets/css/main.css">
 </head>
 <body>
 <header>
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">flatfile-csv-importer</a>
+					<a href="../index.html" class="title">flatfile-csv-importer</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -51,40 +51,103 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="globals.html">Globals</a>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="recordobject.html">RecordObject</a>
 				</li>
 			</ul>
-			<h1> flatfile-csv-importer</h1>
+			<h1>Interface RecordObject</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">RecordObject</span>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Classes</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-class"><a href="classes/enduser.html" class="tsd-kind-icon">End<wbr>User</a></li>
-								<li class="tsd-kind-class"><a href="classes/flatfileimporter.html" class="tsd-kind-icon">Flatfile<wbr>Importer</a></li>
-								<li class="tsd-kind-class"><a href="classes/flatfileresults.html" class="tsd-kind-icon">Flatfile<wbr>Results</a></li>
-								<li class="tsd-kind-class"><a href="classes/stats.html" class="tsd-kind-icon">Stats</a></li>
-								<li class="tsd-kind-class"><a href="classes/uploadfile.html" class="tsd-kind-icon">Upload<wbr>File</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="recordobject.html#data" class="tsd-kind-icon">data</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="recordobject.html#deleted" class="tsd-kind-icon">deleted</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="recordobject.html#sequence" class="tsd-kind-icon">sequence</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="recordobject.html#valid" class="tsd-kind-icon">valid</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section ">
-							<h3>Interfaces</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-interface"><a href="interfaces/customerobject.html" class="tsd-kind-icon">Customer<wbr>Object</a></li>
-								<li class="tsd-kind-interface"><a href="interfaces/enduserobject.html" class="tsd-kind-icon">End<wbr>User<wbr>Object</a></li>
-								<li class="tsd-kind-interface"><a href="interfaces/fileobject.html" class="tsd-kind-icon">File<wbr>Object</a></li>
-								<li class="tsd-kind-interface"><a href="interfaces/meta.html" class="tsd-kind-icon">Meta</a></li>
-								<li class="tsd-kind-interface"><a href="interfaces/recordobject.html" class="tsd-kind-icon">Record<wbr>Object</a></li>
-							</ul>
-						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="data" class="tsd-anchor"></a>
+					<h3>data</h3>
+					<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/obj.record.d.ts#L20">obj.record.d.ts:20</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The fully mapped final data for this row</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="deleted" class="tsd-anchor"></a>
+					<h3>deleted</h3>
+					<div class="tsd-signature tsd-kind-icon">deleted<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/obj.record.d.ts#L5">obj.record.d.ts:5</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Did the user delete this row before submitting</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="sequence" class="tsd-anchor"></a>
+					<h3>sequence</h3>
+					<div class="tsd-signature tsd-kind-icon">sequence<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/obj.record.d.ts#L15">obj.record.d.ts:15</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The original sequence of this row in the uploaded file</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="valid" class="tsd-anchor"></a>
+					<h3>valid</h3>
+					<div class="tsd-signature tsd-kind-icon">valid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/obj.record.d.ts#L10">obj.record.d.ts:10</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Did this row pass validation</p>
+						</div>
 					</div>
 				</section>
 			</section>
@@ -92,43 +155,61 @@
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals current ">
-						<a href="globals.html"><em>Globals</em></a>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-class">
-						<a href="classes/enduser.html" class="tsd-kind-icon">End<wbr>User</a>
+						<a href="../classes/enduser.html" class="tsd-kind-icon">End<wbr>User</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/flatfileimporter.html" class="tsd-kind-icon">Flatfile<wbr>Importer</a>
+						<a href="../classes/flatfileimporter.html" class="tsd-kind-icon">Flatfile<wbr>Importer</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/flatfileresults.html" class="tsd-kind-icon">Flatfile<wbr>Results</a>
+						<a href="../classes/flatfileresults.html" class="tsd-kind-icon">Flatfile<wbr>Results</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/stats.html" class="tsd-kind-icon">Stats</a>
+						<a href="../classes/stats.html" class="tsd-kind-icon">Stats</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/uploadfile.html" class="tsd-kind-icon">Upload<wbr>File</a>
+						<a href="../classes/uploadfile.html" class="tsd-kind-icon">Upload<wbr>File</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/customerobject.html" class="tsd-kind-icon">Customer<wbr>Object</a>
+						<a href="customerobject.html" class="tsd-kind-icon">Customer<wbr>Object</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/enduserobject.html" class="tsd-kind-icon">End<wbr>User<wbr>Object</a>
+						<a href="enduserobject.html" class="tsd-kind-icon">End<wbr>User<wbr>Object</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/fileobject.html" class="tsd-kind-icon">File<wbr>Object</a>
+						<a href="fileobject.html" class="tsd-kind-icon">File<wbr>Object</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/meta.html" class="tsd-kind-icon">Meta</a>
+						<a href="meta.html" class="tsd-kind-icon">Meta</a>
 					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/recordobject.html" class="tsd-kind-icon">Record<wbr>Object</a>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface">
+						<a href="recordobject.html" class="tsd-kind-icon">Record<wbr>Object</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="recordobject.html#data" class="tsd-kind-icon">data</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="recordobject.html#deleted" class="tsd-kind-icon">deleted</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="recordobject.html#sequence" class="tsd-kind-icon">sequence</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="recordobject.html#valid" class="tsd-kind-icon">valid</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 				</ul>
 			</nav>
 		</div>
@@ -197,7 +278,7 @@
 	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>
