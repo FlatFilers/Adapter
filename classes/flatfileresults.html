@@ -91,6 +91,7 @@
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="flatfileresults.html#createdat" class="tsd-kind-icon">created<wbr>At</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="flatfileresults.html#csvfile" class="tsd-kind-icon">csv<wbr>File</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="flatfileresults.html#customcolumns" class="tsd-kind-icon">custom<wbr>Columns</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="flatfileresults.html#customer" class="tsd-kind-icon">customer</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="flatfileresults.html#data" class="tsd-kind-icon">data</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="flatfileresults.html#deleteddata" class="tsd-kind-icon">deleted<wbr>Data</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="flatfileresults.html#failedat" class="tsd-kind-icon">failed<wbr>At</a></li>
@@ -107,7 +108,6 @@
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="flatfileresults.html#stats" class="tsd-kind-icon">stats</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="flatfileresults.html#status" class="tsd-kind-icon">status</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="flatfileresults.html#submittedat" class="tsd-kind-icon">submitted<wbr>At</a></li>
-								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="flatfileresults.html#user" class="tsd-kind-icon">user</a></li>
 								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="flatfileresults.html#validdata" class="tsd-kind-icon">valid<wbr>Data</a></li>
 							</ul>
 						</section>
@@ -126,7 +126,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/results.ts#L22">results.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/63087cc/src/results.ts#L22">results.ts:22</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -158,9 +158,15 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/results.ts#L48">results.ts:48</a></li>
+									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/63087cc/src/results.ts#L67">results.ts:67</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>All data from the original file upload including deleted rows,
+									key-mapped to the configuration provided</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
@@ -175,12 +181,13 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/results.ts#L55">results.ts:55</a></li>
+									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/63087cc/src/results.ts#L75">results.ts:75</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>[alias] batchID</p>
+									<p>The uuid of the batch assigned by Flatfile (use this in internal
+									references for support purposes)</p>
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -197,7 +204,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/results.ts#L133">results.ts:133</a></li>
+									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/63087cc/src/results.ts#L153">results.ts:153</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -219,7 +226,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/results.ts#L196">results.ts:196</a></li>
+									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/63087cc/src/results.ts#L216">results.ts:216</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -241,7 +248,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/results.ts#L96">results.ts:96</a></li>
+									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/63087cc/src/results.ts#L116">results.ts:116</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -266,7 +273,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/results.ts#L168">results.ts:168</a></li>
+									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/63087cc/src/results.ts#L188">results.ts:188</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -275,6 +282,31 @@
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="customer" class="tsd-anchor"></a>
+					<h3>customer</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> customer<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">User</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/63087cc/src/results.ts#L96">results.ts:96</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The customer provided in setCustomer</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">User</span>
+								<span class="tsd-signature-symbol"> | </span>
+								<span class="tsd-signature-type">null</span>
+							</h4>
 						</li>
 					</ul>
 				</section>
@@ -288,9 +320,15 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/results.ts#L34">results.ts:34</a></li>
+									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/63087cc/src/results.ts#L42">results.ts:42</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>An array of valid data, key-mapped to the configuration provided
+									(alias of validData)</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
@@ -305,9 +343,15 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/results.ts#L43">results.ts:43</a></li>
+									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/63087cc/src/results.ts#L58">results.ts:58</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Rows of data the user excluded from the final results,
+									key-mapped to the configuration provided</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
@@ -322,7 +366,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/results.ts#L189">results.ts:189</a></li>
+									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/63087cc/src/results.ts#L209">results.ts:209</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -347,7 +391,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/results.ts#L175">results.ts:175</a></li>
+									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/63087cc/src/results.ts#L195">results.ts:195</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -372,7 +416,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/results.ts#L112">results.ts:112</a></li>
+									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/63087cc/src/results.ts#L132">results.ts:132</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -397,7 +441,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/results.ts#L161">results.ts:161</a></li>
+									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/63087cc/src/results.ts#L181">results.ts:181</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -422,7 +466,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/results.ts#L154">results.ts:154</a></li>
+									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/63087cc/src/results.ts#L174">results.ts:174</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -447,7 +491,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/results.ts#L119">results.ts:119</a></li>
+									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/63087cc/src/results.ts#L139">results.ts:139</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -469,7 +513,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/results.ts#L126">results.ts:126</a></li>
+									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/63087cc/src/results.ts#L146">results.ts:146</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -491,7 +535,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/results.ts#L86">results.ts:86</a></li>
+									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/63087cc/src/results.ts#L106">results.ts:106</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -516,7 +560,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/results.ts#L140">results.ts:140</a></li>
+									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/63087cc/src/results.ts#L160">results.ts:160</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -538,9 +582,15 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/results.ts#L30">results.ts:30</a></li>
+									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/63087cc/src/results.ts#L34">results.ts:34</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The raw output from the importer including all deleted rows
+									and sequence info</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/recordobject.html" class="tsd-signature-type">RecordObject</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
@@ -555,7 +605,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/results.ts#L147">results.ts:147</a></li>
+									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/63087cc/src/results.ts#L167">results.ts:167</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -580,7 +630,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/results.ts#L69">results.ts:69</a></li>
+									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/63087cc/src/results.ts#L89">results.ts:89</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -602,7 +652,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/results.ts#L62">results.ts:62</a></li>
+									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/63087cc/src/results.ts#L82">results.ts:82</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -624,7 +674,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/results.ts#L182">results.ts:182</a></li>
+									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/63087cc/src/results.ts#L202">results.ts:202</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -633,31 +683,6 @@
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span>
-								<span class="tsd-signature-symbol"> | </span>
-								<span class="tsd-signature-type">null</span>
-							</h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
-					<a name="user" class="tsd-anchor"></a>
-					<h3>user</h3>
-					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> user<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">User</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/results.ts#L76">results.ts:76</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>The endUser object created by setUser</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">User</span>
 								<span class="tsd-signature-symbol"> | </span>
 								<span class="tsd-signature-type">null</span>
 							</h4>
@@ -674,9 +699,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/4075a5f/src/results.ts#L38">results.ts:38</a></li>
+									<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/63087cc/src/results.ts#L49">results.ts:49</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>An array of valid data, key-mapped to the configuration provided</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
@@ -726,6 +756,9 @@
 								<a href="flatfileresults.html#customcolumns" class="tsd-kind-icon">custom<wbr>Columns</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="flatfileresults.html#customer" class="tsd-kind-icon">customer</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="flatfileresults.html#data" class="tsd-kind-icon">data</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
@@ -772,9 +805,6 @@
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="flatfileresults.html#submittedat" class="tsd-kind-icon">submitted<wbr>At</a>
-							</li>
-							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
-								<a href="flatfileresults.html#user" class="tsd-kind-icon">user</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
 								<a href="flatfileresults.html#validdata" class="tsd-kind-icon">valid<wbr>Data</a>
