@@ -27,30 +27,50 @@ export default class FlatfileResults {
     this.$importer = importer
   }
 
+  /**
+   * The raw output from the importer including all deleted rows
+   * and sequence info
+   */
   get rawOutput (): Array<RecordObject> {
     return this.$data
   }
 
+  /**
+   * An array of valid data, key-mapped to the configuration provided
+   * (alias of validData)
+   */
   get data (): Array<any> {
     return this.validData
   }
 
+  /**
+   * An array of valid data, key-mapped to the configuration provided
+   */
   get validData (): Array<any> {
     return this.$data.filter(v => v.valid)
                      .map(v => v.data)
   }
 
+  /**
+   * Rows of data the user excluded from the final results,
+   * key-mapped to the configuration provided
+   */
   get deletedData (): Array<any> {
     return this.$data.filter(v => v.deleted)
                      .map(v => v.data)
   }
 
+  /**
+   * All data from the original file upload including deleted rows,
+   * key-mapped to the configuration provided
+   */
   get allData (): Array<any> {
     return this.$data.map(v => v.data)
   }
 
   /**
-   * [alias] batchID
+   * The uuid of the batch assigned by Flatfile (use this in internal
+   * references for support purposes)
    */
   get batchId (): string {
     return this.$meta.batchID
@@ -71,9 +91,9 @@ export default class FlatfileResults {
   }
 
   /**
-   * The endUser object created by setUser
+   * The customer provided in setCustomer
    */
-  get user (): User | null {
+  get customer (): User | null {
     if (this.$meta.endUser) {
       return new User(this.$meta.endUser)
     }
