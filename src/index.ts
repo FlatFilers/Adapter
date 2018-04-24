@@ -181,15 +181,16 @@ export default class FlatfileImporter extends EventEmitter {
     })
   }
 
+  /**
+   * Call close() from the parent window in order to hide the importer. You can do this after
+   * handling the import callback so your users don't have to click the confirmation button
+   */
   close () {
     this.$ready.then((child) => {
       child.close()
     })
   }
-  /**
-   * Call close() from the parent window in order to hide the importer. You can do this after
-   * handling the import callback so your users don't have to click the confirmation button
-   */
+
   private handleClose () {
     elementClass(document.body).remove('flatfile-active')
     let el = document.getElementById(`flatfile-${this.uuid}`)
