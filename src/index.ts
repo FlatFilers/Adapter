@@ -1,4 +1,4 @@
-import * as polyfill from 'es6-promise/auto'
+import 'promise-polyfill/src/polyfill'
 
 import { EventEmitter } from 'eventemitter3'
 import whenDomReady from 'when-dom-ready'
