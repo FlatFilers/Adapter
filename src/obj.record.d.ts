@@ -13,7 +13,7 @@ export default interface RecordObject {
    * The original sequence of this row in the uploaded file
    */
   sequence: number,
-  
+
   /**
    * The fully mapped final data for this row
    */
