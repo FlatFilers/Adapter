@@ -45,17 +45,17 @@ Add the following code before the ending `</body>` tag in your html.
 <script>
   var LICENSE_KEY = 'PASTE YOUR KEY HERE'
 
-  var robotImporter = new FlatfileImporter('demo-account', {
+  var importer = new FlatfileImporter('demo-account', {
     fields: [{
       label: 'Robot Name',
       key: 'name'
     }, {
       label: 'Shield Color',
-      key: 'shield-color',
+      key: 'shieldColor',
       validator: /^[a-zA-Z]+$/
     }, {
       label: 'Robot Helmet Style',
-      key: 'helmet-style',
+      key: 'helmetStyle',
     }, {
       label: 'Call Sign',
       key: 'sign',
@@ -65,20 +65,32 @@ Add the following code before the ending `</body>` tag in your html.
     type: 'Robot'
   })
 
-  robotImporter.on('complete', function(users, meta) {
-    robotImporter.displayLoader()
+  importer.requestDataFromUser().then(function(results) {
+    importer.displayLoader()
 
-    setTimeout(function() {
+    // replace this setTimeout with an ajax request to your server with the data
+    doSomethingWithYourData(results.data).then(function() {
       robotImporter.displaySuccess()
-      $("#output").val(JSON.stringify(users, null, 2));
-    }, 1500)
-  })
-
-  $(function() {
-    $("#import-button").click(function() {
-      robotImporter.open()
     })
   })
+
+  /**
+   * Use this function to do something with your data like upload it your server
+   * 
+   * @param data An array of objects matching your earlier configuration
+   *   [
+   *     {
+   *       name: 'R2D2',
+   *       shieldColor: 'blue',
+   *       helmetStyle: 'awesome',
+   *       callSign: 'beep'
+   *     }
+   *     ...
+   *   ]
+   */
+  function doSomethingWithYourData (data) {
+
+  }
 
 </script>
 ```
@@ -101,8 +113,8 @@ const importer = new FlatfileImporter(FLATFILE_LICENSE_KEY, options)
 // setup your handler
 const buttonClickHandler = async () => {
   try {
-    const response.data = await importer.loadData()
-    await uploadYourData(data)
+    const response = await importer.requestDataFromUser()
+    await uploadYourData(response.data)
   } catch(e) {
     // handle a failed upload
   }
