@@ -1,4 +1,4 @@
-require('es6-promise/auto')
+import * as polyfill from 'es6-promise/auto'
 
 import { EventEmitter } from 'eventemitter3'
 import whenDomReady from 'when-dom-ready'
