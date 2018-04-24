@@ -116,6 +116,7 @@
   },
   "dependencies": {
     "element-class": "^0.2.2",
+    "es6-promise": "^4.2.4",
     "eventemitter3": "^3.0.0",
     "express": "^4.16.2",
     "insert-css": "^2.0.0",

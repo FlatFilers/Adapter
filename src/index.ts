@@ -1,9 +1,10 @@
+require('es6-promise/auto')
+
 import { EventEmitter } from 'eventemitter3'
 import whenDomReady from 'when-dom-ready'
 import insertCss from 'insert-css'
 import elementClass from 'element-class'
 import Penpal from 'penpal'
-import PromisePolyfill from 'promise-polyfill'
 import FlatfileResults from './results'
 import Meta from './obj.meta'
 import RecordObject from './obj.record'
@@ -11,7 +12,7 @@ import CustomerObject from './obj.customer'
 
 export default class FlatfileImporter extends EventEmitter {
 
-  public static Promise = PromisePolyfill
+  public static Promise = Promise
   private static MOUNT_URL: string = 'https://www.flatfile.io/importer/:key'
 
   /**
