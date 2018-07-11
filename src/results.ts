@@ -1,4 +1,4 @@
-import Importer from 'typescript-starter'
+import Importer from './index'
 import Stats from './stats'
 import Meta from './obj.meta'
 import RecordObject from './obj.record'
