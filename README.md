@@ -5,7 +5,7 @@
 [![NPM version](https://img.shields.io/npm/v/typescript-starter.svg)](https://www.npmjs.com/package/typescript-starter)
 [![Standard Version](https://img.shields.io/badge/release-standard%20version-brightgreen.svg)](https://github.com/conventional-changelog/standard-version)
 [![dependencies Status](https://david-dm.org/flatfilers/adapter/status.svg)](https://david-dm.org/flatfilers/adapter)
-[![devDependencies Status](https://david-dm.org/flatfilers/adapter/dev-status.svg)](https://david-dm.org/flatfilers/adapter?type=dev)
+[![devDependencies Status](https://david-dm.org/flatfilers/adapter/dev-status.svg)](https://david-dm.org/flatfilers/adapter?type=dev) [![Greenkeeper badge](https://badges.greenkeeper.io/FlatFilers/Adapter.svg)](https://greenkeeper.io/)
 
 
 A simple adapter for elegantly importing CSV files via [flatfile.io](https://www.flatfile.io) (Typescript, ES6, Browser)
