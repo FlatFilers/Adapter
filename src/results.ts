@@ -48,6 +48,7 @@ export default class FlatfileResults {
    */
   get validData (): Array<any> {
     return this.$data.filter(v => v.valid)
+                     .filter(v => !v.deleted)
                      .map(v => v.data)
   }
 
