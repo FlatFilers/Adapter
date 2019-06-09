@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>EndUserObject | flatfile-csv-importer</title>
+	<title>LoadOptionsObject | flatfile-csv-importer</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,10 +54,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="enduserobject.html">EndUserObject</a>
+					<a href="loadoptionsobject.html">LoadOptionsObject</a>
 				</li>
 			</ul>
-			<h1>Interface EndUserObject</h1>
+			<h1>Interface LoadOptionsObject</h1>
 		</div>
 	</div>
 </header>
@@ -68,12 +68,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="customerobject.html" class="tsd-signature-type">CustomerObject</a>
-						<ul class="tsd-hierarchy">
-							<li>
-								<span class="target">EndUserObject</span>
-							</li>
-						</ul>
+						<span class="target">LoadOptionsObject</span>
 					</li>
 				</ul>
 			</section>
@@ -84,12 +79,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="enduserobject.html#companyid" class="tsd-kind-icon">company<wbr>Id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="enduserobject.html#companyname" class="tsd-kind-icon">company<wbr>Name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="enduserobject.html#email" class="tsd-kind-icon">email</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="enduserobject.html#id" class="tsd-kind-icon">id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="enduserobject.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="enduserobject.html#userid" class="tsd-kind-icon">user<wbr>Id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="loadoptionsobject.html#inchunks" class="tsd-kind-icon">in<wbr>Chunks</a></li>
 							</ul>
 						</section>
 					</div>
@@ -97,98 +87,18 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="companyid" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> company<wbr>Id</h3>
-					<div class="tsd-signature tsd-kind-icon">company<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="customerobject.html">CustomerObject</a>.<a href="customerobject.html#companyid">companyId</a></p>
-						<ul>
-							<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/6a390f8/src/obj.customer.ts#L25">obj.customer.ts:25</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Your internal ID for the company the user is currently operating under</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="companyname" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> company<wbr>Name</h3>
-					<div class="tsd-signature tsd-kind-icon">company<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="customerobject.html">CustomerObject</a>.<a href="customerobject.html#companyname">companyName</a></p>
-						<ul>
-							<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/6a390f8/src/obj.customer.ts#L20">obj.customer.ts:20</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The company name the user is currently operating under</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="email" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> email</h3>
-					<div class="tsd-signature tsd-kind-icon">email<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="customerobject.html">CustomerObject</a>.<a href="customerobject.html#email">email</a></p>
-						<ul>
-							<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/6a390f8/src/obj.customer.ts#L15">obj.customer.ts:15</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>An optional email address for this person</p>
-						</div>
-					</div>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="id" class="tsd-anchor"></a>
-					<h3>id</h3>
-					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="inchunks" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> in<wbr>Chunks</h3>
+					<div class="tsd-signature tsd-kind-icon">in<wbr>Chunks<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/6a390f8/src/obj.end-user.ts#L7">obj.end-user.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/6a390f8/src/obj.load-options.ts#L5">obj.load-options.ts:5</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The unique UUID Flatfile assigns to the user of your import</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="name" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> name</h3>
-					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="customerobject.html">CustomerObject</a>.<a href="customerobject.html#name">name</a></p>
-						<ul>
-							<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/6a390f8/src/obj.customer.ts#L10">obj.customer.ts:10</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>A name to reference this person</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="userid" class="tsd-anchor"></a>
-					<h3>user<wbr>Id</h3>
-					<div class="tsd-signature tsd-kind-icon">user<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="customerobject.html">CustomerObject</a>.<a href="customerobject.html#userid">userId</a></p>
-						<ul>
-							<li>Defined in <a href="https://github.com/FlatFilers/Adapter/blob/6a390f8/src/obj.customer.ts#L5">obj.customer.ts:5</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Your internal ID reference for this user (required)</p>
+							<p>The number of records to receive per chunk</p>
 						</div>
 					</div>
 				</section>
@@ -228,39 +138,24 @@
 					<li class=" tsd-kind-interface">
 						<a href="customerobject.html" class="tsd-kind-icon">Customer<wbr>Object</a>
 					</li>
+					<li class=" tsd-kind-interface">
+						<a href="enduserobject.html" class="tsd-kind-icon">End<wbr>User<wbr>Object</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="fileobject.html" class="tsd-kind-icon">File<wbr>Object</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="enduserobject.html" class="tsd-kind-icon">End<wbr>User<wbr>Object</a>
+						<a href="loadoptionsobject.html" class="tsd-kind-icon">Load<wbr>Options<wbr>Object</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="enduserobject.html#companyid" class="tsd-kind-icon">company<wbr>Id</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="enduserobject.html#companyname" class="tsd-kind-icon">company<wbr>Name</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="enduserobject.html#email" class="tsd-kind-icon">email</a>
-							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="enduserobject.html#id" class="tsd-kind-icon">id</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="enduserobject.html#name" class="tsd-kind-icon">name</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="enduserobject.html#userid" class="tsd-kind-icon">user<wbr>Id</a>
+								<a href="loadoptionsobject.html#inchunks" class="tsd-kind-icon">in<wbr>Chunks</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface">
-						<a href="fileobject.html" class="tsd-kind-icon">File<wbr>Object</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="loadoptionsobject.html" class="tsd-kind-icon">Load<wbr>Options<wbr>Object</a>
-					</li>
 					<li class=" tsd-kind-interface">
 						<a href="meta.html" class="tsd-kind-icon">Meta</a>
 					</li>
