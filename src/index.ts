@@ -104,28 +104,8 @@ export default class FlatfileImporter extends EventEmitter {
    * async/await for an es6 implementation
    */
   requestDataFromUser (options: LoadOptionsObject = { }): Promise<FlatfileResults> {
-    return new FlatfileImporter.Promise((resolve, reject) => {
-      this.open({ inChunks: options.inChunks || null, expectsExpandedResults: true})
-
-      const loadResolveHandler = async (rows: Array<RecordObject>, meta: object) => {
-        const results = new FlatfileResults(rows, meta as Meta, this)
-        resolve(results)
-        cleanup()
-      }
-
-      function loadRejectHandler (err) {
-        reject(err)
-        cleanup()
-      }
-
-      function cleanup () {
-        this.removeListener('close', loadRejectHandler)
-        this.removeListener('results', loadResolveHandler)
-      }
-
-      this.on('close', loadRejectHandler)
-      this.on('results', loadResolveHandler)
-    })
+    this.open({ inChunks: options.inChunks || null, expectsExpandedResults: true})
+    return this.responsePromise()
   }
 
   /**
@@ -142,11 +122,24 @@ export default class FlatfileImporter extends EventEmitter {
    * This will display a dialog inside of the importer with an error icon and the message you
    * pass. The user will be able to acknowledge the error and be returned to the import data
    * spreadsheet to ideally fix any issues or attempt submitting again.
+   * @deprecated
    */
   displayError (msg: string): void {
     this.$ready.then((child) => {
       child.displayError(msg)
     })
+  }
+
+  /**
+   * This will display a dialog inside of the importer with an error icon and the message you
+   * pass. The user will be able to acknowledge the error and be returned to the import data
+   * spreadsheet to ideally fix any issues or attempt submitting again.
+   */
+  requestCorrectionsFromUser (msg): Promise<FlatfileResults> {
+    this.$ready.then((child) => {
+      child.displayError(msg)
+    })
+    return this.responsePromise()
   }
 
   /**
@@ -255,5 +248,29 @@ export default class FlatfileImporter extends EventEmitter {
 
   private $generateUuid (): string {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+  }
+
+  private responsePromise (): Promise<FlatfileResults> {
+    return new Promise((resolve, reject) => {
+      const loadResolveHandler = async (rows: Array<RecordObject>, meta: object) => {
+        const results = new FlatfileResults(rows, meta as Meta, this)
+        resolve(results)
+        cleanup()
+      }
+
+      function loadRejectHandler (err) {
+        reject(err)
+        cleanup()
+      }
+
+      const self = this
+      function cleanup () {
+        self.removeListener('close', loadRejectHandler)
+        self.removeListener('results', loadResolveHandler)
+      }
+
+      this.on('close', loadRejectHandler)
+      this.on('results', loadResolveHandler)
+    })
   }
 }
