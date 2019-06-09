@@ -9,6 +9,7 @@ import FlatfileResults from './results'
 import Meta from './obj.meta'
 import RecordObject from './obj.record'
 import CustomerObject from './obj.customer'
+import LoadOptionsObject from './obj.load-options'
 
 export default class FlatfileImporter extends EventEmitter {
 
@@ -102,14 +103,9 @@ export default class FlatfileImporter extends EventEmitter {
    * Use requestDataFromUser() when you want a promise returned. This is necessary if you want to use
    * async/await for an es6 implementation
    */
-  requestDataFromUser (options = {}): Promise<FlatfileResults> {
+  requestDataFromUser (options: LoadOptionsObject = { }): Promise<FlatfileResults> {
     return new FlatfileImporter.Promise((resolve, reject) => {
-      this.open({ ...options, expectsExpandedResults: true})
-
-      const cleanup = () => {
-        this.removeListener('close', loadRejectHandler)
-        this.removeListener('results', loadResolveHandler)
-      }
+      this.open({ inChunks: options.inChunks || null, expectsExpandedResults: true})
 
       const loadResolveHandler = async (rows: Array<RecordObject>, meta: object) => {
         const results = new FlatfileResults(rows, meta as Meta, this)
@@ -122,6 +118,11 @@ export default class FlatfileImporter extends EventEmitter {
         cleanup()
       }
 
+      function cleanup () {
+        this.removeListener('close', loadRejectHandler)
+        this.removeListener('results', loadResolveHandler)
+      }
+
       this.on('close', loadRejectHandler)
       this.on('results', loadResolveHandler)
     })
@@ -131,9 +132,9 @@ export default class FlatfileImporter extends EventEmitter {
    * This will display a progress indicator inside the importer if you anticipate that handling
    * the output of the importer may take some time.
    */
-  displayLoader (): void {
+  displayLoader (msg?: string): void {
     this.$ready.then((child) => {
-      child.displayLoader()
+      child.displayLoader(msg)
     })
   }
 

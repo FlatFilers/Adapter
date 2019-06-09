@@ -1,6 +1,6 @@
 import EndUserObject from './obj.end-user'
 import FileObject from './obj.file'
-export default interface Meta {
+export interface BaseMeta {
   batchID: string
   endUser?: EndUserObject
   status: string
@@ -26,4 +26,14 @@ export default interface Meta {
   created_at: string
   handled_at: string
   matched_at: string
+}
+
+export default interface Meta extends BaseMeta {
+  inChunks?: number
+}
+
+export interface StreamedMeta extends BaseMeta {
+  inChunks: number
+  hasMore: boolean
+  pointer: number
 }
