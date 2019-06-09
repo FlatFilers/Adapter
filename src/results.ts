@@ -4,6 +4,7 @@ import Meta from './obj.meta'
 import RecordObject from './obj.record'
 import User from './user'
 import UploadFile from './upload-file'
+import StreamedResults from './streamed-results'
 
 export default class FlatfileResults {
   /**
@@ -32,7 +33,7 @@ export default class FlatfileResults {
    * and sequence info
    */
   get rawOutput (): Array<RecordObject> {
-    return this.$data
+    return this.blobOnly(this.$data, 'rawOutput')
   }
 
   /**
@@ -40,16 +41,17 @@ export default class FlatfileResults {
    * (alias of validData)
    */
   get data (): Array<any> {
-    return this.validData
+    return this.blobOnly(this.validData, 'data')
   }
 
   /**
    * An array of valid data, key-mapped to the configuration provided
    */
   get validData (): Array<any> {
-    return this.$data.filter(v => v.valid)
-                     .filter(v => !v.deleted)
-                     .map(v => v.data)
+    const res = this.$data.filter(v => v.valid)
+                          .filter(v => !v.deleted)
+                          .map(v => v.data)
+    return this.blobOnly(res, 'validData')
   }
 
   /**
@@ -57,8 +59,9 @@ export default class FlatfileResults {
    * key-mapped to the configuration provided
    */
   get deletedData (): Array<any> {
-    return this.$data.filter(v => v.deleted)
-                     .map(v => v.data)
+    const res = this.$data.filter(v => v.deleted)
+                          .map(v => v.data)
+    return this.blobOnly(res, 'deletedData')
   }
 
   /**
@@ -66,7 +69,7 @@ export default class FlatfileResults {
    * key-mapped to the configuration provided
    */
   get allData (): Array<any> {
-    return this.$data.map(v => v.data)
+    return this.blobOnly(this.$data.map(v => v.data), 'allData')
   }
 
   /**
@@ -177,6 +180,26 @@ export default class FlatfileResults {
   }
 
   /**
+   * Get the next chunk of records
+   */
+  nextChunk (): Promise<null|StreamedResults> {
+    return new Promise((resolve, reject) => {
+      if (!this.$meta.inChunks) {
+        return reject(`"nextChunk()" is only accessible when using "inChunks". Please see docs for "requestDataFromUser".`)
+      }
+      this.$importer.$ready.then((child) => {
+        console.log('child.nextChunk()')
+        child.nextChunk().then((data) => {
+          console.log('nextChunk()', data)
+          resolve(data.results.length ? new StreamedResults(data.results, data.meta) : null)
+        }, (err) => {
+          console.log('nextChunk(err)', err)
+        })
+      })
+    })
+  }
+
+  /**
    * An array of any columns that were created during import
    */
   get customColumns (): Array<object> {
@@ -209,5 +232,12 @@ export default class FlatfileResults {
    */
   get createdAt (): string {
     return this.$meta.created_at
+  }
+
+  private blobOnly <T> (v: T, method, alt = 'getNextChunk()'): T {
+    if (this.$meta.inChunks) {
+      throw new Error(`"${method}" is not accessible when using "inChunks". Please see docs for "${alt}" instead.`)
+    }
+    return v
   }
 }
