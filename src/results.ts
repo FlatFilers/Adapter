@@ -234,7 +234,7 @@ export default class FlatfileResults {
     return this.$meta.created_at
   }
 
-  private blobOnly <T> (v: T, method, alt = 'getNextChunk()'): T {
+  private blobOnly <T> (v: T, method, alt = 'nextChunk()'): T {
     if (this.$meta.inChunks) {
       throw new Error(`"${method}" is not accessible when using "inChunks". Please see docs for "${alt}" instead.`)
     }
