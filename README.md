@@ -10,7 +10,7 @@
 
 A simple adapter for elegantly importing CSV files via [flatfile.io](https://www.flatfile.io) (Typescript, ES6, Browser)
 
-Read the developer docs &rarr; https://developers.flatfile.io/docs
+Read the developer docs &rarr; https://developers.flatfile.io/docs/install
 
 ![Preview](https://flatfile.io/img/preview.png)
 
