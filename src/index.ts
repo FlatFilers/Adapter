@@ -10,6 +10,7 @@ import Meta from './obj.meta'
 import RecordObject from './obj.record'
 import CustomerObject from './obj.customer'
 import LoadOptionsObject from './obj.load-options'
+import IValidationResponse from './obj.validation-response'
 
 export default class FlatfileImporter extends EventEmitter {
 
@@ -30,6 +31,7 @@ export default class FlatfileImporter extends EventEmitter {
 
   private $resolver: (data: any) => any
   private $rejecter: (err: any) => any
+  private $validatorCallback?: (row: {[key: string]: string | number}) => Array<IValidationResponse> | Promise<Array<IValidationResponse>>
 
   constructor (apiKey: string, options: object, customer?: CustomerObject) {
     super()
@@ -176,6 +178,16 @@ export default class FlatfileImporter extends EventEmitter {
   }
 
   /**
+   * Set the customer information for this import
+   */
+  registerValidatorCallback (callback: FlatfileImporter['$validatorCallback']): void {
+    this.$validatorCallback = callback
+    this.$ready.then((child) => {
+      child.parentHasValidator()
+    })
+  }
+
+  /**
    * Call close() from the parent window in order to hide the importer. You can do this after
    * handling the import callback so your users don't have to click the confirmation button
    */
@@ -230,9 +242,15 @@ export default class FlatfileImporter extends EventEmitter {
           this.emit('close')
           this.handleClose()
         },
+        validatorCallback: (row) => {
+          return this.$validatorCallback ? this.$validatorCallback(row) : undefined
+        },
         ready: () => {
           this.handshake.promise.then((child) => {
             this.$resolver(child)
+            if (this.customer) {
+              child.setUser(this.customer)
+            }
           }).catch((err) => {
             console.error(err)
           })

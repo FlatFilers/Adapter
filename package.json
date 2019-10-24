@@ -1,6 +1,6 @@
 {
   "name": "flatfile-csv-importer",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "description": "A simple adapter for elegantly importing CSV files via flatfile.io (Typescript, ES6, Browser)",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
@@ -33,6 +33,7 @@
     "send-coverage": "nyc report --reporter=lcov > coverage.lcov && codecov",
     "docs": "yarn docs:html && opn build/docs/index.html",
     "docs:html": "typedoc src/index.ts --excludePrivate --mode file --theme default --out build/docs --includeDeclarations --excludeExternals",
+    "docs:md": "typedoc src --readme none --theme markdown --excludePrivate --mode file --out ../Developers/docs/sdk --includeDeclarations --excludeExternals --platform docusaurus",
     "docs:json": "typedoc --mode file --json build/docs/typedoc.json src/index.ts",
     "docs:publish": "yarn docs:html && gh-pages -d build/docs",
     "changelog": "standard-version",
@@ -81,7 +82,8 @@
     "trash-cli": "^1.4.0",
     "tslint": "^5.4.3",
     "tslint-config-standard": "^6.0.1",
-    "typedoc": "^0.8.0",
+    "typedoc": "^0.15.0",
+    "typedoc-plugin-markdown": "^2.1.0",
     "typescript": "^2.4.1",
     "uglify-js": "^3.3.4"
   },
