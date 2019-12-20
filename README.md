@@ -70,7 +70,7 @@ Add the following code before the ending `</body>` tag in your html.
 
     // replace this setTimeout with an ajax request to your server with the data
     doSomethingWithYourData(results.data).then(function() {
-      robotImporter.displaySuccess()
+      importer.displaySuccess()
     })
   })
 
