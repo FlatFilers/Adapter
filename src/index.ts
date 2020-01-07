@@ -10,7 +10,7 @@ import Meta from './obj.meta'
 import RecordObject from './obj.record'
 import CustomerObject from './obj.customer'
 import LoadOptionsObject from './obj.load-options'
-import IValidationResponse from './obj.validation-response'
+import IValidationResponse, { IDataHookResponse } from './obj.validation-response'
 
 export default class FlatfileImporter extends EventEmitter {
 
@@ -32,6 +32,7 @@ export default class FlatfileImporter extends EventEmitter {
   private $resolver: (data: any) => any
   private $rejecter: (err: any) => any
   private $validatorCallback?: (row: {[key: string]: string | number}) => Array<IValidationResponse> | Promise<Array<IValidationResponse>>
+  private $recordHook?: (row: {[key: string]: string | number}, index: number) => IDataHookResponse | Promise<IDataHookResponse>
 
   constructor (apiKey: string, options: object, customer?: CustomerObject) {
     super()
@@ -106,7 +107,7 @@ export default class FlatfileImporter extends EventEmitter {
    * async/await for an es6 implementation
    */
   requestDataFromUser (options: LoadOptionsObject = { }): Promise<FlatfileResults> {
-    this.open({ inChunks: options.inChunks || null, expectsExpandedResults: true})
+    this.open({ ...options, inChunks: options.inChunks || null, expectsExpandedResults: true, hasRecordHook: !!this.$recordHook })
     return this.responsePromise()
   }
 
@@ -188,6 +189,13 @@ export default class FlatfileImporter extends EventEmitter {
   }
 
   /**
+   * Set the customer information for this import
+   */
+  registerRecordHook (callback: FlatfileImporter['$recordHook']): void {
+    this.$recordHook = callback
+  }
+
+  /**
    * Call close() from the parent window in order to hide the importer. You can do this after
    * handling the import callback so your users don't have to click the confirmation button
    */
@@ -244,6 +252,9 @@ export default class FlatfileImporter extends EventEmitter {
         },
         validatorCallback: (row) => {
           return this.$validatorCallback ? this.$validatorCallback(row) : undefined
+        },
+        dataHookCallback: (row, index) => {
+          return this.$recordHook ? this.$recordHook(row, index) : undefined
         },
         ready: () => {
           this.handshake.promise.then((child) => {

@@ -182,7 +182,7 @@ export default class FlatfileResults {
   /**
    * Get the next chunk of records
    */
-  nextChunk (): Promise<null|StreamedResults> {
+  nextChunk (): Promise<null | StreamedResults> {
     return new Promise((resolve, reject) => {
       if (!this.$meta.inChunks) {
         return reject(`"nextChunk()" is only accessible when using "inChunks". Please see docs for "requestDataFromUser".`)
