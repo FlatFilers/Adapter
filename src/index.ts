@@ -15,7 +15,8 @@ import IValidationResponse, { IDataHookResponse } from './obj.validation-respons
 export default class FlatfileImporter extends EventEmitter {
 
   public static Promise = Promise
-  private static MOUNT_URL: string = 'https://www.flatfile.io/importer/:key'
+  private static MOUNT_URL: string = 'https://kiosk-lite.flatfile.io/?key=:key'
+
 
   /**
    * Promise that resolves when the handshake is completed between Flatfile.io and the adapter
@@ -57,6 +58,22 @@ export default class FlatfileImporter extends EventEmitter {
    */
   public static setMountUrl (url: string): void {
     this.MOUNT_URL = url
+  }
+
+  /**
+   * This allows you to opt into or out of specific versions of the Flatfile SDK
+   */
+  public static setVersion(version: 1 | 2): void {
+    switch(version) {
+      case 1:
+        this.MOUNT_URL = 'https://kiosk-lite.flatfile.io/?key=:key'
+        break;
+      case 2:
+        this.MOUNT_URL = 'https://portal-2.flatfile.io/?key=:key'
+        break;
+      default:
+        throw new Error(`${version} is not a valid version`)
+    }
   }
 
   /**
