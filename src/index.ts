@@ -80,6 +80,7 @@ export default class FlatfileImporter extends EventEmitter {
    * Call open() to activate the importer overlay dialog.
    */
   open (options = {}): void {
+    options = {...options, hasRecordHook: !!this.$recordHook, endUser: this.customer}
     this.$ready.then((child) => {
       elementClass(document.body).add('flatfile-active')
       let el = document.getElementById(`flatfile-${this.uuid}`)
@@ -124,7 +125,7 @@ export default class FlatfileImporter extends EventEmitter {
    * async/await for an es6 implementation
    */
   requestDataFromUser (options: LoadOptionsObject = { }): Promise<FlatfileResults> {
-    this.open({ ...options, inChunks: options.inChunks || null, expectsExpandedResults: true, hasRecordHook: !!this.$recordHook })
+    this.open({ ...options, inChunks: options.inChunks || null, expectsExpandedResults: true })
     return this.responsePromise()
   }
 
@@ -189,10 +190,7 @@ export default class FlatfileImporter extends EventEmitter {
    * Set the customer information for this import
    */
   setCustomer (customer: CustomerObject): void {
-    this.$ready.then((child) => {
-      this.customer = customer
-      child.setUser(customer)
-    })
+    this.customer = customer
   }
 
   /**
