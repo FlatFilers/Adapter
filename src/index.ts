@@ -247,6 +247,7 @@ export default class FlatfileImporter extends EventEmitter {
       }
       body.flatfile-active {
         overflow: hidden;
+        overscroll-behavior-x: none;
       }
     `)
 
