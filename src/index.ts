@@ -10,13 +10,12 @@ import Meta from './obj.meta'
 import RecordObject from './obj.record'
 import CustomerObject from './obj.customer'
 import LoadOptionsObject from './obj.load-options'
-import IValidationResponse, { IDataHookResponse } from './obj.validation-response'
+import IValidationResponse, { IDataHookRecord, IDataHookResponse } from './obj.validation-response'
 
 export default class FlatfileImporter extends EventEmitter {
 
   public static Promise = Promise
   private static MOUNT_URL: string = 'https://kiosk-lite.flatfile.io/?key=:key'
-
 
   /**
    * Promise that resolves when the handshake is completed between Flatfile.io and the adapter
@@ -32,8 +31,9 @@ export default class FlatfileImporter extends EventEmitter {
 
   private $resolver: (data: any) => any
   private $rejecter: (err: any) => any
-  private $validatorCallback?: (row: {[key: string]: string | number}) => Array<IValidationResponse> | Promise<Array<IValidationResponse>>
-  private $recordHook?: (row: {[key: string]: string | number}, index: number) => IDataHookResponse | Promise<IDataHookResponse>
+  private $validatorCallback?: (row: { [key: string]: string | number }) => Array<IValidationResponse> | Promise<Array<IValidationResponse>>
+  private $recordHook?: (row: { [key: string]: string | number }, index: number) => IDataHookResponse | Promise<IDataHookResponse>
+  private $fieldHooks: Array<{ field: string, cb: FieldHookCallback }> = []
 
   constructor (apiKey: string, options: object, customer?: CustomerObject) {
     super()
@@ -63,14 +63,14 @@ export default class FlatfileImporter extends EventEmitter {
   /**
    * This allows you to opt into or out of specific versions of the Flatfile SDK
    */
-  public static setVersion(version: 1 | 2): void {
-    switch(version) {
+  public static setVersion (version: 1 | 2): void {
+    switch (version) {
       case 1:
         this.MOUNT_URL = 'https://kiosk-lite.flatfile.io/?key=:key'
-        break;
+        break
       case 2:
         this.MOUNT_URL = 'https://portal-2.flatfile.io/?key=:key'
-        break;
+        break
       default:
         throw new Error(`${version} is not a valid version`)
     }
@@ -80,7 +80,12 @@ export default class FlatfileImporter extends EventEmitter {
    * Call open() to activate the importer overlay dialog.
    */
   open (options = {}): void {
-    options = {...options, hasRecordHook: !!this.$recordHook, endUser: this.customer}
+    options = {
+      ...options,
+      hasRecordHook: !!this.$recordHook,
+      fieldHooks: this.$fieldHooks.map(v => v.field),
+      endUser: this.customer
+    }
     this.$ready.then((child) => {
       elementClass(document.body).add('flatfile-active')
       let el = document.getElementById(`flatfile-${this.uuid}`)
@@ -124,8 +129,8 @@ export default class FlatfileImporter extends EventEmitter {
    * Use requestDataFromUser() when you want a promise returned. This is necessary if you want to use
    * async/await for an es6 implementation
    */
-  requestDataFromUser (options: LoadOptionsObject = { }): Promise<FlatfileResults> {
-    this.open({ ...options, inChunks: options.inChunks || null, expectsExpandedResults: true })
+  requestDataFromUser (options: LoadOptionsObject = {}): Promise<FlatfileResults> {
+    this.open({...options, inChunks: options.inChunks || null, expectsExpandedResults: true})
     return this.responsePromise()
   }
 
@@ -211,6 +216,13 @@ export default class FlatfileImporter extends EventEmitter {
   }
 
   /**
+   * Set the customer information for this import
+   */
+  registerFieldHook (field: string, cb: FieldHookCallback): void {
+    this.$fieldHooks.push({field, cb})
+  }
+
+  /**
    * Call close() from the parent window in order to hide the importer. You can do this after
    * handling the import callback so your users don't have to click the confirmation button
    */
@@ -272,6 +284,13 @@ export default class FlatfileImporter extends EventEmitter {
         dataHookCallback: (row, index) => {
           return this.$recordHook ? this.$recordHook(row, index) : undefined
         },
+        fieldHookCallback: (values, meta) => {
+          const fieldHook = this.$fieldHooks.find(v => v.field === meta.field)
+          if (!fieldHook) {
+            return
+          }
+          return fieldHook.cb(values, meta)
+        },
         ready: () => {
           this.handshake.promise.then((child) => {
             this.$resolver(child)
@@ -309,6 +328,7 @@ export default class FlatfileImporter extends EventEmitter {
       }
 
       const self = this
+
       function cleanup () {
         self.removeListener('close', loadRejectHandler)
         self.removeListener('results', loadResolveHandler)
@@ -319,3 +339,7 @@ export default class FlatfileImporter extends EventEmitter {
     })
   }
 }
+
+export type Scalar = string | number | boolean | null | undefined
+
+export type FieldHookCallback = (values: [Scalar, number][], meta: any) => [IDataHookRecord, number][] | Promise<[IDataHookRecord, number][]>
