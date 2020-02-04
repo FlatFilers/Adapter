@@ -59,7 +59,7 @@
     "node": ">=4.5"
   },
   "devDependencies": {
-    "@types/node": "^13.7.0",
+    "@types/node": "^9.5.0",
     "ava": "^0.21.0",
     "browserify": "^14.1.0",
     "codecov": "^2.2.0",
