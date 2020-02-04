@@ -59,7 +59,7 @@
     "node": ">=4.5"
   },
   "devDependencies": {
-    "@types/node": "^8.0.4",
+    "@types/node": "^13.7.0",
     "ava": "^0.21.0",
     "browserify": "^14.1.0",
     "codecov": "^2.2.0",
@@ -82,8 +82,8 @@
     "trash-cli": "^1.4.0",
     "tslint": "^5.4.3",
     "tslint-config-standard": "^6.0.1",
-    "typedoc": "^0.15.0",
-    "typedoc-plugin-markdown": "^2.1.0",
+    "typedoc": "^0.16.9",
+    "typedoc-plugin-markdown": "^2.2.16",
     "typescript": "^2.4.1",
     "uglify-js": "^3.3.4"
   },
