@@ -1,4 +1,4 @@
-import 'promise-polyfill/src/polyfill'
+import 'promise-polyfill/dist/polyfill'
 
 import { EventEmitter } from 'eventemitter3'
 import whenDomReady from 'when-dom-ready'
@@ -287,7 +287,7 @@ export default class FlatfileImporter extends EventEmitter {
         fieldHookCallback: (values, meta) => {
           const fieldHook = this.$fieldHooks.find(v => v.field === meta.field)
           if (!fieldHook) {
-            return
+            return undefined
           }
           return fieldHook.cb(values, meta)
         },
