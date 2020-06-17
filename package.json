@@ -1,6 +1,6 @@
 {
   "name": "flatfile-csv-importer",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "description": "A simple adapter for elegantly importing CSV files via flatfile.io (Typescript, ES6, Browser)",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
