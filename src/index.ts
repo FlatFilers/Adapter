@@ -27,6 +27,7 @@ export default class FlatfileImporter extends EventEmitter {
   private customer?: CustomerObject
   private uuid: string
 
+  // @ts-ignore
   private handshake: Penpal.IChildConnectionObject
 
   private $resolver: (data: any) => any
