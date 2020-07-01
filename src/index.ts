@@ -27,12 +27,13 @@ export default class FlatfileImporter extends EventEmitter {
   private customer?: CustomerObject
   private uuid: string
 
+  // @ts-ignore
   private handshake: Penpal.IChildConnectionObject
 
   private $resolver: (data: any) => any
   private $rejecter: (err: any) => any
   private $validatorCallback?: (row: { [key: string]: string | number }) => Array<IValidationResponse> | Promise<Array<IValidationResponse>>
-  private $recordHook?: (row: { [key: string]: string | number }, index: number) => IDataHookResponse | Promise<IDataHookResponse>
+  private $recordHook?: (row: { [key: string]: string | number }, index: number, mode: string) => IDataHookResponse | Promise<IDataHookResponse>
   private $fieldHooks: Array<{ field: string, cb: FieldHookCallback }> = []
 
   constructor (apiKey: string, options: object, customer?: CustomerObject) {
@@ -281,8 +282,8 @@ export default class FlatfileImporter extends EventEmitter {
         validatorCallback: (row) => {
           return this.$validatorCallback ? this.$validatorCallback(row) : undefined
         },
-        dataHookCallback: (row, index) => {
-          return this.$recordHook ? this.$recordHook(row, index) : undefined
+        dataHookCallback: (row, index, mode) => {
+          return this.$recordHook ? this.$recordHook(row, index, mode) : undefined
         },
         fieldHookCallback: (values, meta) => {
           const fieldHook = this.$fieldHooks.find(v => v.field === meta.field)
