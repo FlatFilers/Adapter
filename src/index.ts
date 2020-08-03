@@ -15,7 +15,7 @@ import IValidationResponse, { IDataHookRecord, IDataHookResponse } from './obj.v
 export default class FlatfileImporter extends EventEmitter {
 
   public static Promise = Promise
-  private static MOUNT_URL: string = 'https://kiosk-lite.flatfile.io/?key=:key'
+  private static MOUNT_URL: string = 'https://portal-2.flatfile.io/?key=:key'
 
   /**
    * Promise that resolves when the handshake is completed between Flatfile.io and the adapter
