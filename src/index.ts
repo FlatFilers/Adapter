@@ -33,6 +33,7 @@ export default class FlatfileImporter extends EventEmitter {
   private $resolver: (data: any) => any
   private $rejecter: (err: any) => any
   private $validatorCallback?: (row: { [key: string]: string | number }) => Array<IValidationResponse> | Promise<Array<IValidationResponse>>
+  private $networkErrorCallback?: (err: string) => void
   private $recordHook?: (row: { [key: string]: string | number }, index: number, mode: string) => IDataHookResponse | Promise<IDataHookResponse>
   private $fieldHooks: Array<{ field: string, cb: FieldHookCallback }> = []
 
@@ -216,6 +217,10 @@ export default class FlatfileImporter extends EventEmitter {
     this.$recordHook = callback
   }
 
+  registerNetworkErrorCallback (callback: FlatfileImporter['$networkErrorCallback']): void {
+    this.$networkErrorCallback = callback
+  }
+
   /**
    * Set the customer information for this import
    */
@@ -278,6 +283,9 @@ export default class FlatfileImporter extends EventEmitter {
         close: () => {
           this.emit('close')
           this.handleClose()
+        },
+        networkErrorCallback: (error) => {
+          return this.$networkErrorCallback ? this.$networkErrorCallback(error) : undefined
         },
         validatorCallback: (row) => {
           return this.$validatorCallback ? this.$validatorCallback(row) : undefined
