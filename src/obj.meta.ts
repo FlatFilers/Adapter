@@ -19,6 +19,7 @@ export interface BaseMeta {
   skipped_rows: number
   headers_raw: Array<object> | null
   headers_matched: Array<object> | null
+  category_field_map?: object
   custom_columns: Array<object>
   failure_reason: string
   submitted_at: string
