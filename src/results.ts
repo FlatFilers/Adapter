@@ -207,6 +207,13 @@ export default class FlatfileResults {
   }
 
   /**
+   * A mapping of source values to target category values
+   */
+  get categoryFieldMap (): object | null {
+    return this.$meta.category_field_map || null
+  }
+
+  /**
    * The reason for the failure if there was a failure
    */
   get failureReason (): string | null {
