@@ -5,12 +5,15 @@ import whenDomReady from 'when-dom-ready'
 import insertCss from 'insert-css'
 import elementClass from 'element-class'
 import Penpal from 'penpal'
+import registerDocumentContainsPolyfill from './document.contains.polyfill'
 import FlatfileResults from './results'
 import Meta from './obj.meta'
 import RecordObject from './obj.record'
 import CustomerObject from './obj.customer'
 import LoadOptionsObject from './obj.load-options'
 import IValidationResponse, { IDataHookRecord, IDataHookResponse } from './obj.validation-response'
+
+registerDocumentContainsPolyfill()
 
 export default class FlatfileImporter extends EventEmitter {
 
