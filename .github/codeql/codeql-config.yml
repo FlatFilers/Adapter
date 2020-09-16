@@ -1,0 +1,4 @@
+name: "Extended security suite and code quality suite"
+disable-default-queries: false
+queries:
+  - uses: security-and-quality
