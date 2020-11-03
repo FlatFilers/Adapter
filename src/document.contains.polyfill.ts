@@ -21,7 +21,7 @@ const contains = function (other) {
 
 export default function registerDocumentContainsPolyfill () {
   // tslint:disable-next-line
-  if (typeof document.contains !== 'function') {
+  if (typeof document === 'object' && typeof document.contains !== 'function') {
     Object.getPrototypeOf(document).contains = contains
   }
 }
