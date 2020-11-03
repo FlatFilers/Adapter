@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.1.3"></a>
+## [2.1.3](https://github.com/flatfilers/adapter/compare/v2.1.1...v2.1.3) (2020-11-03)
+
+
+### Bug Fixes
+
+* **adapter:** only polyfill document if exists ([06b4ab7](https://github.com/flatfilers/adapter/commit/06b4ab7))
+
+
+
 <a name="0.2.11"></a>
 ## [0.2.11](https://github.com/flatfilers/adapter/compare/v0.2.9...v0.2.11) (2020-06-17)
 
