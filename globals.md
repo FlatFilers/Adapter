@@ -1,6 +1,6 @@
-[flatfile-csv-importer](README.md) › [Globals](globals.md)
+[@flatfile/adapter](README.md) › [Globals](globals.md)
 
-# flatfile-csv-importer
+# @flatfile/adapter
 
 ## Index
 
@@ -19,7 +19,7 @@
 
 Ƭ **FieldHookCallback**: *function*
 
-*Defined in [src/index.ts:345](https://github.com/FlatFilers/Adapter/blob/a601586/src/index.ts#L345)*
+*Defined in [src/index.ts:357](https://github.com/FlatFilers/Adapter/blob/06b4ab7/src/index.ts#L357)*
 
 #### Type declaration:
 
@@ -38,4 +38,4 @@ ___
 
 Ƭ **Scalar**: *string | number | boolean | null | undefined*
 
-*Defined in [src/index.ts:343](https://github.com/FlatFilers/Adapter/blob/a601586/src/index.ts#L343)*
+*Defined in [src/index.ts:355](https://github.com/FlatFilers/Adapter/blob/06b4ab7/src/index.ts#L355)*
