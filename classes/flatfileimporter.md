@@ -55,7 +55,7 @@
 
 \+ **new FlatfileImporter**(`apiKey`: string, `options`: object, `customer?`: CustomerObject): *[FlatfileImporter](flatfileimporter.md)*
 
-*Defined in [src/index.ts:41](https://github.com/FlatFilers/Adapter/blob/06b4ab7/src/index.ts#L41)*
+*Defined in [src/index.ts:41](https://github.com/FlatFilers/Adapter/blob/6cf3acf/src/index.ts#L41)*
 
 **Parameters:**
 
@@ -73,7 +73,7 @@ Name | Type |
 
 • **$ready**: *Promise‹any›*
 
-*Defined in [src/index.ts:26](https://github.com/FlatFilers/Adapter/blob/06b4ab7/src/index.ts#L26)*
+*Defined in [src/index.ts:26](https://github.com/FlatFilers/Adapter/blob/6cf3acf/src/index.ts#L26)*
 
 Promise that resolves when the handshake is completed between Flatfile.io and the adapter
 
@@ -83,7 +83,7 @@ ___
 
 ▪ **Promise**: *PromiseConstructor* = Promise
 
-*Defined in [src/index.ts:20](https://github.com/FlatFilers/Adapter/blob/06b4ab7/src/index.ts#L20)*
+*Defined in [src/index.ts:20](https://github.com/FlatFilers/Adapter/blob/6cf3acf/src/index.ts#L20)*
 
 ___
 
@@ -121,7 +121,7 @@ ___
 
 ▸ **close**(): *void*
 
-*Defined in [src/index.ts:238](https://github.com/FlatFilers/Adapter/blob/06b4ab7/src/index.ts#L238)*
+*Defined in [src/index.ts:238](https://github.com/FlatFilers/Adapter/blob/6cf3acf/src/index.ts#L238)*
 
 Call close() from the parent window in order to hide the importer. You can do this after
 handling the import callback so your users don't have to click the confirmation button
@@ -134,7 +134,7 @@ ___
 
 ▸ **displayError**(`msg`: string): *void*
 
-*Defined in [src/index.ts:158](https://github.com/FlatFilers/Adapter/blob/06b4ab7/src/index.ts#L158)*
+*Defined in [src/index.ts:158](https://github.com/FlatFilers/Adapter/blob/6cf3acf/src/index.ts#L158)*
 
 This will display a dialog inside of the importer with an error icon and the message you
 pass. The user will be able to acknowledge the error and be returned to the import data
@@ -156,7 +156,7 @@ ___
 
 ▸ **displayLoader**(`msg?`: undefined | string): *void*
 
-*Defined in [src/index.ts:146](https://github.com/FlatFilers/Adapter/blob/06b4ab7/src/index.ts#L146)*
+*Defined in [src/index.ts:146](https://github.com/FlatFilers/Adapter/blob/6cf3acf/src/index.ts#L146)*
 
 This will display a progress indicator inside the importer if you anticipate that handling
 the output of the importer may take some time.
@@ -175,7 +175,7 @@ ___
 
 ▸ **displaySuccess**(`msg`: string): *void*
 
-*Defined in [src/index.ts:180](https://github.com/FlatFilers/Adapter/blob/06b4ab7/src/index.ts#L180)*
+*Defined in [src/index.ts:180](https://github.com/FlatFilers/Adapter/blob/6cf3acf/src/index.ts#L180)*
 
 This will display a dialog inside of the importer with a success icon and the message you
 pass.
@@ -230,7 +230,7 @@ ___
 
 ▸ **getMeta**(): *object*
 
-*Defined in [src/index.ts:189](https://github.com/FlatFilers/Adapter/blob/06b4ab7/src/index.ts#L189)*
+*Defined in [src/index.ts:189](https://github.com/FlatFilers/Adapter/blob/6cf3acf/src/index.ts#L189)*
 
 This will fetch the data from the importer
 
@@ -282,7 +282,7 @@ ___
 
 ▸ **load**(): *Promise‹Array‹Object››*
 
-*Defined in [src/index.ts:109](https://github.com/FlatFilers/Adapter/blob/06b4ab7/src/index.ts#L109)*
+*Defined in [src/index.ts:109](https://github.com/FlatFilers/Adapter/blob/6cf3acf/src/index.ts#L109)*
 
 Use load() when you want a promise returned. This is necessary if you want to use
 async/await for an es6 implementation
@@ -362,7 +362,7 @@ ___
 
 ▸ **open**(`options`: object): *void*
 
-*Defined in [src/index.ts:87](https://github.com/FlatFilers/Adapter/blob/06b4ab7/src/index.ts#L87)*
+*Defined in [src/index.ts:87](https://github.com/FlatFilers/Adapter/blob/6cf3acf/src/index.ts#L87)*
 
 Call open() to activate the importer overlay dialog.
 
@@ -380,7 +380,7 @@ ___
 
 ▸ **registerFieldHook**(`field`: string, `cb`: [FieldHookCallback](../globals.md#fieldhookcallback)): *void*
 
-*Defined in [src/index.ts:230](https://github.com/FlatFilers/Adapter/blob/06b4ab7/src/index.ts#L230)*
+*Defined in [src/index.ts:230](https://github.com/FlatFilers/Adapter/blob/6cf3acf/src/index.ts#L230)*
 
 Set the customer information for this import
 
@@ -399,7 +399,7 @@ ___
 
 ▸ **registerNetworkErrorCallback**(`callback`: FlatfileImporter["$networkErrorCallback"]): *void*
 
-*Defined in [src/index.ts:223](https://github.com/FlatFilers/Adapter/blob/06b4ab7/src/index.ts#L223)*
+*Defined in [src/index.ts:223](https://github.com/FlatFilers/Adapter/blob/6cf3acf/src/index.ts#L223)*
 
 **Parameters:**
 
@@ -415,7 +415,7 @@ ___
 
 ▸ **registerRecordHook**(`callback`: FlatfileImporter["$recordHook"]): *void*
 
-*Defined in [src/index.ts:219](https://github.com/FlatFilers/Adapter/blob/06b4ab7/src/index.ts#L219)*
+*Defined in [src/index.ts:219](https://github.com/FlatFilers/Adapter/blob/6cf3acf/src/index.ts#L219)*
 
 Set the customer information for this import
 
@@ -433,7 +433,7 @@ ___
 
 ▸ **registerValidatorCallback**(`callback`: FlatfileImporter["$validatorCallback"]): *void*
 
-*Defined in [src/index.ts:209](https://github.com/FlatFilers/Adapter/blob/06b4ab7/src/index.ts#L209)*
+*Defined in [src/index.ts:209](https://github.com/FlatFilers/Adapter/blob/6cf3acf/src/index.ts#L209)*
 
 Set the customer information for this import
 
@@ -494,7 +494,7 @@ ___
 
 ▸ **requestCorrectionsFromUser**(`msg`: any): *Promise‹FlatfileResults›*
 
-*Defined in [src/index.ts:169](https://github.com/FlatFilers/Adapter/blob/06b4ab7/src/index.ts#L169)*
+*Defined in [src/index.ts:169](https://github.com/FlatFilers/Adapter/blob/6cf3acf/src/index.ts#L169)*
 
 This will display a dialog inside of the importer with an error icon and the message you
 pass. The user will be able to acknowledge the error and be returned to the import data
@@ -514,7 +514,7 @@ ___
 
 ▸ **requestDataFromUser**(`options`: LoadOptionsObject): *Promise‹FlatfileResults›*
 
-*Defined in [src/index.ts:137](https://github.com/FlatFilers/Adapter/blob/06b4ab7/src/index.ts#L137)*
+*Defined in [src/index.ts:137](https://github.com/FlatFilers/Adapter/blob/6cf3acf/src/index.ts#L137)*
 
 Use requestDataFromUser() when you want a promise returned. This is necessary if you want to use
 async/await for an es6 implementation
@@ -533,7 +533,7 @@ ___
 
 ▸ **setCustomer**(`customer`: CustomerObject): *void*
 
-*Defined in [src/index.ts:202](https://github.com/FlatFilers/Adapter/blob/06b4ab7/src/index.ts#L202)*
+*Defined in [src/index.ts:202](https://github.com/FlatFilers/Adapter/blob/6cf3acf/src/index.ts#L202)*
 
 Set the customer information for this import
 
@@ -551,7 +551,7 @@ ___
 
 ▸ **setMountUrl**(`url`: string): *void*
 
-*Defined in [src/index.ts:64](https://github.com/FlatFilers/Adapter/blob/06b4ab7/src/index.ts#L64)*
+*Defined in [src/index.ts:64](https://github.com/FlatFilers/Adapter/blob/6cf3acf/src/index.ts#L64)*
 
 This will by default always be `https://www.flatfile.io/importer/:key` unless you are
 an enterprise customer that is self-hosting the application. In which case, this
@@ -571,7 +571,7 @@ ___
 
 ▸ **setVersion**(`version`: 1 | 2): *void*
 
-*Defined in [src/index.ts:71](https://github.com/FlatFilers/Adapter/blob/06b4ab7/src/index.ts#L71)*
+*Defined in [src/index.ts:71](https://github.com/FlatFilers/Adapter/blob/6cf3acf/src/index.ts#L71)*
 
 This allows you to opt into or out of specific versions of the Flatfile SDK
 

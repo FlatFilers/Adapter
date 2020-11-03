@@ -19,7 +19,7 @@
 
 Ƭ **FieldHookCallback**: *function*
 
-*Defined in [src/index.ts:357](https://github.com/FlatFilers/Adapter/blob/06b4ab7/src/index.ts#L357)*
+*Defined in [src/index.ts:357](https://github.com/FlatFilers/Adapter/blob/6cf3acf/src/index.ts#L357)*
 
 #### Type declaration:
 
@@ -38,4 +38,4 @@ ___
 
 Ƭ **Scalar**: *string | number | boolean | null | undefined*
 
-*Defined in [src/index.ts:355](https://github.com/FlatFilers/Adapter/blob/06b4ab7/src/index.ts#L355)*
+*Defined in [src/index.ts:355](https://github.com/FlatFilers/Adapter/blob/6cf3acf/src/index.ts#L355)*
