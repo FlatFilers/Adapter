@@ -87,6 +87,7 @@ export default class FlatfileImporter extends EventEmitter {
   open (options = {}): void {
     options = {
       ...options,
+      bulkInit: true,
       hasRecordHook: !!this.$recordHook,
       fieldHooks: this.$fieldHooks.map(v => v.field),
       endUser: this.customer
@@ -295,6 +296,9 @@ export default class FlatfileImporter extends EventEmitter {
         },
         dataHookCallback: (row, index, mode) => {
           return this.$recordHook ? this.$recordHook(row, index, mode) : undefined
+        },
+        bulkHookCallback: (rows, mode) => {
+          return this.$recordHook ? Promise.all(rows.map(([row, index]) => this.$recordHook!(row, index, mode))) : undefined
         },
         fieldHookCallback: (values, meta) => {
           const fieldHook = this.$fieldHooks.find(v => v.field === meta.field)
