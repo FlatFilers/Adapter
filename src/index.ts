@@ -12,6 +12,7 @@ import RecordObject from './obj.record'
 import CustomerObject from './obj.customer'
 import LoadOptionsObject from './obj.load-options'
 import IValidationResponse, { IDataHookRecord, IDataHookResponse } from './obj.validation-response'
+import { IBeforeFetchRequest, IBeforeFetchResponse } from './obj.before-fetch'
 
 registerDocumentContainsPolyfill()
 
@@ -37,6 +38,7 @@ export default class FlatfileImporter extends EventEmitter {
   private $rejecter: (err: any) => any
   private $validatorCallback?: (row: { [key: string]: string | number }) => Array<IValidationResponse> | Promise<Array<IValidationResponse>>
   private $networkErrorCallback?: (err: string) => void
+  private $beforeFetchCallback?: (req: IBeforeFetchRequest) => IBeforeFetchResponse
   private $recordHook?: (row: { [key: string]: string | number }, index: number, mode: string) => IDataHookResponse | Promise<IDataHookResponse>
   private $fieldHooks: Array<{ field: string, cb: FieldHookCallback }> = []
 
@@ -225,6 +227,10 @@ export default class FlatfileImporter extends EventEmitter {
     this.$networkErrorCallback = callback
   }
 
+  registerBeforeFetchCallback (callback: FlatfileImporter['$beforeFetchCallback']): void {
+    this.$beforeFetchCallback = callback
+  }
+
   /**
    * Set the customer information for this import
    */
@@ -290,6 +296,9 @@ export default class FlatfileImporter extends EventEmitter {
         },
         networkErrorCallback: (error) => {
           return this.$networkErrorCallback ? this.$networkErrorCallback(error) : undefined
+        },
+        beforeFetchCallback: (req) => {
+          return this.$beforeFetchCallback ? this.$beforeFetchCallback(req) : undefined
         },
         validatorCallback: (row) => {
           return this.$validatorCallback ? this.$validatorCallback(row) : undefined
