@@ -304,17 +304,35 @@ export default class FlatfileImporter extends EventEmitter {
           return this.$validatorCallback ? this.$validatorCallback(row) : undefined
         },
         dataHookCallback: (row, index, mode) => {
-          return this.$recordHook ? this.$recordHook(row, index, mode) : undefined
+          try {
+            return this.$recordHook ? this.$recordHook(row, index, mode) : undefined
+          }catch ({message}) {
+            console.error(`Flatfile Record Hook Error: ${message}`)
+
+            return {}
+          }
         },
         bulkHookCallback: (rows, mode) => {
-          return this.$recordHook ? Promise.all(rows.map(([row, index]) => this.$recordHook!(row, index, mode))) : undefined
+          try {
+            return this.$recordHook ? Promise.all(rows.map(([row, index]) => this.$recordHook!(row, index, mode))) : undefined
+          }catch ({message}) {
+            console.error(`Flatfile Record Hook Error: ${message}`)
+
+            return {}
+          }
         },
         fieldHookCallback: (values, meta) => {
           const fieldHook = this.$fieldHooks.find(v => v.field === meta.field)
           if (!fieldHook) {
             return undefined
           }
-          return fieldHook.cb(values, meta)
+          try {
+            return fieldHook.cb(values, meta)
+          }catch ({message}) {
+            console.error(`Flatfile Field Hook Error: ${message}`)
+
+            return []
+          }
         },
         ready: () => {
           this.handshake.promise.then((child) => {
