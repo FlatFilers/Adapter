@@ -330,7 +330,7 @@ export default class FlatfileImporter extends EventEmitter {
           try {
             return fieldHook.cb(values, meta)
           }catch ({message}) {
-            console.error(`Flatfile Field Hook Error: ${message}`)
+            console.error(`Flatfile Field Hook Error on field: ${meta.field}: ${message}`, stack, {meta, values})
 
             return []
           }
