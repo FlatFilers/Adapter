@@ -306,18 +306,25 @@ export default class FlatfileImporter extends EventEmitter {
         dataHookCallback: (row, index, mode) => {
           try {
             return this.$recordHook ? this.$recordHook(row, index, mode) : undefined
-          }catch ({message}) {
           }catch ({message, stack}) {
-            console.error(`Flatfile Record Hook Error on row ${index}: ${message}`, stack, { row, mode })
+            console.error(`Flatfile Record Hook Error on row ${index}:\n  ${stack}`, { row, mode })
 
             return {}
           }
         },
         bulkHookCallback: (rows, mode) => {
           try {
-            return this.$recordHook ? Promise.all(rows.map(([row, index]) => this.$recordHook!(row, index, mode))) : undefined
-          }catch ({message}) {
-            console.error(`Flatfile Record Hook Error: ${message}`)
+            return this.$recordHook ? Promise.all(rows.map(([row, index]) => {
+              try {
+                return this.$recordHook!(row, index, mode)
+              }catch (e) {
+                e.row = row
+                e.index = index
+                throw e
+              }
+            })) : undefined
+          }catch ({stack, row, index}) {
+            console.error(`Flatfile Record Hook Error on row ${index}:\n  ${stack}`, { row, mode })
 
             return {}
           }
@@ -329,8 +336,8 @@ export default class FlatfileImporter extends EventEmitter {
           }
           try {
             return fieldHook.cb(values, meta)
-          }catch ({message}) {
-            console.error(`Flatfile Field Hook Error on field: ${meta.field}: ${message}`, stack, {meta, values})
+          }catch ({stack}) {
+            console.error(`Flatfile Field Hook Error on field "${meta.field}":\n  ${stack}`, { meta, values })
 
             return []
           }
