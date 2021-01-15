@@ -4,7 +4,7 @@ export default interface LoadOptionsObject {
   /**
    * The number of records to receive per chunk
    */
-  inChunks?: number,
+  inChunks?: number
 
   /**
    * Provide a CSV string, file url, list of row arrays, or list of input objects

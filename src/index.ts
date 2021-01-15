@@ -17,7 +17,6 @@ import { IBeforeFetchRequest, IBeforeFetchResponse } from './obj.before-fetch'
 registerDocumentContainsPolyfill()
 
 export default class FlatfileImporter extends EventEmitter {
-
   public static Promise = Promise
   private static MOUNT_URL: string = 'https://portal-2.flatfile.io/?key=:key'
 
@@ -36,13 +35,19 @@ export default class FlatfileImporter extends EventEmitter {
 
   private $resolver: (data: any) => any
   private $rejecter: (err: any) => any
-  private $validatorCallback?: (row: { [key: string]: string | number }) => Array<IValidationResponse> | Promise<Array<IValidationResponse>>
+  private $validatorCallback?: (row: {
+    [key: string]: string | number
+  }) => Array<IValidationResponse> | Promise<Array<IValidationResponse>>
   private $networkErrorCallback?: (err: string) => void
   private $beforeFetchCallback?: (req: IBeforeFetchRequest) => IBeforeFetchResponse
-  private $recordHook?: (row: { [key: string]: string | number }, index: number, mode: string) => IDataHookResponse | Promise<IDataHookResponse>
-  private $fieldHooks: Array<{ field: string, cb: FieldHookCallback }> = []
+  private $recordHook?: (
+    row: { [key: string]: string | number },
+    index: number,
+    mode: string
+  ) => IDataHookResponse | Promise<IDataHookResponse>
+  private $fieldHooks: Array<{ field: string; cb: FieldHookCallback }> = []
 
-  constructor (apiKey: string, options: object, customer?: CustomerObject) {
+  constructor(apiKey: string, options: object, customer?: CustomerObject) {
     super()
     this.apiKey = apiKey
     this.options = options
@@ -63,14 +68,14 @@ export default class FlatfileImporter extends EventEmitter {
    * an enterprise customer that is self-hosting the application. In which case, this
    * will be the URL of your enterprise installd Flatfile importer index page
    */
-  public static setMountUrl (url: string): void {
+  public static setMountUrl(url: string): void {
     this.MOUNT_URL = url
   }
 
   /**
    * This allows you to opt into or out of specific versions of the Flatfile SDK
    */
-  public static setVersion (version: 1 | 2): void {
+  public static setVersion(version: 1 | 2): void {
     switch (version) {
       case 1:
         this.MOUNT_URL = 'https://kiosk-lite.flatfile.io/?key=:key'
@@ -86,12 +91,12 @@ export default class FlatfileImporter extends EventEmitter {
   /**
    * Call open() to activate the importer overlay dialog.
    */
-  open (options = {}): void {
+  open(options = {}): void {
     options = {
       ...options,
       bulkInit: true,
       hasRecordHook: !!this.$recordHook,
-      fieldHooks: this.$fieldHooks.map(v => v.field),
+      fieldHooks: this.$fieldHooks.map((v) => v.field),
       endUser: this.customer
     }
     this.$ready.then((child) => {
@@ -109,7 +114,7 @@ export default class FlatfileImporter extends EventEmitter {
    * async/await for an es6 implementation
    * @deprecated
    */
-  load (): Promise<Array<Object>> {
+  load(): Promise<Array<Object>> {
     return new FlatfileImporter.Promise((resolve, reject) => {
       this.open()
 
@@ -118,12 +123,12 @@ export default class FlatfileImporter extends EventEmitter {
         this.removeListener('complete', loadResolveHandler)
       }
 
-      function loadResolveHandler (rows: Array<Object>) {
+      function loadResolveHandler(rows: Array<Object>) {
         resolve(rows)
         cleanup()
       }
 
-      function loadRejectHandler (err) {
+      function loadRejectHandler(err) {
         reject(err)
         cleanup()
       }
@@ -137,8 +142,8 @@ export default class FlatfileImporter extends EventEmitter {
    * Use requestDataFromUser() when you want a promise returned. This is necessary if you want to use
    * async/await for an es6 implementation
    */
-  requestDataFromUser (options: LoadOptionsObject = {}): Promise<FlatfileResults> {
-    this.open({...options, inChunks: options.inChunks || null, expectsExpandedResults: true})
+  requestDataFromUser(options: LoadOptionsObject = {}): Promise<FlatfileResults> {
+    this.open({ ...options, inChunks: options.inChunks || null, expectsExpandedResults: true })
     return this.responsePromise()
   }
 
@@ -146,7 +151,7 @@ export default class FlatfileImporter extends EventEmitter {
    * This will display a progress indicator inside the importer if you anticipate that handling
    * the output of the importer may take some time.
    */
-  displayLoader (msg?: string): void {
+  displayLoader(msg?: string): void {
     this.$ready.then((child) => {
       child.displayLoader(msg)
     })
@@ -158,7 +163,7 @@ export default class FlatfileImporter extends EventEmitter {
    * spreadsheet to ideally fix any issues or attempt submitting again.
    * @deprecated
    */
-  displayError (msg?: string): void {
+  displayError(msg?: string): void {
     this.$ready.then((child) => {
       child.displayError(msg)
     })
@@ -169,7 +174,7 @@ export default class FlatfileImporter extends EventEmitter {
    * pass. The user will be able to acknowledge the error and be returned to the import data
    * spreadsheet to ideally fix any issues or attempt submitting again.
    */
-  requestCorrectionsFromUser (msg?: string): Promise<FlatfileResults> {
+  requestCorrectionsFromUser(msg?: string): Promise<FlatfileResults> {
     this.$ready.then((child) => {
       child.displayError(msg)
     })
@@ -180,7 +185,7 @@ export default class FlatfileImporter extends EventEmitter {
    * This will display a dialog inside of the importer with a success icon and the message you
    * pass.
    */
-  displaySuccess (msg?: string): void {
+  displaySuccess(msg?: string): void {
     this.$ready.then((child) => {
       child.displaySuccess(msg)
     })
@@ -189,27 +194,27 @@ export default class FlatfileImporter extends EventEmitter {
   /**
    * This will fetch the data from the importer
    */
-  getMeta (): object {
+  getMeta(): object {
     return new Promise((resolve, reject) => {
-      this.$ready.then((child) => {
-        child.getMeta()
-          .then(resolve)
-          .catch(reject)
-      }).catch(reject)
+      this.$ready
+        .then((child) => {
+          child.getMeta().then(resolve).catch(reject)
+        })
+        .catch(reject)
     })
   }
 
   /**
    * Set the customer information for this import
    */
-  setCustomer (customer: CustomerObject): void {
+  setCustomer(customer: CustomerObject): void {
     this.customer = customer
   }
 
   /**
    * Set the customer information for this import
    */
-  registerValidatorCallback (callback: FlatfileImporter['$validatorCallback']): void {
+  registerValidatorCallback(callback: FlatfileImporter['$validatorCallback']): void {
     this.$validatorCallback = callback
     this.$ready.then((child) => {
       child.parentHasValidator()
@@ -219,36 +224,36 @@ export default class FlatfileImporter extends EventEmitter {
   /**
    * Set the customer information for this import
    */
-  registerRecordHook (callback: FlatfileImporter['$recordHook']): void {
+  registerRecordHook(callback: FlatfileImporter['$recordHook']): void {
     this.$recordHook = callback
   }
 
-  registerNetworkErrorCallback (callback: FlatfileImporter['$networkErrorCallback']): void {
+  registerNetworkErrorCallback(callback: FlatfileImporter['$networkErrorCallback']): void {
     this.$networkErrorCallback = callback
   }
 
-  registerBeforeFetchCallback (callback: FlatfileImporter['$beforeFetchCallback']): void {
+  registerBeforeFetchCallback(callback: FlatfileImporter['$beforeFetchCallback']): void {
     this.$beforeFetchCallback = callback
   }
 
   /**
    * Set the customer information for this import
    */
-  registerFieldHook (field: string, cb: FieldHookCallback): void {
-    this.$fieldHooks.push({field, cb})
+  registerFieldHook(field: string, cb: FieldHookCallback): void {
+    this.$fieldHooks.push({ field, cb })
   }
 
   /**
    * Call close() from the parent window in order to hide the importer. You can do this after
    * handling the import callback so your users don't have to click the confirmation button
    */
-  close () {
+  close() {
     this.$ready.then((child) => {
       child.close()
     })
   }
 
-  private handleClose () {
+  private handleClose() {
     elementClass(document.body).remove('flatfile-active')
     let el = document.getElementById(`flatfile-${this.uuid}`)
     if (el) {
@@ -256,7 +261,7 @@ export default class FlatfileImporter extends EventEmitter {
     }
   }
 
-  private initialize () {
+  private initialize() {
     insertCss(`
       .flatfile-component {
         position: fixed;
@@ -279,7 +284,10 @@ export default class FlatfileImporter extends EventEmitter {
       }
     `)
 
-    document.body.insertAdjacentHTML('beforeend', `<div id="flatfile-${this.uuid}" class="flatfile-component"></div>`)
+    document.body.insertAdjacentHTML(
+      'beforeend',
+      `<div id="flatfile-${this.uuid}" class="flatfile-component"></div>`
+    )
     this.handshake = Penpal.connectToChild({
       appendTo: document.getElementById(`flatfile-${this.uuid}`) || undefined,
       url: FlatfileImporter.MOUNT_URL.replace(':key', this.apiKey),
@@ -304,27 +312,62 @@ export default class FlatfileImporter extends EventEmitter {
           return this.$validatorCallback ? this.$validatorCallback(row) : undefined
         },
         dataHookCallback: (row, index, mode) => {
-          return this.$recordHook ? this.$recordHook(row, index, mode) : undefined
+          try {
+            return this.$recordHook ? this.$recordHook(row, index, mode) : undefined
+          } catch ({ message, stack }) {
+            console.error(`Flatfile Record Hook Error on row ${index}:\n  ${stack}`, { row, mode })
+
+            return {}
+          }
         },
         bulkHookCallback: (rows, mode) => {
-          return this.$recordHook ? Promise.all(rows.map(([row, index]) => this.$recordHook!(row, index, mode))) : undefined
+          try {
+            return this.$recordHook
+              ? Promise.all(
+                  rows.map(([row, index]) => {
+                    try {
+                      return this.$recordHook!(row, index, mode)
+                    } catch (e) {
+                      e.row = row
+                      e.index = index
+                      throw e
+                    }
+                  })
+                )
+              : undefined
+          } catch ({ stack, row, index }) {
+            console.error(`Flatfile Record Hook Error on row ${index}:\n  ${stack}`, { row, mode })
+
+            return {}
+          }
         },
         fieldHookCallback: (values, meta) => {
-          const fieldHook = this.$fieldHooks.find(v => v.field === meta.field)
+          const fieldHook = this.$fieldHooks.find((v) => v.field === meta.field)
           if (!fieldHook) {
             return undefined
           }
-          return fieldHook.cb(values, meta)
+          try {
+            return fieldHook.cb(values, meta)
+          } catch ({ stack }) {
+            console.error(`Flatfile Field Hook Error on field "${meta.field}":\n  ${stack}`, {
+              meta,
+              values
+            })
+
+            return []
+          }
         },
         ready: () => {
-          this.handshake.promise.then((child) => {
-            this.$resolver(child)
-            if (this.customer) {
-              child.setUser(this.customer)
-            }
-          }).catch((err) => {
-            console.error(err)
-          })
+          this.handshake.promise
+            .then((child) => {
+              this.$resolver(child)
+              if (this.customer) {
+                child.setUser(this.customer)
+              }
+            })
+            .catch((err) => {
+              console.error(err)
+            })
           return this.options
         }
       }
@@ -335,11 +378,11 @@ export default class FlatfileImporter extends EventEmitter {
     })
   }
 
-  private $generateUuid (): string {
+  private $generateUuid(): string {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
   }
 
-  private responsePromise (): Promise<FlatfileResults> {
+  private responsePromise(): Promise<FlatfileResults> {
     return new Promise((resolve, reject) => {
       const loadResolveHandler = async (rows: Array<RecordObject>, meta: object) => {
         const results = new FlatfileResults(rows, meta as Meta, this)
@@ -347,14 +390,14 @@ export default class FlatfileImporter extends EventEmitter {
         cleanup()
       }
 
-      function loadRejectHandler (err) {
+      function loadRejectHandler(err) {
         reject(err)
         cleanup()
       }
 
       const self = this
 
-      function cleanup () {
+      function cleanup() {
         self.removeListener('close', loadRejectHandler)
         self.removeListener('results', loadResolveHandler)
       }
@@ -367,4 +410,7 @@ export default class FlatfileImporter extends EventEmitter {
 
 export type Scalar = string | number | boolean | null | undefined
 
-export type FieldHookCallback = (values: [Scalar, number][], meta: any) => [IDataHookRecord, number][] | Promise<[IDataHookRecord, number][]>
+export type FieldHookCallback = (
+  values: [Scalar, number][],
+  meta: any
+) => [IDataHookRecord, number][] | Promise<[IDataHookRecord, number][]>

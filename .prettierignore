@@ -1,0 +1,6 @@
+dist
+spec/adapter.js
+node_modules
+.vscode
+types
+*.html

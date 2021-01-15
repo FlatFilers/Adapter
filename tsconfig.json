@@ -12,6 +12,7 @@
     "listFiles": false,
     "traceResolution": false,
     "pretty": true,
+    "skipLibCheck": true,
     "lib" : [
       "es6", "dom"
     ],
