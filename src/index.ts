@@ -307,7 +307,8 @@ export default class FlatfileImporter extends EventEmitter {
           try {
             return this.$recordHook ? this.$recordHook(row, index, mode) : undefined
           }catch ({message}) {
-            console.error(`Flatfile Record Hook Error: ${message}`)
+          }catch ({message, stack}) {
+            console.error(`Flatfile Record Hook Error on row ${index}: ${message}`, stack, { row, mode })
 
             return {}
           }
