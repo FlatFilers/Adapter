@@ -158,7 +158,7 @@ export default class FlatfileImporter extends EventEmitter {
    * spreadsheet to ideally fix any issues or attempt submitting again.
    * @deprecated
    */
-  displayError (msg: string): void {
+  displayError (msg?: string): void {
     this.$ready.then((child) => {
       child.displayError(msg)
     })
@@ -169,7 +169,7 @@ export default class FlatfileImporter extends EventEmitter {
    * pass. The user will be able to acknowledge the error and be returned to the import data
    * spreadsheet to ideally fix any issues or attempt submitting again.
    */
-  requestCorrectionsFromUser (msg): Promise<FlatfileResults> {
+  requestCorrectionsFromUser (msg?: string): Promise<FlatfileResults> {
     this.$ready.then((child) => {
       child.displayError(msg)
     })
@@ -180,7 +180,7 @@ export default class FlatfileImporter extends EventEmitter {
    * This will display a dialog inside of the importer with a success icon and the message you
    * pass.
    */
-  displaySuccess (msg: string): void {
+  displaySuccess (msg?: string): void {
     this.$ready.then((child) => {
       child.displaySuccess(msg)
     })
