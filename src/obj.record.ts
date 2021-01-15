@@ -2,17 +2,17 @@ export default interface RecordObject {
   /**
    * Did the user delete this row before submitting
    */
-  deleted: boolean,
+  deleted: boolean
 
   /**
    * Did this row pass validation
    */
-  valid: boolean,
+  valid: boolean
 
   /**
    * The original sequence of this row in the uploaded file
    */
-  sequence: number,
+  sequence: number
 
   /**
    * The fully mapped final data for this row
