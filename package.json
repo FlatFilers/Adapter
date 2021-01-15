@@ -30,7 +30,7 @@
     "test": "nqr lint && nqr unit && nqr check-coverage",
     "watch": "nqr build && nqr build:tests -- --no-browser && concurrently -r --kill-others 'npm run --silent build:main -- -w' 'npm run --silent build:tests -- -w --no-browser' 'sleepms 2000 && ava --watch'",
     "cov": "nqr unit && nqr html-coverage && opn coverage/index.html",
-    "serve:dev": "nqr build:module && nqr run build:browser-dist-local; node serve.js",
+    "serve:dev": "nqr build:module && nqr build:browser-dist-local; node serve.js",
     "html-coverage": "nyc report --reporter=html",
     "send-coverage": "nyc report --reporter=lcov > coverage.lcov && codecov",
     "docs": "nqr docs:html && opn build/docs/index.html",
