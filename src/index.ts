@@ -13,6 +13,7 @@ import CustomerObject from './obj.customer'
 import LoadOptionsObject from './obj.load-options'
 import IValidationResponse, { IDataHookRecord, IDataHookResponse } from './obj.validation-response'
 import { IBeforeFetchRequest, IBeforeFetchResponse } from './obj.before-fetch'
+import { IInteractionEvent } from './obj.interaction-event'
 
 registerDocumentContainsPolyfill()
 
@@ -40,6 +41,7 @@ export default class FlatfileImporter extends EventEmitter {
   }) => Array<IValidationResponse> | Promise<Array<IValidationResponse>>
   private $networkErrorCallback?: (err: string) => void
   private $beforeFetchCallback?: (req: IBeforeFetchRequest) => IBeforeFetchResponse
+  private $interactionEventCallback?: (req: IInteractionEvent) => void
   private $recordHook?: (
     row: { [key: string]: string | number },
     index: number,
@@ -96,6 +98,7 @@ export default class FlatfileImporter extends EventEmitter {
       ...options,
       bulkInit: true,
       hasRecordHook: !!this.$recordHook,
+      hasInteractionEventCallback: !!this.$interactionEventCallback,
       fieldHooks: this.$fieldHooks.map((v) => v.field),
       endUser: this.customer
     }
@@ -236,6 +239,10 @@ export default class FlatfileImporter extends EventEmitter {
     this.$beforeFetchCallback = callback
   }
 
+  registerInteractionEventCallback(callback: FlatfileImporter['$interactionEventCallback']): void {
+    this.$interactionEventCallback = callback
+  }
+
   /**
    * Set the customer information for this import
    */
@@ -307,6 +314,9 @@ export default class FlatfileImporter extends EventEmitter {
         },
         beforeFetchCallback: (req) => {
           return this.$beforeFetchCallback ? this.$beforeFetchCallback(req) : undefined
+        },
+        interactionEventCallback: (req) => {
+          return this.$interactionEventCallback ? this.$interactionEventCallback(req) : undefined
         },
         validatorCallback: (row) => {
           return this.$validatorCallback ? this.$validatorCallback(row) : undefined
