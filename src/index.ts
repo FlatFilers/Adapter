@@ -184,10 +184,21 @@ export default class FlatfileImporter extends EventEmitter {
   /**
    * This will display a dialog inside of the importer with a success icon and the message you
    * pass.
+   * 
+   * @return Promise that will be resolved when user closes the dialog.
    */
-  displaySuccess(msg?: string): void {
+  displaySuccess(msg?: string): Promise<void> {
     this.$ready.then((child) => {
       child.displaySuccess(msg)
+    })
+
+    return new Promise((resolve) => {
+      const handleSuccess = () => {
+        resolve()
+        this.removeListener('close', handleSuccess)
+      }
+
+      this.on('close', handleSuccess)
     })
   }
 
