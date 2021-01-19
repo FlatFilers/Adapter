@@ -1,3 +1,5 @@
 export interface IInteractionEvent {
-  type: 'mousedown' | 'keydown' | 'mousemove'
+  mousemove: number
+  keydown: number
+  mousedown: number
 }
