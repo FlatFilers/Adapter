@@ -11,7 +11,7 @@ import Meta from './obj.meta'
 import RecordObject from './obj.record'
 import CustomerObject from './obj.customer'
 import LoadOptionsObject from './obj.load-options'
-import IValidationResponse, { IDataHookRecord, IDataHookResponse } from './obj.validation-response'
+import { IDataHookRecord, IDataHookResponse } from './obj.validation-response'
 import { IBeforeFetchRequest, IBeforeFetchResponse } from './obj.before-fetch'
 import { IInteractionEvent } from './obj.interaction-event'
 
@@ -36,9 +36,6 @@ export default class FlatfileImporter extends EventEmitter {
 
   private $resolver: (data: any) => any
   private $rejecter: (err: any) => any
-  private $validatorCallback?: (row: {
-    [key: string]: string | number
-  }) => Array<IValidationResponse> | Promise<Array<IValidationResponse>>
   private $networkErrorCallback?: (err: string) => void
   private $beforeFetchCallback?: (req: IBeforeFetchRequest) => IBeforeFetchResponse
   private $interactionEventCallback?: (req: IInteractionEvent) => void
@@ -187,7 +184,7 @@ export default class FlatfileImporter extends EventEmitter {
   /**
    * This will display a dialog inside of the importer with a success icon and the message you
    * pass.
-   * 
+   *
    * @return Promise that will be resolved when user closes the dialog.
    */
   displaySuccess(msg?: string): Promise<void> {
@@ -206,33 +203,10 @@ export default class FlatfileImporter extends EventEmitter {
   }
 
   /**
-   * This will fetch the data from the importer
-   */
-  getMeta(): object {
-    return new Promise((resolve, reject) => {
-      this.$ready
-        .then((child) => {
-          child.getMeta().then(resolve).catch(reject)
-        })
-        .catch(reject)
-    })
-  }
-
-  /**
    * Set the customer information for this import
    */
   setCustomer(customer: CustomerObject): void {
     this.customer = customer
-  }
-
-  /**
-   * Set the customer information for this import
-   */
-  registerValidatorCallback(callback: FlatfileImporter['$validatorCallback']): void {
-    this.$validatorCallback = callback
-    this.$ready.then((child) => {
-      child.parentHasValidator()
-    })
   }
 
   /**
@@ -328,9 +302,6 @@ export default class FlatfileImporter extends EventEmitter {
         },
         interactionEventCallback: (req) => {
           return this.$interactionEventCallback ? this.$interactionEventCallback(req) : undefined
-        },
-        validatorCallback: (row) => {
-          return this.$validatorCallback ? this.$validatorCallback(row) : undefined
         },
         dataHookCallback: (row, index, mode) => {
           try {
