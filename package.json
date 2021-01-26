@@ -144,7 +144,7 @@
   "lint-staged": {
     "*.{js,ts,tsx}": [
       "npm run lint",
-      "npm run lint:prettier:fix"
+      "npm run lint:prettier"
     ]
   }
 }
