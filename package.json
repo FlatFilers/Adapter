@@ -69,6 +69,8 @@
     "cpx": "^1.5.0",
     "gh-pages": "^3.1.0",
     "hash.js": "^1.1.7",
+    "husky": "^4.3.8",
+    "lint-staged": "^10.5.3",
     "mkdirp": "^1.0.4",
     "npm-check-updates": "^10.2.5",
     "npm-scripts-info": "^0.3.9",
@@ -133,5 +135,16 @@
     "ts-promise": "^2.2.0",
     "tslib": "^2.1.0",
     "when-dom-ready": "^1.2.12"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "npm run lint",
+      "npm run lint:prettier"
+    ]
   }
 }
