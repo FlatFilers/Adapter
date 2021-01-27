@@ -173,10 +173,16 @@ export default class FlatfileImporter extends EventEmitter {
    * This will display a dialog inside of the importer with an error icon and the message you
    * pass. The user will be able to acknowledge the error and be returned to the import data
    * spreadsheet to ideally fix any issues or attempt submitting again.
+   *
+   * @param corrections - allows user to do server-side validation and provide error / warning
+   * messages or value overrides
    */
-  requestCorrectionsFromUser(msg?: string): Promise<FlatfileResults> {
+  requestCorrectionsFromUser(
+    msg?: string,
+    corrections?: IDataHookResponse[]
+  ): Promise<FlatfileResults> {
     this.$ready.then((child) => {
-      child.displayError(msg)
+      child.displayError(msg, corrections)
     })
     return this.responsePromise()
   }
