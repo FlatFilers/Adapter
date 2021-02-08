@@ -210,6 +210,15 @@ export default class FlatfileImporter extends EventEmitter {
   }
 
   /**
+   * Set the language for the Portal
+   */
+  setLanguage(lang: string): void {
+    this.$ready.then((child) => {
+      child.setLanguage(lang)
+    })
+  }
+
+  /**
    * Set the customer information for this import
    */
   registerRecordHook(callback: FlatfileImporter['$recordHook']): void {
