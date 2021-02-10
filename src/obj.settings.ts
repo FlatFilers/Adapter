@@ -175,14 +175,14 @@ export interface IFieldOptionDictionary {
 export type IFieldOption = IFieldOptionDictionary
 
 export interface II18nOverrides {
-  otherLocales: string[]
+  otherLocales?: string[]
 
   /**
-   * @deprecated use importer.setLanguage('en')
+   * @deprecated use `importer.setLanguage('en')`
    */
-  setLanguage: string | undefined
+  setLanguage?: string | undefined
 
-  overrides: IDictionary<string>
+  overrides: IDictionary<string | IDictionary<string>>
 }
 
 export interface IIntegrations {
