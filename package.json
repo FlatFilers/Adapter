@@ -1,6 +1,6 @@
 {
   "name": "@flatfile/adapter",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "description": "A lightweight adapter for working with Flatfile's Portal",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
@@ -124,6 +124,7 @@
     ]
   },
   "dependencies": {
+    "csstype": "^3.0.6",
     "element-class": "^0.2.2",
     "es6-promise": "^4.2.8",
     "eventemitter3": "^4.0.7",

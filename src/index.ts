@@ -14,6 +14,7 @@ import LoadOptionsObject from './obj.load-options'
 import { IDataHookRecord, IDataHookResponse } from './obj.validation-response'
 import { IBeforeFetchRequest, IBeforeFetchResponse } from './obj.before-fetch'
 import { IInteractionEvent } from './obj.interaction-event'
+import { ISettings } from './obj.settings'
 
 registerDocumentContainsPolyfill()
 
@@ -27,7 +28,7 @@ export default class FlatfileImporter extends EventEmitter {
   public $ready: Promise<any>
 
   private apiKey: string
-  private options: object
+  private options: ISettings
   private customer?: CustomerObject
   private uuid: string
 
@@ -46,7 +47,7 @@ export default class FlatfileImporter extends EventEmitter {
   ) => IDataHookResponse | Promise<IDataHookResponse>
   private $fieldHooks: Array<{ field: string; cb: FieldHookCallback }> = []
 
-  constructor(apiKey: string, options: object, customer?: CustomerObject) {
+  constructor(apiKey: string, options: ISettings, customer?: CustomerObject) {
     super()
     this.apiKey = apiKey
     this.options = options
