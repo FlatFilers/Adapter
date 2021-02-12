@@ -44,19 +44,39 @@ interface IStyleCSSTable extends IStyleTable {
   ':invalid'?: IStyleTable
 }
 
+type IStyleSelect = Pick<
+  CSSObject,
+  | 'backgroundColor'
+  | 'color'
+  | 'border'
+  | 'borderTop'
+  | 'borderRight'
+  | 'borderBottom'
+  | 'borderLeft'
+  | 'borderRadius'
+  | 'boxShadow'
+>
+
+interface IStyleCSSSelect extends IStyleSelect {
+  ':focus'?: IStyleSelect
+  ':active'?: IStyleSelect
+  ':selected'?: IStyleSelect
+}
+
 export interface ITheme {
   global?: {
-    backgroundColor?: string // default background color
-    textColor?: string // default text color
+    backgroundColor?: CSSObject['backgroundColor'] // default background color
+    textColor?: CSSObject['color'] // default text color
 
-    primaryTextColor?: string // primary text color
-    secondaryTextColor?: string // secondary text color
+    primaryTextColor?: CSSObject['color'] // primary text color
+    secondaryTextColor?: CSSObject['color'] // secondary text color
 
-    successColor?: string // default success color
-    warningColor?: string // default warning color
+    successColor?: CSSObject['color'] // default success color
+    warningColor?: CSSObject['color'] // default warning color
+
+    borderRadius?: CSSObject['borderRadius'] // default border radius
   }
   buttons?: {
-    // global
     primary?: IStyleCSSButton
     secondary?: IStyleCSSButton
     success?: IStyleCSSButton
@@ -122,6 +142,7 @@ export interface ITheme {
       th?: IStyleCSSTable
       td?: IStyleCSSTable
     }
+    select?: IStyleCSSSelect
   }
   columnMatch?: {
     root?: IStyleCSS
@@ -150,6 +171,7 @@ export interface ITheme {
     subtitle?: IStyleCSS
     step?: IStyleCSS
     footer?: IStyleCSS
+    select?: IStyleCSSSelect
   }
   loader?: {
     root?: IStyleCSS
