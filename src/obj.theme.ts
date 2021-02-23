@@ -38,10 +38,21 @@ type IStyleTable = Pick<
   'backgroundColor' | 'color' | 'borderColor' | 'fontSize' | 'fontWeight' | 'textAlign'
 >
 
-interface IStyleCSSTable extends IStyleTable {
+interface IStyleCSSTableColumn extends IStyleTable {
+  ':focus'?: IStyleTable
+  ':hover'?: IStyleTable
+}
+
+interface IStyleCSSTableRow extends IStyleTable {
   ':focus'?: IStyleTable
   ':hover'?: IStyleTable
   ':invalid'?: IStyleTable
+}
+
+interface IStyleCSSTableRowIndex extends IStyleTable {
+  ':focus'?: IStyleTable
+  ':hover'?: IStyleTable
+  ':empty'?: IStyleTable
 }
 
 type IStyleSelect = Pick<
@@ -65,16 +76,40 @@ interface IStyleCSSSelect extends IStyleSelect {
 
 export interface ITheme {
   global?: {
-    backgroundColor?: CSSObject['backgroundColor'] // default background color
-    textColor?: CSSObject['color'] // default text color
+    /**
+     * default background color
+     */
+    backgroundColor?: CSSObject['backgroundColor']
 
-    primaryTextColor?: CSSObject['color'] // primary text color
-    secondaryTextColor?: CSSObject['color'] // secondary text color
+    /**
+     * default text color
+     */
+    textColor?: CSSObject['color']
 
-    successColor?: CSSObject['color'] // default success color
-    warningColor?: CSSObject['color'] // default warning color
+    /**
+     * default primary text color
+     */
+    primaryTextColor?: CSSObject['color']
 
-    borderRadius?: CSSObject['borderRadius'] // default border radius
+    /**
+     * default secondary text color
+     */
+    secondaryTextColor?: CSSObject['color']
+
+    /**
+     * default success color
+     */
+    successColor?: CSSObject['color']
+
+    /**
+     * default warning color
+     */
+    warningColor?: CSSObject['color']
+
+    /**
+     * default border radius
+     */
+    borderRadius?: CSSObject['borderRadius']
   }
   buttons?: {
     primary?: IStyleCSSButton
@@ -130,8 +165,9 @@ export interface ITheme {
     root?: IStyleCSS
     title?: IStyleCSS
     table?: {
-      th?: IStyleCSSTable
-      td?: IStyleCSSTable
+      th?: IStyleCSSTableColumn
+      td?: IStyleCSSTableRow
+      rowIndex?: IStyleCSSTableRowIndex
     }
   }
   headerMatch?: {
@@ -139,8 +175,8 @@ export interface ITheme {
     content?: IStyleCSS
     icon?: IStyleCSSSvg
     table?: {
-      th?: IStyleCSSTable
-      td?: IStyleCSSTable
+      th?: IStyleCSSTableColumn
+      td?: IStyleCSSTableRow
     }
     select?: IStyleCSSSelect
   }
@@ -155,15 +191,15 @@ export interface ITheme {
       field?: IStyleCSS
     }
     table?: {
-      th?: IStyleCSSTable
-      td?: IStyleCSSTable
+      th?: IStyleCSSTableColumn
+      td?: IStyleCSSTableRow
     }
   }
   dialog?: {
     root?: IStyleCSS
     content?: IStyleCSS
     footer?: IStyleCSS
-    overlayColor?: string // overlay color
+    overlayColor?: string
   }
   dataSource?: {
     root?: IStyleCSS
@@ -175,10 +211,20 @@ export interface ITheme {
   }
   loader?: {
     root?: IStyleCSS
-    overlayColor?: string // overlay color
+    overlayColor?: string
   }
   iterator?: {
     root?: IStyleCSS
-    overlayColor?: string // overlay color
+    overlayColor?: string
+
+    /**
+     * loader bar foreground color
+     */
+    barColor?: string
+
+    /**
+     * loader bar background color
+     */
+    barBackground?: string
   }
 }

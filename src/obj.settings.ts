@@ -18,6 +18,11 @@ export interface ISettings {
   fields: IField[]
 
   /**
+   * Configure a list of columns that should be ignored.
+   */
+  ignoreColumns?: string[]
+
+  /**
    * Specific overrides to allow theming.
    * @deprecated use `theme`
    */
@@ -27,6 +32,7 @@ export interface ISettings {
    * Overrides to allow theming for most Portal elements.
    */
   theme?: ITheme
+
   /**
    * Boolean configuration which turns on dashboard functionality and sends data
    * to Flatfile's servers.
@@ -88,6 +94,11 @@ export interface ISettings {
    * Whether or not to allow users to select encoding
    */
   displayEncoding?: boolean
+
+  /**
+   * Whether or not to show "Are you sure?" dialog before closing
+   */
+  confirmClose?: boolean
 
   /**
    * Allows for additional rows to be added to the initial rows checked on import.
