@@ -11,20 +11,20 @@ interface CSSObject extends CSSProperties, CSSPseudos {
 type IStyleCSS = Pick<
   CSSObject,
   | 'backgroundColor'
-  | 'color'
-  | 'padding'
-  | 'margin'
-  | 'fontSize'
-  | 'fontWeight'
-  | 'lineHeight'
   | 'border'
-  | 'borderTop'
-  | 'borderRight'
   | 'borderBottom'
   | 'borderLeft'
   | 'borderRadius'
-  | 'textAlign'
+  | 'borderRight'
+  | 'borderTop'
   | 'boxShadow'
+  | 'color'
+  | 'fontSize'
+  | 'fontWeight'
+  | 'lineHeight'
+  | 'margin'
+  | 'padding'
+  | 'textAlign'
 >
 
 type IStyleCSSButton = IStyleCSS & Pick<CSSObject, ':focus' | ':hover' | ':active'>
@@ -35,7 +35,7 @@ interface IStyleCSSSvg {
 
 type IStyleTable = Pick<
   CSSObject,
-  'backgroundColor' | 'color' | 'borderColor' | 'fontSize' | 'fontWeight' | 'textAlign'
+  'backgroundColor' | 'borderColor' | 'color' | 'fontSize' | 'fontWeight' | 'textAlign'
 >
 
 interface IStyleCSSTableColumn extends IStyleTable {
@@ -50,22 +50,22 @@ interface IStyleCSSTableRow extends IStyleTable {
 }
 
 interface IStyleCSSTableRowIndex extends IStyleTable {
+  ':empty'?: IStyleTable
   ':focus'?: IStyleTable
   ':hover'?: IStyleTable
-  ':empty'?: IStyleTable
 }
 
 type IStyleSelect = Pick<
   CSSObject,
   | 'backgroundColor'
-  | 'color'
   | 'border'
-  | 'borderTop'
-  | 'borderRight'
   | 'borderBottom'
   | 'borderLeft'
   | 'borderRadius'
+  | 'borderRight'
+  | 'borderTop'
   | 'boxShadow'
+  | 'color'
 >
 
 interface IStyleCSSSelect extends IStyleSelect {
