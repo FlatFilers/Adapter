@@ -1,18 +1,14 @@
 # Flatfile.io CSV Importer Adapter
 
 [![Build Status](https://travis-ci.org/FlatFilers/Adapter.svg?branch=master)](https://travis-ci.org/FlatFilers/Adapter)
-[![Codecov](https://img.shields.io/codecov/c/github/FlatFilers/Adapter.svg)](https://codecov.io/gh/FlatFilers/Adapter)
-[![NPM version](https://img.shields.io/npm/v/typescript-starter.svg)](https://www.npmjs.com/package/typescript-starter)
 [![Standard Version](https://img.shields.io/badge/release-standard%20version-brightgreen.svg)](https://github.com/conventional-changelog/standard-version)
-[![dependencies Status](https://david-dm.org/flatfilers/adapter/status.svg)](https://david-dm.org/flatfilers/adapter)
-[![devDependencies Status](https://david-dm.org/flatfilers/adapter/dev-status.svg)](https://david-dm.org/flatfilers/adapter?type=dev)
+[![dependencies Status](https://img.shields.io/david/FlatFilers/adapter)](https://david-dm.org/FlatFilers/adapter)
+[![devDependencies Status](https://img.shields.io/david/dev/FlatFilers/adapter)](https://david-dm.org/FlatFilers/adapter?type=dev)
 
 
 A simple adapter for elegantly importing CSV files via [flatfile.io](https://www.flatfile.io) (Typescript, ES6, Browser)
 
-Read the developer docs &rarr; https://developers.flatfile.io/docs/install
-
-![Preview](https://flatfile.io/img/preview.png)
+Read the developer docs &rarr; https://flatfile.io/developers/
 
 > **License Key**
 >
@@ -23,7 +19,7 @@ Read the developer docs &rarr; https://developers.flatfile.io/docs/install
 If you don't like external dependencies, or you have a nice build system like Webpack in place. You can install and use Flatfile as an npm package.
 
 ```sh
-npm install flatfile-csv-importer --save
+npm i @flatfile/adapter --save
 ```
 
 
@@ -32,102 +28,166 @@ npm install flatfile-csv-importer --save
 The latest version of the package is available via CDN so you can just drop it into your website and start using it.
 
 ```sh
-https://unpkg.com/flatfile-csv-importer/build/dist/index.min.js
+https://unpkg.com/@flatfile/adapter/build/dist/index.min.js
 ```
 
 ## Quickstart
 Add the following code before the ending `</body>` tag in your html.
 
-```js
-
-<script src="https://unpkg.com/flatfile-csv-importer/build/dist/index.min.js"></script>
+```html
+<script src="https://unpkg.com/@flatfile/adapter/build/dist/index.min.js"></script>
 
 <script>
-  var LICENSE_KEY = 'PASTE YOUR KEY HERE'
+  const LICENSE_KEY = '00000000-0000-0000-0000-000000000000' // replace this with your license key
 
-  var importer = new FlatfileImporter('demo-account', {
-    fields: [{
-      label: 'Robot Name',
-      key: 'name'
-    }, {
-      label: 'Shield Color',
-      key: 'shieldColor',
-      validator: /^[a-zA-Z]+$/
-    }, {
-      label: 'Robot Helmet Style',
-      key: 'helmetStyle',
-    }, {
-      label: 'Call Sign',
-      key: 'sign',
-      alternates: ['nickname', 'wave'],
-      validator: /^\w{4}$/
-    }],
-    type: 'Robot'
+  const importer = new FlatfileImporter(LICENSE_KEY, {
+    type: 'Robot',
+    fields: [
+      {
+        label: 'Name',
+        key: 'name',
+        validators: [ { validate: 'unique' } ]
+      },
+      {
+        label: 'Phone',
+        key: 'phone',
+        alternates: ['number', 'tel'],
+        validators: [
+          {
+            validate: 'regex_matches',
+            regex: '^\d{10}$'
+          }
+        ]
+      },
+      {
+        label: 'Country',
+        key: 'country',
+        type: 'select',
+        options: [
+          { value: 'US', label: 'United States' },
+          { value: 'CA', label: 'Canada' }
+        ]
+      }
+    ]
   })
 
-  importer.requestDataFromUser().then(function(results) {
-    importer.displayLoader()
-
-    // replace this setTimeout with an ajax request to your server with the data
-    doSomethingWithYourData(results.data).then(function() {
-      importer.displaySuccess().then(function() {
-        console.log('User closed the dialog');
-      })
-    })
+  // More info: https://flatfile.io/developers/javascript/getting-started/#the-basics
+  importer.setCustomer({
+    userId: '1'
   })
 
-  /**
-   * Use this function to do something with your data like upload it your server
-   * 
-   * @param data An array of objects matching your earlier configuration
-   *   [
-   *     {
-   *       name: 'R2D2',
-   *       shieldColor: 'blue',
-   *       helmetStyle: 'awesome',
-   *       callSign: 'beep'
-   *     }
-   *     ...
-   *   ]
-   */
-  function doSomethingWithYourData (data) {
+  importer.requestDataFromUser().then((results) => {
+    importer.displayLoader('Please wait while your data is loading')
 
-  }
+    // do something with your data
+    setTimeout(() => {
+      // console.log(results)
 
+      importer.displaySuccess('You are all done!')
+    }, 1000)
+  })
 </script>
 ```
 
 ## ES6 / Babel
 
 ```js
-import FlatfileImporter from 'flatfile-csv-importer'
-import $ from 'jquery'
+const LICENSE_KEY = '00000000-0000-0000-0000-000000000000' // replace this with your license key
 
-// configure your flatfile options here
-const options = {}
+const importer = new FlatfileImporter(LICENSE_KEY, {
+  type: 'Robot',
+  fields: [
+    {
+      label: 'Name',
+      key: 'name'
+    }
+  ]
+})
 
-// Obtain your license key from https://flatfile.io
-const LICENSE_KEY = 'PASTE YOUR KEY HERE'
+// More info: https://flatfile.io/developers/javascript/getting-started/#the-basics
+importer.setCustomer({
+  userId: '1'
+})
 
-// initialize the importer
-const importer = new FlatfileImporter(FLATFILE_LICENSE_KEY, options)
+document.querySelector('button').addEventListener('click', async () => {
+  try{
+    const results = await importer.requestDataFromUser()
 
-// setup your handler
-const buttonClickHandler = async () => {
-  try {
-    const response = await importer.requestDataFromUser()
-    await uploadYourData(response.data)
-  } catch(e) {
+    importer.displayLoader('Please wait while your data is loading')
+
+    // do something with your data
+    setTimeout(() => {
+      // console.log(results)
+
+      importer.displaySuccess('You are all done!')
+    }, 1000)
+  }catch(e){
     // handle a failed upload
   }
+})
+```
 
-}
+## Data hooks
+Flatfile's Data Hooks are a useful data healing element to re-format, validate and/or correct data automatically during the import without the user having to correct manually.
 
-const uploadYourData = (data) => {
-  // logic here to upload the clean data your server
-}
+More information: [Getting started with Data Hooks](https://flatfile.io/developers/javascript/datahooks)
 
-$("#upload-button").click(buttonClickHandler)
+```js
+const importer = new FlatfileImporter(LICENSE_KEY, {
+  type: 'Robot',
+  fields: [
+    {
+      label: 'Name',
+      key: 'name'
+    }
+  ]
+})
+
+importer.setCustomer({
+  userId: '1'
+})
+
+// adding a data hook that will add 'Jr.' to the name in each row
+importer.registerRecordHook((row) => {
+  // Example row: {name: 'John'}
+  const result = {};
+
+  if (row.name) {
+    result.name = {
+      value: `${row.name} Jr.`
+    };
+  }
+
+  return result;
+});
+```
+
+## Themes
+Theming gives you independent control over the look and feel of Flatfile Portal. With this, you can adjust both a global styles and individual components within the importer, as well as control the CSS pseudo-class :hover & :focus on buttons.
+
+More information: [Custom Themes for Flatfile Portal](https://flatfile.io/developers/javascript/themes)
+
+```js
+const importer = new FlatfileImporter(LICENSE_KEY, {
+  type: 'Robot',
+  fields: [
+    {
+      label: 'Name',
+      key: 'name'
+    }
+  ],
+  theme: {
+    global: {
+      backgroundColor: '#212327',
+      textColor: '#c2c3c3',
+      primaryTextColor: '#c2c3c3',
+      secondaryTextColor: '#c2c3c3',
+      successColor: '#c2c3c3',
+      warningColor: '#c2c3c3'
+    },
+    // other keys below
+  }
+})
 ```
 
 ## Promise Overrides
