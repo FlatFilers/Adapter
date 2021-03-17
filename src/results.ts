@@ -249,6 +249,13 @@ export default class FlatfileResults {
     return this.$meta.created_at
   }
 
+  /**
+   * The stylesheet of the cells. Make sure to use `allowFormatting=true` in the config.
+   */
+  get stylesheet(): Meta['stylesheet'] | null {
+    return this.$meta.stylesheet
+  }
+
   private blobOnly<T>(v: T, method, alt = 'nextChunk()'): T {
     if (this.$meta.inChunks) {
       throw new Error(

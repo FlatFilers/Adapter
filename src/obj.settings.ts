@@ -66,6 +66,11 @@ export interface ISettings {
   allowInvalidSubmit?: boolean
 
   /**
+   * Whether or not to allow bold / italic / strike formatting of the cells.
+   */
+  allowFormatting?: boolean
+
+  /**
    * Allows use of non-standard fonts
    */
   integrations?: IIntegrations
