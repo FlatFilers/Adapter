@@ -1,5 +1,6 @@
 import EndUserObject from './obj.end-user'
 import FileObject from './obj.file'
+
 export interface BaseMeta {
   batchID: string
   endUser?: EndUserObject
@@ -27,6 +28,7 @@ export interface BaseMeta {
   created_at: string
   handled_at: string
   matched_at: string
+  stylesheet: StyleSheet | null
 }
 
 export default interface Meta extends BaseMeta {
@@ -37,4 +39,12 @@ export interface StreamedMeta extends BaseMeta {
   inChunks: number
   hasMore: boolean
   pointer: number
+}
+
+interface StyleSheet {
+  [key: string]: {
+    bold?: boolean
+    italic?: boolean
+    strike?: boolean
+  }
 }
