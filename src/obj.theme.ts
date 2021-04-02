@@ -106,10 +106,9 @@ export interface ITheme {
      */
     warningColor?: CSSObject['color']
 
-    /**
-     * default border radius
-     */
     borderRadius?: CSSObject['borderRadius']
+    overlayColor?: CSSObject['backgroundColor']
+    fontFamily?: CSSObject['fontFamily']
   }
   buttons?: {
     primary?: IStyleCSSButton
@@ -154,6 +153,7 @@ export interface ITheme {
     current?: IStyleCSS
     complete?: IStyleCSS
     incomplete?: IStyleCSS
+    arrow?: IStyleCSSSvg
   }
   dropzone?: {
     root?: IStyleCSS
