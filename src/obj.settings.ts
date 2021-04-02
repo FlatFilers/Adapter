@@ -203,6 +203,7 @@ export interface II18nOverrides {
 
 export interface IIntegrations {
   adobeFontsWebProjectId?: string
+  googleFonts?: string
 }
 
 export interface IStyleOverrides {
