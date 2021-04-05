@@ -11,10 +11,11 @@ import Meta from './obj.meta'
 import RecordObject from './obj.record'
 import CustomerObject from './obj.customer'
 import LoadOptionsObject from './obj.load-options'
-import { IDataHookRecord, IDataHookResponse } from './obj.validation-response'
+import { IDataHookResponse } from './obj.validation-response'
 import { IBeforeFetchRequest, IBeforeFetchResponse } from './obj.before-fetch'
 import { IInteractionEvent } from './obj.interaction-event'
 import { ISettings } from './obj.settings'
+import { FieldHookCallback, StepHooks, StepHookCallback } from './obj.hooks'
 
 registerDocumentContainsPolyfill()
 
@@ -46,6 +47,7 @@ export default class FlatfileImporter extends EventEmitter {
     mode: string
   ) => IDataHookResponse | Promise<IDataHookResponse>
   private $fieldHooks: Array<{ field: string; cb: FieldHookCallback }> = []
+  private $stepHooks: StepHooks = {} as StepHooks
 
   constructor(apiKey: string, options: ISettings, customer?: CustomerObject) {
     super()
@@ -97,6 +99,7 @@ export default class FlatfileImporter extends EventEmitter {
       bulkInit: true,
       hasRecordHook: !!this.$recordHook,
       hasInteractionEventCallback: !!this.$interactionEventCallback,
+      stepHooks: Object.keys(this.$stepHooks),
       fieldHooks: this.$fieldHooks.map((v) => v.field),
       endUser: this.customer
     }
@@ -244,11 +247,12 @@ export default class FlatfileImporter extends EventEmitter {
     this.$interactionEventCallback = callback
   }
 
-  /**
-   * Set the customer information for this import
-   */
   registerFieldHook(field: string, cb: FieldHookCallback): void {
     this.$fieldHooks.push({ field, cb })
+  }
+
+  registerStepHook<T extends keyof StepHooks>(step: T, callback: StepHookCallback<T>): void {
+    this.$stepHooks[step] = callback
   }
 
   /**
@@ -365,6 +369,18 @@ export default class FlatfileImporter extends EventEmitter {
             return []
           }
         },
+        stepHookCallback: async (step, payload) => {
+          if (!this.$stepHooks[step]) {
+            return undefined
+          }
+          try {
+            return await this.$stepHooks[step](payload)
+          } catch ({ stack }) {
+            console.error(`Flatfile Step Hook Error on step "${step}":\n  ${stack}`, {
+              payload
+            })
+          }
+        },
         ready: () => {
           this.handshake.promise
             .then((child) => {
@@ -415,10 +431,3 @@ export default class FlatfileImporter extends EventEmitter {
     })
   }
 }
-
-export type Scalar = string | number | boolean | null | undefined
-
-export type FieldHookCallback = (
-  values: [Scalar, number][],
-  meta: any
-) => [IDataHookRecord, number][] | Promise<[IDataHookRecord, number][]>
