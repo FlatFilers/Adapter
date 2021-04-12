@@ -173,6 +173,7 @@ export interface ITheme {
   headerMatch?: {
     root?: IStyleCSS
     content?: IStyleCSS
+    info?: IStyleCSS
     icon?: IStyleCSSSvg
     table?: {
       th?: IStyleCSSTableColumn
