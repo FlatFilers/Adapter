@@ -71,6 +71,11 @@ export interface ISettings {
   allowFormatting?: boolean
 
   /**
+   * Whether or not to auto-detect headers
+   */
+  autoDetectHeaders?: boolean
+
+  /**
    * Allows use of non-standard fonts
    */
   integrations?: IIntegrations
