@@ -6,9 +6,11 @@
 [![devDependencies Status](https://img.shields.io/david/dev/FlatFilers/adapter)](https://david-dm.org/FlatFilers/adapter?type=dev)
 
 
-A simple adapter for elegantly importing CSV files via [flatfile.io](https://www.flatfile.io) (Typescript, ES6, Browser)
+A simple adapter for elegantly importing data (CSV, XLS & more) via [flatfile.io](https://www.flatfile.io) (Typescript, ES6, Browser)
 
 _*Important note:*_ While the below info is a basic way to get up and running, we recommend reading the developer docs &rarr; https://flatfile.io/developers/javascript/getting-started
+
+_*Another note:*_ If you are using Angular or React, we have specific packages for those. Check out our [React package on GitHub](https://github.com/FlatFilers/react-adapter) and [Angular package on GitHub](https://github.com/FlatFilers/angular-adapter).
 
 > **License Key**
 >
