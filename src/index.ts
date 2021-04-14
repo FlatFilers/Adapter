@@ -14,7 +14,7 @@ import LoadOptionsObject from './obj.load-options'
 import { IDataHookResponse } from './obj.validation-response'
 import { IBeforeFetchRequest, IBeforeFetchResponse } from './obj.before-fetch'
 import { IInteractionEvent } from './obj.interaction-event'
-import { ISettings } from './obj.settings'
+import { ISettings, IVirtualFieldOptions } from './obj.settings'
 import { FieldHookCallback, StepHooks, StepHookCallback } from './obj.hooks'
 
 registerDocumentContainsPolyfill()
@@ -225,6 +225,12 @@ export default class FlatfileImporter extends EventEmitter {
   setLanguage(lang: string): void {
     this.$ready.then((child) => {
       child.setLanguage(lang)
+    })
+  }
+
+  addVirtualField(field: ISettings['fields'][0], options: IVirtualFieldOptions = {}): void {
+    this.$ready.then((child) => {
+      child.addVirtualField({ field, options })
     })
   }
 

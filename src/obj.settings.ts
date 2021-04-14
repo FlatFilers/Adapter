@@ -258,3 +258,8 @@ export interface IDictionary<V = string> {
 export type Nullable<T> = T | undefined | null
 export type IPrimitive = string | number | boolean
 export type ScalarDictionary = IDictionary<Nullable<IPrimitive>>
+
+export interface IVirtualFieldOptions {
+  order?: number
+  hideFields?: string[]
+}
