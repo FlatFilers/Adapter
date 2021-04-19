@@ -1,4 +1,4 @@
-import FileObject from './obj.file'
+import { FileObject } from './obj'
 
 export default class UploadFile {
   private $file: FileObject

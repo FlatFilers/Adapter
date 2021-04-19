@@ -1,4 +1,4 @@
-import EndUserObject from './obj.end-user'
+import { EndUserObject } from './obj'
 
 export default class EndUser {
   private $user: EndUserObject

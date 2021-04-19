@@ -1,7 +1,6 @@
 import Importer from './index'
 import Stats from './stats'
-import Meta from './obj.meta'
-import RecordObject from './obj.record'
+import { Meta, RecordObject } from './obj'
 import User from './user'
 import UploadFile from './upload-file'
 import StreamedResults from './streamed-results'
