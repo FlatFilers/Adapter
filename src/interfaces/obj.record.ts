@@ -1,4 +1,4 @@
-export default interface RecordObject {
+export interface RecordObject {
   /**
    * Did the user delete this row before submitting
    */

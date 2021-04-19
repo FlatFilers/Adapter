@@ -1,6 +1,6 @@
-import { EndUserObject } from './obj'
+import { EndUserObject } from './interfaces'
 
-export default class EndUser {
+export class EndUser {
   private $user: EndUserObject
 
   constructor(meta: EndUserObject) {

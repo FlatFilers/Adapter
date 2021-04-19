@@ -1,3 +1,4 @@
+import { IPrimitive } from './obj.load-options'
 import { ITheme } from './obj.theme'
 
 export interface ISettings {
@@ -256,7 +257,6 @@ export interface IDictionary<V = string> {
   [key: string]: V
 }
 export type Nullable<T> = T | undefined | null
-export type IPrimitive = string | number | boolean
 export type ScalarDictionary = IDictionary<Nullable<IPrimitive>>
 
 export interface IVirtualFieldOptions {

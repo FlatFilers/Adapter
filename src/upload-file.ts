@@ -1,6 +1,6 @@
-import { FileObject } from './obj'
+import { FileObject } from './interfaces'
 
-export default class UploadFile {
+export class UploadFile {
   private $file: FileObject
 
   constructor(file: FileObject) {

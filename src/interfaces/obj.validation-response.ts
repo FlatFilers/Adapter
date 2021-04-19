@@ -1,4 +1,4 @@
-export default interface IValidationResponse {
+export interface IValidationResponse {
   /**
    * A string referencing the key affected by the problem
    */

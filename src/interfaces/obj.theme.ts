@@ -1,79 +1,5 @@
 import * as CSS from 'csstype'
 
-type CSSProperties = CSS.Properties<string | number>
-
-type CSSPseudos = { [K in CSS.Pseudos]?: CSSObject }
-
-interface CSSObject extends CSSProperties, CSSPseudos {
-  [key: string]: CSSObject | string | number | undefined
-}
-
-type IStyleCSS = Pick<
-  CSSObject,
-  | 'backgroundColor'
-  | 'border'
-  | 'borderBottom'
-  | 'borderLeft'
-  | 'borderRadius'
-  | 'borderRight'
-  | 'borderTop'
-  | 'boxShadow'
-  | 'color'
-  | 'fontSize'
-  | 'fontWeight'
-  | 'lineHeight'
-  | 'margin'
-  | 'padding'
-  | 'textAlign'
->
-
-type IStyleCSSButton = IStyleCSS & Pick<CSSObject, ':focus' | ':hover' | ':active'>
-
-interface IStyleCSSSvg {
-  fill?: string
-}
-
-type IStyleTable = Pick<
-  CSSObject,
-  'backgroundColor' | 'borderColor' | 'color' | 'fontSize' | 'fontWeight' | 'textAlign'
->
-
-interface IStyleCSSTableColumn extends IStyleTable {
-  ':focus'?: IStyleTable
-  ':hover'?: IStyleTable
-}
-
-interface IStyleCSSTableRow extends IStyleTable {
-  ':focus'?: IStyleTable
-  ':hover'?: IStyleTable
-  ':invalid'?: IStyleTable
-}
-
-interface IStyleCSSTableRowIndex extends IStyleTable {
-  ':empty'?: IStyleTable
-  ':focus'?: IStyleTable
-  ':hover'?: IStyleTable
-}
-
-type IStyleSelect = Pick<
-  CSSObject,
-  | 'backgroundColor'
-  | 'border'
-  | 'borderBottom'
-  | 'borderLeft'
-  | 'borderRadius'
-  | 'borderRight'
-  | 'borderTop'
-  | 'boxShadow'
-  | 'color'
->
-
-interface IStyleCSSSelect extends IStyleSelect {
-  ':focus'?: IStyleSelect
-  ':active'?: IStyleSelect
-  ':selected'?: IStyleSelect
-}
-
 export interface ITheme {
   global?: {
     /**
@@ -228,4 +154,82 @@ export interface ITheme {
      */
     barBackground?: string
   }
+}
+
+/**
+ * @NOTE private
+ */
+
+type CSSProperties = CSS.Properties<string | number>
+
+type CSSPseudos = { [K in CSS.Pseudos]?: CSSObject }
+
+interface CSSObject extends CSSProperties, CSSPseudos {
+  [key: string]: CSSObject | string | number | undefined
+}
+
+type IStyleCSS = Pick<
+  CSSObject,
+  | 'backgroundColor'
+  | 'border'
+  | 'borderBottom'
+  | 'borderLeft'
+  | 'borderRadius'
+  | 'borderRight'
+  | 'borderTop'
+  | 'boxShadow'
+  | 'color'
+  | 'fontSize'
+  | 'fontWeight'
+  | 'lineHeight'
+  | 'margin'
+  | 'padding'
+  | 'textAlign'
+>
+
+type IStyleCSSButton = IStyleCSS & Pick<CSSObject, ':focus' | ':hover' | ':active'>
+
+interface IStyleCSSSvg {
+  fill?: string
+}
+
+type IStyleTable = Pick<
+  CSSObject,
+  'backgroundColor' | 'borderColor' | 'color' | 'fontSize' | 'fontWeight' | 'textAlign'
+>
+
+interface IStyleCSSTableColumn extends IStyleTable {
+  ':focus'?: IStyleTable
+  ':hover'?: IStyleTable
+}
+
+interface IStyleCSSTableRow extends IStyleTable {
+  ':focus'?: IStyleTable
+  ':hover'?: IStyleTable
+  ':invalid'?: IStyleTable
+}
+
+interface IStyleCSSTableRowIndex extends IStyleTable {
+  ':empty'?: IStyleTable
+  ':focus'?: IStyleTable
+  ':hover'?: IStyleTable
+}
+
+type IStyleSelect = Pick<
+  CSSObject,
+  | 'backgroundColor'
+  | 'border'
+  | 'borderBottom'
+  | 'borderLeft'
+  | 'borderRadius'
+  | 'borderRight'
+  | 'borderTop'
+  | 'boxShadow'
+  | 'color'
+>
+
+interface IStyleCSSSelect extends IStyleSelect {
+  ':focus'?: IStyleSelect
+  ':active'?: IStyleSelect
+  ':selected'?: IStyleSelect
 }

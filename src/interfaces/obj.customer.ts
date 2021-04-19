@@ -1,4 +1,4 @@
-export default interface CustomerObject {
+export interface CustomerObject {
   /**
    * Your internal ID reference for this user (required)
    */

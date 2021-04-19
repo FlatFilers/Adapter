@@ -1,5 +1,5 @@
-import EndUserObject from './obj.end-user'
-import FileObject from './obj.file'
+import { EndUserObject } from './obj.end-user'
+import { FileObject } from './obj.file'
 
 export interface BaseMeta {
   batchID: string
@@ -31,7 +31,7 @@ export interface BaseMeta {
   stylesheet: StyleSheet | null
 }
 
-export default interface Meta extends BaseMeta {
+export interface Meta extends BaseMeta {
   inChunks?: number
 }
 

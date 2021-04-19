@@ -1,11 +1,11 @@
-import Importer from './index'
-import Stats from './stats'
-import { Meta, RecordObject } from './obj'
-import User from './user'
-import UploadFile from './upload-file'
-import StreamedResults from './streamed-results'
+import { FlatfileImporter } from './importer'
+import { Stats } from './stats'
+import { Meta, RecordObject } from './interfaces'
+import { EndUser } from './user'
+import { UploadFile } from './upload-file'
+import { StreamedResults } from './streamed-results'
 
-export default class FlatfileResults {
+export class FlatfileResults {
   /**
    * Information about the import
    */
@@ -19,9 +19,9 @@ export default class FlatfileResults {
   /**
    * Instance of importer used to manage this file
    */
-  private $importer: Importer
+  private $importer: FlatfileImporter
 
-  constructor(data: Array<RecordObject>, meta: Meta, importer: Importer) {
+  constructor(data: Array<RecordObject>, meta: Meta, importer: FlatfileImporter) {
     this.$meta = meta
     this.$data = data
     this.$importer = importer
@@ -92,9 +92,9 @@ export default class FlatfileResults {
   /**
    * The customer provided in setCustomer
    */
-  get customer(): User | null {
+  get customer(): EndUser | null {
     if (this.$meta.endUser) {
-      return new User(this.$meta.endUser)
+      return new EndUser(this.$meta.endUser)
     }
     return null
   }

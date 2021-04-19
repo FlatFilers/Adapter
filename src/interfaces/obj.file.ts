@@ -1,4 +1,4 @@
-export default interface FileObject {
+export interface FileObject {
   /**
    * A unique UUID referencing this file in the Flatfile system
    */
