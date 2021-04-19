@@ -1,14 +1,18 @@
 {
   "name": "@flatfile/adapter",
-  "version": "3.0.0-beta.0",
-  "description": "A lightweight adapter for working with Flatfile's Portal",
+  "version": "3.0.0-beta.1",
+  "description": "A lightweight TypeScript/JavaScript adapter for working with Flatfile's Portal",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
   "module": "build/module/index.js",
   "browser": "build/browser/index.js",
   "repository": "https://github.com/flatfilers/adapter",
   "author": "David Boskovic <david@flatfile.io>",
+  "homepage": "https://flatfile.io",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FlatFilers/adapter/issues"
+  },
   "scripts": {
     "info": "npm-scripts-info",
     "build": "trash build && nqr build:main && nqr build:module && nqr build:browser-deps && nqr build:browser && nqr build:browser-cjs && nqr build:browser-dist && nqr build:resolve-sourcemaps",

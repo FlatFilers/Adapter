@@ -18,7 +18,7 @@ import {
   StepHookCallback,
   StepHooks
 } from './interfaces'
-import { FlatfileResults } from './results'
+import { Results } from './results'
 
 export class FlatfileImporter extends EventEmitter {
   public static Promise = Promise
@@ -147,7 +147,7 @@ export class FlatfileImporter extends EventEmitter {
    * Use requestDataFromUser() when you want a promise returned. This is necessary if you want to use
    * async/await for an es6 implementation
    */
-  requestDataFromUser(options: LoadOptionsObject = {}): Promise<FlatfileResults> {
+  requestDataFromUser(options: LoadOptionsObject = {}): Promise<Results> {
     this.open({ ...options, inChunks: options.inChunks || null, expectsExpandedResults: true })
     return this.responsePromise()
   }
@@ -182,10 +182,7 @@ export class FlatfileImporter extends EventEmitter {
    * @param corrections - allows user to do server-side validation and provide error / warning
    * messages or value overrides
    */
-  requestCorrectionsFromUser(
-    msg?: string,
-    corrections?: IDataHookResponse[]
-  ): Promise<FlatfileResults> {
+  requestCorrectionsFromUser(msg?: string, corrections?: IDataHookResponse[]): Promise<Results> {
     this.$ready.then((child) => {
       child.displayError(msg, corrections)
     })
@@ -413,10 +410,10 @@ export class FlatfileImporter extends EventEmitter {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
   }
 
-  private responsePromise(): Promise<FlatfileResults> {
+  private responsePromise(): Promise<Results> {
     return new Promise((resolve, reject) => {
       const loadResolveHandler = async (rows: Array<RecordObject>, meta: object) => {
-        const results = new FlatfileResults(rows, meta as Meta, this)
+        const results = new Results(rows, meta as Meta, this)
         resolve(results)
         cleanup()
       }

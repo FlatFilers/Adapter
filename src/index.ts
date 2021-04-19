@@ -3,6 +3,8 @@ import 'promise-polyfill/dist/polyfill'
 import registerDocumentContainsPolyfill from './document.contains.polyfill'
 registerDocumentContainsPolyfill()
 
+import { FlatfileImporter } from './importer'
+
 export {
   ISettings,
   CustomerObject,
@@ -16,8 +18,8 @@ export {
   Nullable,
   IPrimitive,
   IValidationResponse,
-  IDictionary
+  IDictionary,
+  FlatfileResults
 } from './interfaces'
 
-export { FlatfileResults } from './results'
-export { FlatfileImporter } from './importer'
+export default FlatfileImporter
