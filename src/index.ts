@@ -7,15 +7,37 @@ import elementClass from 'element-class'
 import Penpal from 'penpal'
 import registerDocumentContainsPolyfill from './document.contains.polyfill'
 import FlatfileResults from './results'
-import Meta from './obj.meta'
-import RecordObject from './obj.record'
-import CustomerObject from './obj.customer'
-import LoadOptionsObject from './obj.load-options'
-import { IDataHookResponse } from './obj.validation-response'
-import { IBeforeFetchRequest, IBeforeFetchResponse } from './obj.before-fetch'
-import { IInteractionEvent } from './obj.interaction-event'
-import { ISettings, IVirtualFieldOptions } from './obj.settings'
-import { FieldHookCallback, StepHooks, StepHookCallback } from './obj.hooks'
+
+import {
+  ISettings,
+  CustomerObject,
+  IBeforeFetchRequest,
+  IBeforeFetchResponse,
+  IInteractionEvent,
+  FieldHookCallback,
+  StepHooks,
+  LoadOptionsObject,
+  IVirtualFieldOptions,
+  StepHookCallback,
+  RecordObject,
+  IDataHookResponse,
+  Meta
+} from './obj'
+export {
+  ISettings,
+  CustomerObject,
+  IBeforeFetchRequest,
+  IBeforeFetchResponse,
+  IInteractionEvent,
+  FieldHookCallback,
+  StepHooks,
+  LoadOptionsObject,
+  IVirtualFieldOptions,
+  StepHookCallback,
+  RecordObject,
+  IDataHookResponse,
+  Meta
+} from './obj'
 
 registerDocumentContainsPolyfill()
 

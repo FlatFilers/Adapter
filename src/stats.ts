@@ -1,4 +1,4 @@
-import Meta from './obj.meta'
+import { Meta } from './obj'
 
 export default class Stats {
   private $meta: Meta

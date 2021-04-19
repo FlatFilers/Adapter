@@ -1,5 +1,4 @@
-import { StreamedMeta } from './obj.meta'
-import RecordObject from './obj.record'
+import { RecordObject, StreamedMeta } from './obj'
 
 export default class StreamedResults {
   /**
