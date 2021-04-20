@@ -14,11 +14,13 @@ _An example of these new imports and usage:_
 ```ts
 import FlatfileImporter, { // <-- still found at the default export level
   FieldHookCallback, // <-- everything else public is now available via destructuring from @flatfile/adapter
-  CustomerObject as FlatfileCustomer,
-  LoadOptionsObject,
-  FlatfileResults,
   ISettings,
+  CustomerObject,
+  LoadOptionsObject,
   IVirtualFieldOptions,
+  IInteractionEvent,
+  IBeforeFetchRequest,
+  IBeforeFetchResponse,
   StepHookCallback,
   RecordObject,
   IDataHookResponse,
@@ -27,6 +29,7 @@ import FlatfileImporter, { // <-- still found at the default export level
   IPrimitive,
   IValidationResponse,
   IDictionary,
+  FlatfileResults
 } from '@flatfile/adapter';
 ```
 
