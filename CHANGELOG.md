@@ -2,6 +2,40 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.8.0"></a>
+## [2.8.0](https://github.com/flatfilers/adapter/compare/v2.7.0...v2.8.0) (2020-04-20)
+
+#### Breaking Changes
+
+- All `default` exports have been removed, all publicly available interfaces or classes are now available from `@flatfile/adapter` (no deep-imports), with the exception being `FlatfileImporter` itself being exported from the default.
+
+_An example of these new imports and usage:_
+
+```ts
+import FlatfileImporter, { // <-- still found at the default export level
+  FieldHookCallback, // <-- everything else public is now available via destructuring from @flatfile/adapter
+  ISettings,
+  CustomerObject,
+  LoadOptionsObject,
+  IVirtualFieldOptions,
+  IInteractionEvent,
+  IBeforeFetchRequest,
+  IBeforeFetchResponse,
+  StepHookCallback,
+  RecordObject,
+  IDataHookResponse,
+  ScalarDictionary,
+  Nullable,
+  IPrimitive,
+  IValidationResponse,
+  IDictionary,
+  FlatfileResults
+} from '@flatfile/adapter';
+```
+
+- `FlatfileResult` is now found from the root of `import { FlatfileResult } from '@flatfile/adapter';`
+  - Previously it was grabbed via default import from a deep-import `import FlatfileResults from '@flatfile/adapter/build/main/results';`
+
 <a name="2.1.4"></a>
 ## [2.1.4](https://github.com/flatfilers/adapter/compare/v2.1.3...v2.1.4) (2020-11-03)
 

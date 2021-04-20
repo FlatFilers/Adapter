@@ -1,6 +1,6 @@
-import { RecordObject, StreamedMeta } from './obj'
+import { RecordObject, StreamedMeta } from './interfaces'
 
-export default class StreamedResults {
+export class StreamedResults {
   /**
    * Helpful meta information
    */

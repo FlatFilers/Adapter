@@ -1,11 +1,12 @@
-import Importer from './index'
-import Stats from './stats'
-import { Meta, RecordObject } from './obj'
-import User from './user'
-import UploadFile from './upload-file'
-import StreamedResults from './streamed-results'
+import { FlatfileImporter } from './importer'
+import { Stats } from './stats'
+import { Meta, RecordObject } from './interfaces'
+import { EndUser } from './user'
+import { UploadFile } from './upload-file'
+import { StreamedResults } from './streamed-results'
+import { FlatfileResults } from './interfaces/results.interface'
 
-export default class FlatfileResults {
+export class Results implements FlatfileResults {
   /**
    * Information about the import
    */
@@ -19,9 +20,9 @@ export default class FlatfileResults {
   /**
    * Instance of importer used to manage this file
    */
-  private $importer: Importer
+  private $importer: FlatfileImporter
 
-  constructor(data: Array<RecordObject>, meta: Meta, importer: Importer) {
+  constructor(data: Array<RecordObject>, meta: Meta, importer: FlatfileImporter) {
     this.$meta = meta
     this.$data = data
     this.$importer = importer
@@ -92,9 +93,9 @@ export default class FlatfileResults {
   /**
    * The customer provided in setCustomer
    */
-  get customer(): User | null {
+  get customer(): EndUser | null {
     if (this.$meta.endUser) {
-      return new User(this.$meta.endUser)
+      return new EndUser(this.$meta.endUser)
     }
     return null
   }
@@ -182,31 +183,6 @@ export default class FlatfileResults {
   }
 
   /**
-   * Get the next chunk of records
-   */
-  nextChunk(): Promise<null | StreamedResults> {
-    return new Promise((resolve, reject) => {
-      if (!this.$meta.inChunks) {
-        return reject(
-          `"nextChunk()" is only accessible when using "inChunks". Please see docs for "requestDataFromUser".`
-        )
-      }
-      this.$importer.$ready.then((child) => {
-        console.log('child.nextChunk()')
-        child.nextChunk().then(
-          (data) => {
-            console.log('nextChunk()', data)
-            resolve(data.results.length ? new StreamedResults(data.results, data.meta) : null)
-          },
-          (err) => {
-            console.log('nextChunk(err)', err)
-          }
-        )
-      })
-    })
-  }
-
-  /**
    * An array of any columns that were created during import
    */
   get customColumns(): Array<object> {
@@ -262,5 +238,30 @@ export default class FlatfileResults {
       )
     }
     return v
+  }
+
+  /**
+   * Get the next chunk of records
+   */
+  nextChunk(): Promise<null | StreamedResults> {
+    return new Promise((resolve, reject) => {
+      if (!this.$meta.inChunks) {
+        return reject(
+          `"nextChunk()" is only accessible when using "inChunks". Please see docs for "requestDataFromUser".`
+        )
+      }
+      this.$importer.$ready.then((child) => {
+        console.log('child.nextChunk()')
+        child.nextChunk().then(
+          (data) => {
+            console.log('nextChunk()', data)
+            resolve(data.results.length ? new StreamedResults(data.results, data.meta) : null)
+          },
+          (err) => {
+            console.log('nextChunk(err)', err)
+          }
+        )
+      })
+    })
   }
 }

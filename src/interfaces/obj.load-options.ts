@@ -1,6 +1,6 @@
-import IValidationResponse from './obj.validation-response'
+import { IValidationResponse } from './obj.validation-response'
 
-export default interface LoadOptionsObject {
+export interface LoadOptionsObject {
   /**
    * The number of records to receive per chunk
    */

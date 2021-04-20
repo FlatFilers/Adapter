@@ -1,6 +1,6 @@
-import { Meta } from './obj'
+import { Meta } from './interfaces'
 
-export default class Stats {
+export class Stats {
   private $meta: Meta
 
   constructor(meta: Meta) {
