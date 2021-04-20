@@ -1,11 +1,9 @@
 import { EndUser } from '../user'
-import { FlatfileImporter } from '../importer'
 import { Stats } from '../stats'
-
+import { UploadFile } from '../upload-file'
+import { StreamedResults } from '../streamed-results'
 import { Meta } from './obj.meta'
 import { RecordObject } from './obj.record'
-import { UploadFile } from 'src/upload-file'
-import { StreamedResults } from 'src/streamed-results'
 
 export interface FlatfileResults {
   /**
