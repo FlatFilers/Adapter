@@ -16,6 +16,12 @@ _*Another note:*_ If you are using Angular or React, we have specific packages f
 >
 > In order to setup, you need to [create or sign in to your flatfile.io account](https://flatfile.io) and obtain a license key.
 
+#### Changelog
+
+To view information about the latest releases and any minor/major changes, check out the [changelog here](./CHANGELOG.md).
+
+> Note: In version 2.8, previously available "deep-imports" (for Interfaces) have been moved to the root level of `@flatfile/adapter`.
+
 ## Using NPM
 
 If you don't like external dependencies, or you have a nice build system like Webpack in place. You can install and use Flatfile as an npm package.
