@@ -120,6 +120,11 @@ export interface ISettings {
    * Boolean configuration which sets disables billing for development uploads
    */
   devMode?: boolean
+
+  /**
+   * String for formatting dates when parsing Excel files on the server.
+   */
+  dateFormat?: string
 }
 
 export type IField = IFieldBase | IFieldSelect
