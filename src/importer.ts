@@ -304,6 +304,13 @@ export class FlatfileImporter extends EventEmitter {
       'beforeend',
       `<div id="flatfile-${this.uuid}" class="flatfile-component"></div>`
     )
+    const timeout = setTimeout(
+      () =>
+        console.error(
+          '[Flatfile] Looks like Portal takes too long to load. Please contact Flatfile support for any help.'
+        ),
+      5000
+    )
     this.handshake = Penpal.connectToChild({
       appendTo: document.getElementById(`flatfile-${this.uuid}`) || undefined,
       url: FlatfileImporter.MOUNT_URL.replace(':key', this.apiKey),
@@ -399,6 +406,10 @@ export class FlatfileImporter extends EventEmitter {
           return this.options
         }
       }
+    })
+
+    this.handshake.promise.then(() => {
+      if (timeout) clearTimeout(timeout)
     })
 
     this.handshake.promise.catch((err) => {
