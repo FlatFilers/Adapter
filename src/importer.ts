@@ -307,7 +307,7 @@ export class FlatfileImporter extends EventEmitter {
     const timeout = setTimeout(
       () =>
         console.error(
-          '[Flatfile] Looks like Portal takes too long to load. Please contact Flatfile support for any help.'
+          '[Flatfile] Looks like Portal takes too long to load. Please visit our Help Center (https://help.flatfile.io/support/solutions/articles/64000263381-my-importer-isn-t-loading) or contact Flatfile support for any help.'
         ),
       5000
     )
