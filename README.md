@@ -1,4 +1,4 @@
-# Flatfile.io CSV Importer Adapter
+# Flatfile.com CSV Importer Adapter
 
 [![Build Status](https://travis-ci.org/FlatFilers/Adapter.svg?branch=master)](https://travis-ci.org/FlatFilers/Adapter)
 [![Standard Version](https://img.shields.io/badge/release-standard%20version-brightgreen.svg)](https://github.com/conventional-changelog/standard-version)
@@ -6,15 +6,15 @@
 [![devDependencies Status](https://img.shields.io/david/dev/FlatFilers/adapter)](https://david-dm.org/FlatFilers/adapter?type=dev)
 
 
-A simple adapter for elegantly importing data (CSV, XLS & more) via [flatfile.io](https://www.flatfile.io) (Typescript, ES6, Browser)
+A simple adapter for elegantly importing data (CSV, XLS & more) via [flatfile.com](https://www.flatfile.com) (Typescript, ES6, Browser)
 
-_*Important note:*_ While the below info is a basic way to get up and running, we recommend reading the developer docs &rarr; https://flatfile.io/developers/javascript/getting-started
+_*Important note:*_ While the below info is a basic way to get up and running, we recommend reading the developer docs &rarr; https://flatfile.com/developers/javascript/getting-started
 
 _*Another note:*_ If you are using Angular or React, we have specific packages for those. Check out our [React package on GitHub](https://github.com/FlatFilers/react-adapter) and [Angular package on GitHub](https://github.com/FlatFilers/angular-adapter).
 
 > **License Key**
 >
-> In order to setup, you need to [create or sign in to your flatfile.io account](https://flatfile.io) and obtain a license key.
+> In order to setup, you need to [create or sign in to your flatfile.com account](https://flatfile.com) and obtain a license key.
 
 #### Changelog
 
@@ -79,7 +79,7 @@ Add the following code before the ending `</body>` tag in your html.
     ]
   })
 
-  // More info: https://flatfile.io/developers/javascript/getting-started/#the-basics
+  // More info: https://flatfile.com/developers/javascript/getting-started/#the-basics
   importer.setCustomer({
     userId: '1'
   })
@@ -112,7 +112,7 @@ const importer = new FlatfileImporter(LICENSE_KEY, {
   ]
 })
 
-// More info: https://flatfile.io/developers/javascript/getting-started/#the-basics
+// More info: https://flatfile.com/developers/javascript/getting-started/#the-basics
 importer.setCustomer({
   userId: '1'
 })
@@ -138,7 +138,7 @@ document.querySelector('button').addEventListener('click', async () => {
 ## Data hooks
 Flatfile's Data Hooks are a useful data healing element to re-format, validate and/or correct data automatically during the import without the user having to correct manually.
 
-More information: [Getting started with Data Hooks](https://flatfile.io/developers/javascript/datahooks)
+More information: [Getting started with Data Hooks](https://flatfile.com/developers/javascript/datahooks)
 
 ```js
 const importer = new FlatfileImporter(LICENSE_KEY, {
@@ -173,7 +173,7 @@ importer.registerRecordHook((row) => {
 ## Themes
 Theming gives you independent control over the look and feel of Flatfile Portal. With this, you can adjust both a global styles and individual components within the importer, as well as control the CSS pseudo-class :hover & :focus on buttons.
 
-More information: [Custom Themes for Flatfile Portal](https://flatfile.io/developers/javascript/themes)
+More information: [Custom Themes for Flatfile Portal](https://flatfile.com/developers/javascript/themes)
 
 ```js
 const importer = new FlatfileImporter(LICENSE_KEY, {

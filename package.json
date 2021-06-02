@@ -1,14 +1,14 @@
 {
   "name": "@flatfile/adapter",
-  "version": "2.8.2",
+  "version": "2.8.3",
   "description": "A lightweight TypeScript/JavaScript adapter for working with Flatfile's Portal",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
   "module": "build/module/index.js",
   "browser": "build/browser/index.js",
   "repository": "https://github.com/flatfilers/adapter",
-  "author": "David Boskovic <david@flatfile.io>",
-  "homepage": "https://flatfile.io",
+  "author": "David Boskovic <david@flatfile.com>",
+  "homepage": "https://flatfile.com",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/FlatFilers/adapter/issues"
