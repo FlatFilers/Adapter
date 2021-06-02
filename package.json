@@ -8,7 +8,7 @@
   "browser": "build/browser/index.js",
   "repository": "https://github.com/flatfilers/adapter",
   "author": "David Boskovic <david@flatfile.io>",
-  "homepage": "https://flatfile.io",
+  "homepage": "https://flatfile.com",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/FlatFilers/adapter/issues"
