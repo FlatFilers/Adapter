@@ -10,9 +10,9 @@ export interface IValidationResponse {
   message: string
 
   /**
-   * The type of validation response - currently only 'error' is supported
+   * The type of validation response
    */
-  level?: 'error'
+  level?: 'error' | 'warning' | 'info'
 }
 
 export interface IDataHookResponse {
