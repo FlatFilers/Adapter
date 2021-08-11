@@ -3,35 +3,32 @@ import { Meta } from './interfaces'
 export class Stats {
   private $meta: Meta
 
-  constructor(meta: Meta) {
-    this.$meta = meta
-  }
-
   /**
    * The number of rows in the parsed data
    */
-  get originalRows(): number {
-    return this.$meta.count_rows
-  }
+  originalRows: number
 
   /**
    * The number of rows that were submitted
    */
-  get acceptedRows(): number | null {
-    return this.$meta.count_rows_accepted || null
-  }
+  acceptedRows: number | null
 
   /**
    * The number of columns in the parsed data
    */
-  get originalColumns(): number | null {
-    return this.$meta.count_columns || null
-  }
+  originalColumns: number | null
 
   /**
    * The number of columns submitted
    */
-  get matchedColumns(): number | null {
-    return this.$meta.count_columns_matched || null
+  matchedColumns: number | null
+
+  constructor(meta: Meta) {
+    this.$meta = meta
+
+    this.originalRows = this.$meta.count_rows
+    this.acceptedRows = this.$meta.count_rows_accepted || null
+    this.originalColumns = this.$meta.count_columns || null
+    this.matchedColumns = this.$meta.count_columns_matched || null
   }
 }

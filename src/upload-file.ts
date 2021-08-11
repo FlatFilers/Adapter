@@ -3,42 +3,37 @@ import { FileObject } from './interfaces'
 export class UploadFile {
   private $file: FileObject
 
-  constructor(file: FileObject) {
-    this.$file = file
-  }
-
   /**
    * A unique UUID referencing this file in the Flatfile system
    */
-  get id() {
-    return this.$file.id
-  }
+  id: string
 
   /**
    * The original filename on the user's system
    */
-  get filename() {
-    return this.$file.filename
-  }
+  filename: string
 
   /**
    * The size of the file in bytes
    */
-  get filesize() {
-    return this.$file.filesize
-  }
+  filesize: number
 
   /**
    * The type of file
    */
-  get filetype() {
-    return this.$file.filetype
-  }
+  filetype: string
 
   /**
    * A securely signed url giving you temporary access to download the file
    */
-  get url() {
-    return this.$file.url
+  url: string
+
+  constructor(file: FileObject) {
+    this.$file = file
+    this.id = this.$file.id
+    this.filename = this.$file.filename
+    this.filesize = this.$file.filesize
+    this.filetype = this.$file.filetype
+    this.url = this.$file.url
   }
 }
