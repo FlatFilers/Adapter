@@ -11,85 +11,77 @@ export class StreamedResults {
    */
   private $data: Array<RecordObject>
 
-  constructor(data: Array<RecordObject>, meta: StreamedMeta) {
-    this.$meta = meta
-    this.$data = data
-  }
-
   /**
    * The raw output from the importer including all deleted rows
    * and sequence info
    */
-  get rawOutput(): Array<RecordObject> {
-    return this.$data
-  }
+  rawOutput: Array<RecordObject>
 
   /**
    * An array of valid data, key-mapped to the configuration provided
    * (alias of validData)
    */
-  get data(): Array<any> {
-    return this.validData
-  }
+  data: Array<any>
 
   /**
    * An array of valid data, key-mapped to the configuration provided
    */
-  get validData(): Array<any> {
-    return this.$data
-      .filter((v) => v.valid)
-      .filter((v) => !v.deleted)
-      .map((v) => v.data)
-  }
+  validData: Array<any>
 
   /**
    * Rows of data the user excluded from the final results,
    * key-mapped to the configuration provided
    */
-  get deletedData(): Array<any> {
-    return this.$data.filter((v) => v.deleted).map((v) => v.data)
-  }
+  deletedData: Array<any>
 
   /**
    * All data from the original file upload including deleted rows,
    * key-mapped to the configuration provided
    */
-  get allData(): Array<any> {
-    return this.$data.map((v) => v.data)
-  }
+  allData: Array<any>
 
   /**
    * The number of remaining chunks in the stream
    */
-  get remainingChunks(): number {
-    return Math.ceil((this.totalChunks - this.currentChunk) / this.$meta.inChunks)
-  }
+  remainingChunks: number
 
   /**
    * The total number of chunks that will have to be received before data processing is completed
    */
-  get totalChunks(): number {
-    return Math.ceil(this.$meta.count_rows_accepted / this.$meta.inChunks)
-  }
+  totalChunks: number
 
   /**
    * The size of chunks as configured when requesting data.
    */
-  get chunkSize(): number {
-    return this.$meta.inChunks
-  }
+  chunkSize: number
 
   /**
    * The current chunk by index
    */
-  get currentChunk(): number {
-    return (this.$meta.pointer + this.chunkSize) / this.chunkSize
-  }
+  currentChunk: number
 
   /**
    * The current chunk by index
    */
-  get hasMore(): boolean {
-    return this.$meta.hasMore
+  hasMore: boolean
+
+  constructor(data: Array<RecordObject>, meta: StreamedMeta) {
+    this.$meta = meta
+    this.$data = data
+
+    this.rawOutput = this.$data
+    this.validData = this.$data
+      .filter((v) => v.valid)
+      .filter((v) => !v.deleted)
+      .map((v) => v.data)
+
+    this.data = this.validData
+    this.deletedData = this.$data.filter((v) => v.deleted).map((v) => v.data)
+    this.allData = this.$data.map((v) => v.data)
+    this.remainingChunks = Math.ceil((this.totalChunks - this.currentChunk) / this.$meta.inChunks)
+    this.totalChunks = Math.ceil(this.$meta.count_rows_accepted / this.$meta.inChunks)
+    this.chunkSize = this.$meta.inChunks
+    this.currentChunk = (this.$meta.pointer + this.chunkSize) / this.chunkSize
+    this.hasMore = this.$meta.hasMore
   }
 }
