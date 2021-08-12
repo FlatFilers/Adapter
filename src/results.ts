@@ -163,7 +163,6 @@ export class Results implements FlatfileResults {
     this.$importer = importer
 
     this.rawOutput = this.blobOnly(this.$data, 'rawOutput')
-    this.data = this.blobOnly(this.validData, 'data')
 
     this.validData = this.blobOnly(
       this.$data
@@ -172,6 +171,8 @@ export class Results implements FlatfileResults {
         .map((v) => v.data),
       'validData'
     )
+
+    this.data = this.blobOnly(this.validData, 'data')
 
     this.deletedData = this.blobOnly(
       this.$data.filter((v) => v.deleted).map((v) => v.data),
