@@ -33,7 +33,6 @@ export class FlatfileImporter extends EventEmitter {
   private options: ISettings
   private customer?: CustomerObject
   private uuid: string
-  private styleElement?: HTMLStyleElement
 
   // @ts-ignore
   private handshake: Penpal.IChildConnectionObject | null
