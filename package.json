@@ -132,7 +132,6 @@
     "es6-promise": "^4.2.8",
     "eventemitter3": "^4.0.7",
     "express": "^4.17.1",
-    "insert-css": "^2.0.0",
     "nqr": "^1.0.0",
     "penpal": "^3.0.1",
     "promise-polyfill": "^8.2.0",

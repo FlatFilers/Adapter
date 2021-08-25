@@ -1,6 +1,5 @@
 import { EventEmitter } from 'eventemitter3'
 import whenDomReady from 'when-dom-ready'
-import insertCss from 'insert-css'
 import elementClass from 'element-class'
 import Penpal from 'penpal'
 import {
@@ -19,6 +18,7 @@ import {
   StepHooks
 } from './interfaces'
 import { Results } from './results'
+import { insertCss } from './utils/insertCss'
 
 export class FlatfileImporter extends EventEmitter {
   public static Promise = Promise
@@ -33,9 +33,10 @@ export class FlatfileImporter extends EventEmitter {
   private options: ISettings
   private customer?: CustomerObject
   private uuid: string
+  private styleElement?: HTMLStyleElement
 
   // @ts-ignore
-  private handshake: Penpal.IChildConnectionObject
+  private handshake: Penpal.IChildConnectionObject | null
 
   private $resolver: (data: any) => any
   private $rejecter: (err: any) => any
@@ -95,6 +96,9 @@ export class FlatfileImporter extends EventEmitter {
    * Call open() to activate the importer overlay dialog.
    */
   open(options = {}): void {
+    if (this.handshake === null) {
+      throw new Error('This importer has been destroyed.')
+    }
     options = {
       ...options,
       bulkInit: true,
@@ -267,6 +271,15 @@ export class FlatfileImporter extends EventEmitter {
     this.$ready.then((child) => {
       child.close()
     })
+  }
+
+  /**
+   * This will remove the importer's HTML element and will destroy the connection.
+   * You wouldn't be able to open an importer if this method gets called.
+   */
+  destroy() {
+    document.getElementById(`flatfile-${this.uuid}`)?.remove()
+    this.handshake = null
   }
 
   private handleClose() {
