@@ -14,7 +14,7 @@ export const insertCss = (css: string) => {
   document.querySelector('head')?.appendChild(styleElement)
 
   if (css.charCodeAt(0) === 0xfeff) {
-    css = css.substr(1, css.length)
+    css = css.substr(1)
   }
 
   if (styleElement.styleSheet) {
