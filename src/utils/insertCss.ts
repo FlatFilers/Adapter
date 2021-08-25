@@ -20,6 +20,6 @@ export const insertCss = (css: string) => {
   if (styleElement.styleSheet) {
     styleElement.styleSheet.cssText = css
   } else {
-    styleElement.textContent += css
+    styleElement.textContent = css
   }
 }
