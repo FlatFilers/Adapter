@@ -125,6 +125,16 @@ export interface ISettings {
    * String for formatting dates when parsing Excel files on the server.
    */
   dateFormat?: string
+
+  /**
+   * Toggles full screen mode.
+   */
+  fullScreen?: boolean
+
+  /**
+   * Whether or not to hide the progress bar.
+   */
+  hideProgressBar?: boolean
 }
 
 export type IField = IFieldBase | IFieldSelect
