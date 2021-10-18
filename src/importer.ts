@@ -23,6 +23,10 @@ import { insertCss } from './utils/insertCss'
 export class FlatfileImporter extends EventEmitter {
   public static Promise = Promise
   private static MOUNT_URL: string = 'https://portal-2.flatfile.io/?key=:key'
+  private UserBulkInitHook?: (
+    rows: { [key: string]: string | number }[],
+    mode: string
+  ) => IDataHookResponse[] | Promise<IDataHookResponse[]>
 
   /**
    * Promise that resolves when the handshake is completed between Flatfile.io and the adapter
@@ -94,6 +98,10 @@ export class FlatfileImporter extends EventEmitter {
       default:
         throw new Error(`${version} is not a valid version`)
     }
+  }
+
+  setUserBulkInitHook(cb: (rows: { [key: string]: string | number }[], mode: string) => IDataHookResponse[] | Promise<IDataHookResponse[]>) {
+    this.UserBulkInitHook = cb
   }
 
   /**
@@ -365,6 +373,10 @@ export class FlatfileImporter extends EventEmitter {
           }
         },
         bulkHookCallback: (rows, mode) => {
+          if (this.UserBulkInitHook) {
+            return this.UserBulkInitHook(rows, mode)
+          }
+
           try {
             if (mode === 'virtual') {
               return this.$virtualRecordHook
