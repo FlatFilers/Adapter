@@ -47,6 +47,11 @@ export class FlatfileImporter extends EventEmitter {
     index: number,
     mode: string
   ) => IDataHookResponse | Promise<IDataHookResponse>
+  private $virtualRecordHook?: (
+    row: { [key: string]: string | number },
+    index: number,
+    mode: string
+  ) => IDataHookResponse | Promise<IDataHookResponse>
   private $fieldHooks: Array<{ field: string; cb: FieldHookCallback }> = []
   private $stepHooks: StepHooks = {} as StepHooks
 
@@ -101,6 +106,7 @@ export class FlatfileImporter extends EventEmitter {
     options = {
       ...options,
       bulkInit: true,
+      hasVirtualRecordHook: !!this.$virtualRecordHook,
       hasRecordHook: !!this.$recordHook,
       hasInteractionEventCallback: !!this.$interactionEventCallback,
       stepHooks: Object.keys(this.$stepHooks),
@@ -242,6 +248,10 @@ export class FlatfileImporter extends EventEmitter {
     this.$recordHook = callback
   }
 
+  registerVirtualRecordHook(callback: FlatfileImporter['$virtualRecordHook']): void {
+    this.$virtualRecordHook = callback
+  }
+
   registerNetworkErrorCallback(callback: FlatfileImporter['$networkErrorCallback']): void {
     this.$networkErrorCallback = callback
   }
@@ -357,6 +367,21 @@ export class FlatfileImporter extends EventEmitter {
         },
         bulkHookCallback: (rows, mode) => {
           try {
+            if (mode === 'virtual') {
+              return this.$virtualRecordHook
+                ? Promise.all(
+                    rows.map(([row, index]) => {
+                      try {
+                        return this.$virtualRecordHook!(row, index, mode)
+                      } catch (e) {
+                        e.row = row
+                        e.index = index
+                        throw e
+                      }
+                    })
+                  )
+                : undefined
+            }
             return this.$recordHook
               ? Promise.all(
                   rows.map(([row, index]) => {
