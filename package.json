@@ -1,6 +1,6 @@
 {
   "name": "@flatfile/adapter",
-  "version": "2.9.1",
+  "version": "2.9.2",
   "description": "A lightweight TypeScript/JavaScript adapter for working with Flatfile's Portal",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
