@@ -135,6 +135,11 @@ export interface ISettings {
    * Whether or not to hide the progress bar.
    */
   hideProgressBar?: boolean
+  
+  /**
+   * Prevent automatically trimming whitespace from cells
+   */
+  preventAutoTrimming?: boolean
 }
 
 export type IField = IFieldBase | IFieldSelect
