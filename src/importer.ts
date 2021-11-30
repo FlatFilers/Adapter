@@ -175,7 +175,6 @@ export class FlatfileImporter extends EventEmitter {
    * This will display a dialog inside of the importer with an error icon and the message you
    * pass. The user will be able to acknowledge the error and be returned to the import data
    * spreadsheet to ideally fix any issues or attempt submitting again.
-   * @deprecated
    */
   displayError(msg?: string): void {
     this.$ready.then((child) => {

@@ -1,6 +1,6 @@
 import { FlatfileImporter } from './importer'
 import { Stats } from './stats'
-import { Meta, RecordObject } from './interfaces'
+import { Meta, RawRecordObject, RecordObject } from './interfaces'
 import { EndUser } from './user'
 import { UploadFile } from './upload-file'
 import { StreamedResults } from './streamed-results'
@@ -32,24 +32,24 @@ export class Results implements FlatfileResults {
    * An array of valid data, key-mapped to the configuration provided
    * (alias of validData)
    */
-  data: Array<any>
+  data: Array<RawRecordObject>
 
   /**
    * An array of valid data, key-mapped to the configuration provided
    */
-  validData: Array<any>
+  validData: Array<RawRecordObject>
 
   /**
    * Rows of data the user excluded from the final results,
    * key-mapped to the configuration provided
    */
-  deletedData: Array<any>
+  deletedData: Array<RawRecordObject>
 
   /**
    * All data from the original file upload including deleted rows,
    * key-mapped to the configuration provided
    */
-  allData: Array<any>
+  allData: Array<RawRecordObject>
 
   /**
    * The uuid of the batch assigned by Flatfile (use this in internal
