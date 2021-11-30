@@ -19,3 +19,5 @@ export interface RecordObject {
    */
   data: any
 }
+
+export type RawRecordObject = Record<string, string> & { $custom?: Record<string, string> }
