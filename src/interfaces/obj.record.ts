@@ -21,3 +21,4 @@ export interface RecordObject {
 }
 
 export type RawRecordObject = Record<string, string> & { $custom?: Record<string, string> }
+export type HookRecordObject = { [key: string]: string | number }
