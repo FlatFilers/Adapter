@@ -54,8 +54,7 @@ export class FlatfileImporter extends EventEmitter {
     mode: string
   ) => IDataHookResponse | Promise<IDataHookResponse>
   private $bulkInitRecordHook?: (
-    rows: [HookRecordObject, number][],
-    mode: string
+    rows: [HookRecordObject, number][]
   ) => IDataHookResponse[] | Promise<IDataHookResponse[]>
   private $fieldHooks: Array<{ field: string; cb: FieldHookCallback }> = []
   private $stepHooks: StepHooks = {} as StepHooks
@@ -376,9 +375,9 @@ export class FlatfileImporter extends EventEmitter {
         bulkHookCallback: (rows, mode) => {
           if (this.$bulkInitRecordHook) {
             try {
-              return this.$bulkInitRecordHook(rows, mode)
+              return this.$bulkInitRecordHook(rows)
             } catch ({ stack }) {
-              console.error(`Flatfile Bulk Init Record Hook Error:\n  ${stack}`, { rows, mode })
+              console.error(`Flatfile Bulk Init Record Hook Error:\n  ${stack}`, { rows })
 
               return {}
             }
