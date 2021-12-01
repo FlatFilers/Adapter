@@ -11,6 +11,7 @@ import {
   IInteractionEvent,
   ISettings,
   IVirtualFieldOptions,
+  HookRecordObject,
   LoadOptionsObject,
   Meta,
   RecordObject,
@@ -43,15 +44,18 @@ export class FlatfileImporter extends EventEmitter {
   private $beforeFetchCallback?: (req: IBeforeFetchRequest) => IBeforeFetchResponse
   private $interactionEventCallback?: (req: IInteractionEvent) => void
   private $recordHook?: (
-    row: { [key: string]: string | number },
+    row: HookRecordObject,
     index: number,
     mode: string
   ) => IDataHookResponse | Promise<IDataHookResponse>
   private $virtualRecordHook?: (
-    row: { [key: string]: string | number },
+    row: HookRecordObject,
     index: number,
     mode: string
   ) => IDataHookResponse | Promise<IDataHookResponse>
+  private $bulkInitRecordHook?: (
+    rows: [HookRecordObject, number][]
+  ) => IDataHookResponse[] | Promise<IDataHookResponse[]>
   private $fieldHooks: Array<{ field: string; cb: FieldHookCallback }> = []
   private $stepHooks: StepHooks = {} as StepHooks
 
@@ -107,7 +111,7 @@ export class FlatfileImporter extends EventEmitter {
       ...options,
       bulkInit: true,
       hasVirtualRecordHook: !!this.$virtualRecordHook,
-      hasRecordHook: !!this.$recordHook,
+      hasRecordHook: !!(this.$recordHook || this.$bulkInitRecordHook),
       hasInteractionEventCallback: !!this.$interactionEventCallback,
       stepHooks: Object.keys(this.$stepHooks),
       fieldHooks: this.$fieldHooks.map((v) => v.field),
@@ -247,6 +251,10 @@ export class FlatfileImporter extends EventEmitter {
     this.$recordHook = callback
   }
 
+  registerBulkInitRecordHook(callback: FlatfileImporter['$bulkInitRecordHook']): void {
+    this.$bulkInitRecordHook = callback
+  }
+
   registerVirtualRecordHook(callback: FlatfileImporter['$virtualRecordHook']): void {
     this.$virtualRecordHook = callback
   }
@@ -365,6 +373,14 @@ export class FlatfileImporter extends EventEmitter {
           }
         },
         bulkHookCallback: (rows, mode) => {
+          if (this.$bulkInitRecordHook) {
+            try {
+              return this.$bulkInitRecordHook(rows)
+            } catch ({ stack }) {
+              console.error(`Flatfile Bulk Init Record Hook Error:\n  ${stack}`, { rows })
+              return {}
+            }
+          }
           try {
             if (mode === 'virtual') {
               return this.$virtualRecordHook
