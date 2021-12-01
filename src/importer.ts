@@ -378,7 +378,6 @@ export class FlatfileImporter extends EventEmitter {
               return this.$bulkInitRecordHook(rows)
             } catch ({ stack }) {
               console.error(`Flatfile Bulk Init Record Hook Error:\n  ${stack}`, { rows })
-
               return {}
             }
           }
